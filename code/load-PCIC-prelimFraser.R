@@ -5,7 +5,7 @@
 # Date: April 17, 2023
 ###############################################################################
 
-link_dat <- "1-exposure/data/raw-data/PCIC/hydro_model_out/Fraser-prelim/"
+link_dat <- "data/raw-data/PCIC/hydro_model_out/Fraser-prelim/"
 
 #-----------------------------------------------------------------------------
 # Open

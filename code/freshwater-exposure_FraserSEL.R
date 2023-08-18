@@ -70,6 +70,11 @@ periods <- data.frame(
 periods$start_num <- match(periods$start, date)
 periods$end_num <- match(periods$end - 1, date)
 
+#-----------------------------------------------------------------------------
+# Define freshwater stages
+#-----------------------------------------------------------------------------
+
+stages <- c("adult_migration", "spawning", "eggs_alevin", "fw_rearing")
 
 ###############################################################################
 # Population sensitivity data
@@ -107,11 +112,19 @@ cu_list <- read.csv("https://raw.githubusercontent.com/salmonwatersheds/tech-rep
 timing <- read.csv("data/timing/Life_cycle_tables_20230731.csv") %>% subset(species == "SEL" & region == "fraser")
 timing$cuid <- cu_list$CUID[match(timing$culabel, cu_list$Conservation.Unit)]
 
+# Adjust stage labels to match
+timing$stage[timing$stage == "Incubation"] <- "eggs_alevin"
+timing$stage[timing$stage == "Rearing"] <- "fw_rearing"
+timing$stage[timing$stage == "Upriver Migration"] <- "adult_migration"
+timing$stage[timing$stage == "Spawning"] <- "spawning"
+
+
 # **Initial focus on Fraser CUs with specific thermal tolerance data **
 cus_to_keep <-data.frame(
   culabel = c("Chilko-Early Summer", "Chilko-Summer", "Takla-Trembleur-Early Stuart (cyclic)",  "Francois-Fraser-Summer", "Nadina-Francois-Early Summer", "Quesnel-Summer (cyclic)",
                  "Anderson-Seton-Early Summer",  "Kamloops-Early Summer", "Shuswap-Early Summer (cyclic)", "Shuswap-Late (cyclic)",  "Harrison-Upstream Migrating-Late", "Harrison-Downstream Migrating-Late"),
   population = c(rep("Chilko", 2), "EarlyStuart", rep("Nechako", 2), "Quesnel", "Gates", rep("Lower Adams", 3), "Weaver", "Harrison"))
+cus_to_keep$cuid <- cu_list$CUID[match(cus_to_keep$culabel, cu_list$Conservation.Unit)]
 popCol <- c(Chilko = "#384E9D", Nechako = "#EF1F25", Gates = "#EC7E21", EarlyStuart = "#7C2781", Quesnel = "#0B803F", Weaver = "#6ACADC", Harrison = "#FF40FF")
 
 #------------------------------------------------------------------------------
@@ -119,6 +132,14 @@ popCol <- c(Chilko = "#384E9D", Nechako = "#EF1F25", Gates = "#EC7E21", EarlyStu
 #------------------------------------------------------------------------------
 
 spawn_zoi <- st_read(dsn = "data/spatial/ZOI/fraser-spawning-zoi/fraser_spawning_zoi_SEL.shp") %>% st_transform(crs = 4269)
+
+#------------------------------------------------------------------------------
+# Adult migration lines: Fraser SEL
+#------------------------------------------------------------------------------
+mig_paths <- st_read(dsn = "data/spatial/fw-migration/spawn_timing_migration_paths_wCU_fraser.shp") %>% st_transform(crs = 4269)
+
+# Check these paths
+plot(mig_paths)
 
 # #------------------------------------------------------------------------------
 # # Spawning points and lines: Fraser SEL
@@ -132,15 +153,15 @@ spawn_zoi <- st_read(dsn = "data/spatial/ZOI/fraser-spawning-zoi/fraser_spawning
 # Conservation Unit Boundaries: SEL
 #------------------------------------------------------------------------------
 
-shp_path <- "1-exposure/data/spatial/CU-boundaries/Lake_Type_Sockeye_Salmon_CU_Boundary/SEL_CU_BOUNDARY_En"
-cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"))
+shp_path <- "data/spatial/CU-boundaries/Lake_Type_Sockeye_Salmon_CU_Boundary/SEL_CU_BOUNDARY_En"
+cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE)
 
 ###############################################################################
 # Select CU for analysis
 ###############################################################################
 
 # cuids <- timing$cuid[which(timing$region == "Fraser" & timing$SPECIES_QUALIFIED == "SEL" & !is.na(timing$cuid))] # 23 Fraser SEL Cus
-cuids <- cu_list$CUID[match(cus_to_keep$culabel, cu_list$Conservation.Unit)]
+cuids <- cus_to_keep$cuid
 
 # Setup arrays to store output
 fw_exposure <- array(NA,
@@ -148,6 +169,7 @@ fw_exposure <- array(NA,
             dimnames = list(
               c("temp_opt", "temp_crit", "lowflow_opt", "lowflow_crit"),
               cus_to_keep$culabel, 
+              stage
               c("early", "mid", "late"), 
               c("median", "lower", "upper")))
 
@@ -155,36 +177,72 @@ fw_exposure <- array(NA,
 # For each CU
 #------------------------------------------------------------------------------
 
-for(i in 6:10){
-# i <- which(cuids == 721) # Chilko summer
-# i <- which(cuids == 719) #Anderson/Seton_Early Summer
+for(i in 1:length(cuids)){
+  
   # Subset temporal and spatial data
+  cu_boundary.i <- cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[which(cu_list$CUID == cuids[i])]),]
   
-  timing.i <- round(timing[which(timing$cuid == cuids[i]), c("spawn_start", "spawn_end")])
+  zoi.i <- spawn_zoi[which(spawn_zoi$cuid == cuids[i]), ]
   
-  zoi.i <- zoi[which(zoi$cuid == cuids[i]), ]
+  mig_paths.i <- mig_paths[which(mig_paths$cuid == cuids[i]), ]
   
-  cu_boundary.i <- cu_boundary[which(cu_boundary$FULL_CU_IN == timing$FULL_CU_IN[which(timing$cuid == cuids[i])]),]
+  #------------------------------------------------------------------------------
+  # For each life stage
+  #------------------------------------------------------------------------------
+  for(j in 1:length(stages)){
+    
+    # If there are timing data
+    if(length(which(timing$cuid == cuids[i] & timing$stage == stages[j])) > 0){
+      
+      # Extract timing and covert to day-of-year
+      timing.ij <- timing[which(timing$cuid == cuids[i] & timing$stage == stages[j])[1], c("start", "end")] %>% 
+      as.character() %>%
+      as.Date(format = "%Y-%m-%d") %>% 
+      strftime(format = "%j") %>% 
+      as.numeric() %>%
+      round()
   
-  #-----------------------------------------------------------------------------
-  # Identify grid cells that overlap CU
-  #-----------------------------------------------------------------------------
-  
-  # Find those whose centers overlap CU or zoi
-  intrscts <- st_intersects(grid_points, zoi.i, sparse = FALSE)
-  incl <- which(c(intrscts) == TRUE)
-  
-  # Highlight those cells
-  grid_polys_incl <- st_as_sf(data.frame(
-    V2 = rep(spat_grid$V2[incl], each = 5),
-    rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl)),
-    lon = c(rep(spat_grid$lon[incl], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl))),
-    lat = c(rep(spat_grid$lat[incl], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl)))
-  ), coords = c("lon", "lat"), crs = 4269) %>% 
-    group_by(V2) %>%
-    summarise(geometry = st_combine(geometry)) %>%
-    st_cast("POLYGON") 
-  
+      #-----------------------------------------------------------------------------
+      # Identify grid cells for given life stage
+      #-----------------------------------------------------------------------------
+      # For adult migration and freshwater rearing, include downstream migration route
+      if(stages[j] %in% c("adult_migration", "fw_rearing")){
+        intrscts <- st_is_within_distance(grid_points, mig_paths.i, 3000, sparse = FALSE)  
+        incl <- which(c(intrscts[, 1]) == TRUE)
+        # There may be more than one line segment
+        if(dim(intrscts)[2] > 1){
+            for(k in 2:dim(intrscts)[2]){
+              incl <- unique(c(incl, which(c(intrscts[, k]) == TRUE)))
+            }
+        }
+      } 
+      
+      # For spawning, eggs_alevin, use spawning ZOI
+      if(stages[j] %in% c("spawning", "eggs_alevin")){
+        intrscts <- st_intersects(grid_points, zoi.i, sparse = FALSE)
+        incl <- which(c(intrscts) == TRUE)
+      }
+      
+      # For freshwater rearing, include rearing lake (CU boundary)
+      if(stages[j] == "fw_rearing"){
+        
+        p <- st_make_valid(cu_boundary.i)
+        
+        intrscts <- st_intersects(grid_points, p, sparse = FALSE)
+        incl <- unique(c(incl, which(c(intrscts) == TRUE)))
+      } 
+      
+      # Highlight those cells
+      grid_polys_incl <- st_as_sf(data.frame(
+        V2 = rep(spat_grid$V2[incl], each = 5),
+        rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl)),
+        lon = c(rep(spat_grid$lon[incl], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl))),
+        lat = c(rep(spat_grid$lat[incl], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl)))
+      ), coords = c("lon", "lat"), crs = 4269) %>% 
+        group_by(V2) %>%
+        summarise(geometry = st_combine(geometry)) %>%
+        st_cast("POLYGON") 
+      
   #-----------------------------------------------------------------------------
   # Calculate MAD over historical period
   #-----------------------------------------------------------------------------

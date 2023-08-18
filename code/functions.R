@@ -67,3 +67,17 @@ weeklyStat <- function(x, stat){
   return(xx)
     
 }
+
+#------------------------------------------------------------------------------
+# Function to sum degree days outside of optimal range
+#------------------------------------------------------------------------------
+degdays <- function(
+    x, # time series of temperature or flow
+    thresh # vector of lower, upper thresholds
+){
+  
+  sum(
+    pmax(0, x - thresh[2], na.rm = TRUE), # Values above upper threshold
+    pmax(0, thresh[1] - x, na.rm = TRUE))/30 # Values below lower threshold
+  # divide by 30 years in period to get average annual dd
+}
