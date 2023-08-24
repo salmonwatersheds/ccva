@@ -165,18 +165,34 @@ cuids <- cus_to_keep$cuid
 
 # Setup arrays to store output
 fw_exposure <- array(NA,
-            dim = c(4, length(cuids), 3, 3),
+            dim = c(4, length(cuids), length(stages), 4, 3),
             dimnames = list(
               c("temp_opt", "temp_crit", "lowflow_opt", "lowflow_crit"),
               cus_to_keep$culabel, 
-              stage
-              c("early", "mid", "late"), 
+              stages,
+              c("hist", "early", "mid", "late"), 
               c("median", "lower", "upper")))
 
+# Create list to store full spatial output for plotting maps
+fw_exposure.spat <- list(); length(fw_exposure.spat) <- length(cuids)*length(stages) 
+dim(fw_exposure.spat) <- c(length(cuids), length(stages))
+
+# Store temperature thresholds for each stage
+tempThresh <- data.frame(
+  cuid = rep(cus_to_keep$cuid, each = length(stages)),
+  culabel = rep(cus_to_keep$culabel, each = length(stages)),
+  stage = rep(stages, length(cuids)),
+  critical_min = rep(NA, length(cuids)*length(stages)),
+  critical_max = rep(NA, length(cuids)*length(stages)),
+  optimal_min = rep(NA, length(cuids)*length(stages)),
+  optimal_max = rep(NA, length(cuids)*length(stages)))
 #------------------------------------------------------------------------------
 # For each CU
 #------------------------------------------------------------------------------
+# Track time to run (takes ~ 20 mins for Fraser SEL CUs)
+start.time <- Sys.time()
 
+# Loop through each CU
 for(i in 1:length(cuids)){
   
   # Subset temporal and spatial data
@@ -195,12 +211,16 @@ for(i in 1:length(cuids)){
     if(length(which(timing$cuid == cuids[i] & timing$stage == stages[j])) > 0){
       
       # Extract timing and covert to day-of-year
-      timing.ij <- timing[which(timing$cuid == cuids[i] & timing$stage == stages[j])[1], c("start", "end")] %>% 
+      timing.ij_prelim1 <- timing[which(timing$cuid == cuids[i] & timing$stage == stages[j])[1], c("start", "end")] %>% 
       as.character() %>%
-      as.Date(format = "%Y-%m-%d") %>% 
-      strftime(format = "%j") %>% 
-      as.numeric() %>%
-      round()
+      as.Date(format = "%Y-%m-%d")
+      if(timing.ij_prelim1[2] - timing.ij_prelim1[1] + 1 == 365){
+        timing.ij <- c(1, 365)
+      } else {
+        timing.ij <- strftime(timing.ij_prelim1, format = "%j") %>% 
+          as.numeric() %>%
+          round()
+      }
   
       #-----------------------------------------------------------------------------
       # Identify grid cells for given life stage
@@ -226,6 +246,7 @@ for(i in 1:length(cuids)){
       # For freshwater rearing, include rearing lake (CU boundary)
       if(stages[j] == "fw_rearing"){
         
+        # CU boundary is a multipolygon and was throwing error: 
         p <- st_make_valid(cu_boundary.i)
         
         intrscts <- st_intersects(grid_points, p, sparse = FALSE)
@@ -243,82 +264,300 @@ for(i in 1:length(cuids)){
         summarise(geometry = st_combine(geometry)) %>%
         st_cast("POLYGON") 
       
-  #-----------------------------------------------------------------------------
-  # Calculate MAD over historical period
-  #-----------------------------------------------------------------------------
-  mad <- apply(Qs[incl, c(periods[periods$period == 'hist', 'start_num']:periods[periods$period == "hist", "end_num"])], 1, mean)
+      # Dimensions
+      n.grid <- length(incl)
+      
+      # Setup array to hold full spatial output
+      fw_exposure.spat[[i,j]] <- array(data = NA,
+                              dim = c(4, 4, n.grid),
+                              dimnames = list(
+                                c("temp_opt", "temp_crit", "lowflow_opt", "lowflow_crit"),
+                                c("hist", "early", "mid", "late"),
+                                NULL)
+                              )
   
   #-----------------------------------------------------------------------------
-  # Calculate rolling weekly max (Ts) or mean (Qs) over spawning period
+  # Calculate rolling weekly max (Ts) or mean (Qs) over life-stage period
   #-----------------------------------------------------------------------------
   
-  # Select dates in spawn timing, extending earlier 7 days for calculating 7-day rolling avg
-  periods.ind <- rbind(
-    hist = which(DOY %in% c(c(timing.i$spawn_start - 7):timing.i$spawn_end) & years %in% c(1970:1999)),
-    early = which(DOY %in% c(c(timing.i$spawn_start - 7):timing.i$spawn_end) & years %in% c(2010:2039)),
-    mid = which(DOY %in% c(c(timing.i$spawn_start - 7):timing.i$spawn_end) & years %in% c(2040:2069)),
-    late = which(DOY %in% c(c(timing.i$spawn_start - 7):timing.i$spawn_end) & years %in% c(2070:2099)))
-  
-  # Create arrays
-  Ts.weeklyMax <- array(
-    NA, 
-    dim = c(4, length(incl), ncol(periods.ind) - 7), 
-    dimnames = list(c("hist", "early", "mid", "late")))
-  Qs.weeklyMean <- Ts.weeklyMax
-  
-  for(p in 1:4){ # For each period
-    Ts.weeklyMax[p, , ] <- t(apply(Ts[incl, periods.ind[p,]], 1, weeklyStat, stat = "max"))[, 8:ncol(periods.ind)]
-    Qs.weeklyMean[p, , ] <- t(apply(Qs[incl, periods.ind[p,]], 1, weeklyStat, stat = "mean"))[, 8:ncol(periods.ind)]
-  }
+      # Select dates in spawn timing, extending earlier 7 days for calculating 7-day rolling avg
+      periods.ind <- rbind(
+        hist = which(DOY %in% c(c(timing.ij[1] - 7):timing.ij[2]) & years %in% c(1970:1999)),
+        early = which(DOY %in% c(c(timing.ij[1] - 7):timing.ij[2]) & years %in% c(2010:2039)),
+        mid = which(DOY %in% c(c(timing.ij[1] - 7):timing.ij[2]) & years %in% c(2040:2069)),
+        late = which(DOY %in% c(c(timing.ij[1] - 7):timing.ij[2]) & years %in% c(2070:2099)))
+      
+      # Dimensions
+      n.days <- ncol(periods.ind) - 7
+      
+      
+      # Create arrays
+      Ts.weeklyMax <- array(
+        NA, 
+        dim = c(4, n.grid, n.days), 
+        dimnames = list(c("hist", "early", "mid", "late")))
+      Qs.weeklyMean <- Ts.weeklyMax
+      
+      # Loop through each period
+      for(p in 1:4){ 
+        Ts.weeklyMax[p, , ] <- t(apply(Ts[incl, periods.ind[p,]], 1, weeklyStat, stat = "max"))[, 8:ncol(periods.ind)]
+        Qs.weeklyMean[p, , ] <- t(apply(Qs[incl, periods.ind[p,]], 1, weeklyStat, stat = "mean"))[, 8:ncol(periods.ind)]
+      }
   
   # Checks in case -Inf (not getting this any more?)
   Ts.weeklyMax[which(Ts.weeklyMax == -Inf)] <- NA
   Qs.weeklyMean[which(Qs.weeklyMean == -Inf)] <- NA
   
-  # Average weekly max for each period
-  # Calculate degree days (dd) over thresh
-  Ts.weeklyMax_avg <- matrix(NA, nrow = 4, ncol = length(incl))
-  Ts.dd <- matrix(NA, nrow = 4, ncol = length(incl))
-  Ts.dd2 <- matrix(NA, nrow = 4, ncol = length(incl))
-  for(p in 1:4){
-    Ts.weeklyMax_avg[p, ] <- apply(Ts.weeklyMax[p, , ], 1, mean, na.rm = TRUE)
-    Ts.dd[p, ] <- apply(Ts.weeklyMax[p, , ], 1, degdays, thresh = topt)
-    Ts.dd2[p, ] <- apply(Ts.weeklyMax[p, , ], 1, degdays, thresh = as.numeric(topt2[topt2$population == cus_to_keep$population[i], c("min", "max")]))
+  
+  #-----------------------------------------------------------------------------
+  # Stream temperature 
+  #-----------------------------------------------------------------------------
+  
+  # Historical temperature
+  #  # dimensions: space (grid cells) x time (days in 30-year period)
+  
+  # Calculate acute (critical) and chronic (optimal) temperature thresholds
+  thresh <- apply(Ts.weeklyMax[1, , ], 1, quantile, c(0.1, 0.9, 0.025, 0.975), na.rm = TRUE)
+  rownames(thresh) <- c("opt_min", "opt_max", "crit_min", "crit_max")
+  
+  if(3 == 2){
+    par(mfrow = c(1,1), mar = c(4,4,2,1), oma = c(0,0,2,0))
+    hist(Ts.weeklyMax[1, 10, ], las = 1, xlab = "Weekly max. (˚C)", main = "", col = paste0(cols[5], 60), border = NA)
+    abline(v = thresh[c("opt_min", "opt_max"), 10], col = cols[2], lty = 2)
+    abline(v = thresh[c("crit_min", "crit_max"), 10], col = cols[2])
+    for(k in 2:4){
+      
+      hist(Ts.weeklyMax[k, , ], las = 1, xlab = "", main = "", col = paste0(cols[c(3,4,1)[k-1]], 60), border = NA, add = TRUE)
+    }
+    mtext(side = 3, outer = TRUE, paste(cus_to_keep$culabel[i], stages[j]))
+    legend("topright", fill = paste0(cols[c(5,3,4,1)], 60), border = NA, legend = c("hist", "early", "mid", "late"))
   }
   
-  # Summarize for CU
-  streamTemp_dd[i, 1:4, 1] <- apply(Ts.dd, 1, median)
-  streamTemp_dd[i, 1:4, 2] <- apply(Ts.dd, 1, min)
-  streamTemp_dd[i, 1:4, 3] <- apply(Ts.dd, 1, max)
+  # Apply hard thresholds where historical temps are extreme
+  # ** Might need to think about also imposing higher crit_max for northern CUs where historical temp distribution is cold...
+  thresh["crit_max", which(thresh["crit_max", ] > 26)] <- 26 # Critical max 26˚C, Richter & Kolmes (2005)
+  thresh["opt_max", which(thresh["opt_max", ] > 24)] <- 24 # Chronic max 24˚C, Sullivan 2000
   
-  streamTemp_dd2[i, 1:4, 1] <- apply(Ts.dd2, 1, median)
-  streamTemp_dd2[i, 1:4, 2] <- apply(Ts.dd2, 1, min)
-  streamTemp_dd2[i, 1:4, 3] <- apply(Ts.dd2, 1, max)
+  thresh["opt_min", which(thresh["opt_min", ] < c(8, 10, 8, 7)[j])] <- c(8, 10, 8, 7)[j] # Example of minimum temps from Mayer (in review)
+  
+  # Check that optimal is always inside critical
+  if(length(which(thresh["crit_max", ] < thresh["opt_max", ])) > 0){
+    stop("crit_max < opt_max")
+  }
+  if(length(which(thresh["crit_min", ] > thresh["opt_min", ])) > 0){
+    stop("crit_min > opt_min")
+  }
+  
+  # Store median thresholds for output
+  tempThresh[which(tempThresh$cuid == cuids[i] & tempThresh$stage == stages[j]), c("critical_min", "critical_max")] <- apply(thresh[c("crit_min", "crit_max"), ], 1, median)
+  tempThresh[which(tempThresh$cuid == cuids[i] & tempThresh$stage == stages[j]), c("optimal_min", "optimal_max")] <- apply(thresh[c("opt_min", "opt_max"), ], 1, median)
+  
+  # Calculate days outside of threshold
+  Ts.dot <- array(NA, 
+                  dim = c(2, 4, length(incl)),
+                  dimnames = list(c("opt", "crit"), c("hist", "early", "mid", 'late'), NULL)
+  )
+  for(p in 1:4){
+    for(k in 1:2){
+      Ts.dot[k, p, ] <- calcDOT(x = Ts.weeklyMax[p, , ], 
+                                thresholds = thresh[list(c("opt_min", "opt_max"), c("crit_min", "crit_max"))[[k]], ])
+    }}
+  
+  # Calculate % of days outside window
+  Ts.perc <- Ts.dot/n.days
+  
+  # Store full spatial output
+  fw_exposure.spat[[i,j]][c("temp_opt", "temp_crit"), , ] <- Ts.perc
+    
+    # store summary output
+  for(p in 1:4){ # for each period
+      for(k in 1:2){
+        # Store output in end array
+        fw_exposure[k, i, j, p, ] <- c(
+          median(Ts.perc[k, p, ]),
+          range(Ts.perc[k, p, ]))
+      
+    }}
+  
+  # # Calculate % change in the number of days outside window relative to historical
+  # Ts.pchange <- array(NA, 
+  #                     dim = c(2, 3, 3), 
+  #                     dimnames = list(c("acute", "chronic"), 
+  #                                     c("early", "mid", "late"), 
+  #                                     c("median", "min", "max"))
+  # )
+  # 
+  # for(p in 1:3){
+  #   for(k in 1:2){
+  #     perc <- (Ts.dot[k, p + 1, ] - Ts.dot[k, 1, ])/Ts.dot[k, 1, ] * 100
+  #     Ts.pchange[k, p, "median"] <- median(perc)
+  #     Ts.pchange[k, p, c("min", "max")] <- range(perc)
+  #     
+  #     # Store output in end array
+  #     fw_exposure[k, i, j, p, ] <- Ts.pchange[k, p, ]
+  # }}
+  
   
   #-----------------------------------------------------------------------------
   # Flow
   #-----------------------------------------------------------------------------
   
-  # Calculate degree days (dd) over thresh
-  Qs.cmsd <- matrix(NA, nrow = 4, ncol = length(incl))
+  #--------------
+  # Calculate MAD over historical period for each included grid cell
+  #-------------
+  
+  mad <- apply(Qs[incl, c(periods[periods$period == 'hist', 'start_num']:periods[periods$period == "hist", "end_num"])], 1, mean, na.rm = TRUE)
+  
+  # Calculate acute (critical) and chronic (optimal) temperature thresholds
+  thresh_mad <- mad %*% matrix(c(0.2, 0.1), nrow = 1)
+  colnames(thresh_mad) <- c("opt", "crit")
+  
+  # Calculate days below % mad threshold
+  Qs.dbt <- array(NA, 
+                  dim = c(2, 4, n.grid),
+                  dimnames = list(c("opt", "crit"), 
+                                  c("hist", "early", "mid", 'late'), 
+                                  NULL)
+  )
   for(p in 1:4){
-    for(j in 1:length(incl)){
-      Qs.cmsd[p, j] <- degdays(Qs.weeklyMean[p, j, ], thresh = c(0, 0.2*mad[j]))
-    }
-  }
+    for(k in 1:2){
+      Qs.dbt[k, p, ] <- calcDBT(x = Qs.weeklyMean[p, , ], 
+                                mad_threshold = c(thresh_mad[, c("opt", "crit")[k]]))
+    }}
   
   
-  # Summarize for CU
-  lowFlow_cmsd[i, 1:4, 1] <- apply(Qs.cmsd, 1, median)
-  lowFlow_cmsd[i, 1:4, 2] <- apply(Qs.cmsd, 1, min)
-  lowFlow_cmsd[i, 1:4, 3] <- apply(Qs.cmsd, 1, max)
+  # Calculate % of days outside window
+  Qs.perc <- Qs.dbt/n.days
   
-  }
+  
+  # Store full spatial output
+  fw_exposure.spat[[i,j]][c("lowflow_opt", "lowflow_crit"), , ] <- Qs.perc
+  
+  for(p in 1:4){ # for each period
+    for(k in 1:2){
+      # Store output in end array
+      fw_exposure[c("lowflow_opt", "lowflow_crit")[k], i, j, p, ] <- c(
+        median(Qs.perc[c("opt", "crit")[k], p, ]),
+        range(Qs.perc[c("opt", "crit")[k], p, ]))
+    }}
+  
+    } # end if timing data
+    print(".")
+  } # end life stage j
+  print(paste0("Done ", cus_to_keep$culabel[i]))
+  } # end CU i
+print(Sys.time() - start.time)
 
+write.csv(tempThresh, file = "output/tempThresholds_FraserSEL.csv")
 
 ###############################################################################
 # PLOTS
 ###############################################################################
+
+# Plot map for each CU and lifestage
+pdf(file = paste0("output/figures/Ts.percdays_FraserSEL.pdf"), width = 10, height = 5)
+
+for(i in 1:length(cuids)){
+  for(j in 1:length(stages)){
+    
+    # Subset temporal and spatial data
+    cu_boundary.i <- cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[which(cu_list$CUID == cuids[i])]),]
+    
+    zoi.i <- spawn_zoi[which(spawn_zoi$cuid == cuids[i]), ]
+    
+    mig_paths.i <- mig_paths[which(mig_paths$cuid == cuids[i]), ]
+    
+    #-----------------------------------------------------------------------------
+    # Identify grid cells for given life stage
+    #-----------------------------------------------------------------------------
+    # For adult migration and freshwater rearing, include downstream migration route
+    if(stages[j] %in% c("adult_migration", "fw_rearing")){
+      intrscts <- st_is_within_distance(grid_points, mig_paths.i, 3000, sparse = FALSE)  
+      incl <- which(c(intrscts[, 1]) == TRUE)
+      # There may be more than one line segment
+      if(dim(intrscts)[2] > 1){
+        for(k in 2:dim(intrscts)[2]){
+          incl <- unique(c(incl, which(c(intrscts[, k]) == TRUE)))
+        }
+      }
+    } 
+    
+    # For spawning, eggs_alevin, use spawning ZOI
+    if(stages[j] %in% c("spawning", "eggs_alevin")){
+      intrscts <- st_intersects(grid_points, zoi.i, sparse = FALSE)
+      incl <- which(c(intrscts) == TRUE)
+    }
+    
+    # For freshwater rearing, include rearing lake (CU boundary)
+    if(stages[j] == "fw_rearing"){
+      
+      # CU boundary is a multipolygon and was throwing error: 
+      p <- st_make_valid(cu_boundary.i)
+      
+      intrscts <- st_intersects(grid_points, p, sparse = FALSE)
+      incl <- unique(c(incl, which(c(intrscts) == TRUE)))
+    } 
+    
+    # Highlight those cells
+    grid_polys_incl <- st_as_sf(data.frame(
+      V2 = rep(spat_grid$V2[incl], each = 5),
+      rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl)),
+      lon = c(rep(spat_grid$lon[incl], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl))),
+      lat = c(rep(spat_grid$lat[incl], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl)))
+    ), coords = c("lon", "lat"), crs = 4269) %>% 
+      group_by(V2) %>%
+      summarise(geometry = st_combine(geometry)) %>%
+      st_cast("POLYGON") 
+    
+    
+    # Set plot extent
+    bounds <- st_bbox(grid_polys_incl)
+    
+    # Setup plot
+    par(bg = NA, mfrow = c(2, 4), mar = c(0, 0, 0, 0), oma = c(2,4,4,2))
+    
+    for(k in 1:2){
+      for(p in 1:4){
+        
+        plot(st_geometry(BC), 
+             border = NA, 
+             col = NA, 
+             axes = FALSE, 
+             las = 1, 
+             xlim = bounds[c(1,3)], 
+             ylim = bounds[c(2,4)], 
+             bty = "o")
+        u <- par('usr')
+        segments(x0 = u[c(1, 1, 1, 2)], x1 = u[c(2, 2, 1, 2)], y0 = u[c(1, 2, 1, 1)], y1 = u[c(1, 2, 2, 2)], xpd = NA)
+        
+        if(k == 1) mtext(side = 3, line = 0, c("Historical", "Early-century", "Mid-century", "Late-century")[p])
+        if(p == 1) mtext(side = 2, line = 2, c("Optimal", "Critical")[k])
+        
+        col_levels <- seq(0, 0.9, 0.1)
+        col_palette <- colorRampPalette(colors = cols[c(5,3,1)])(n = length(col_levels) + 1)
+        col_polys <- col_palette[findInterval(fw_exposure.spat[[i,j]][c("temp_opt", "temp_crit")[k], p, ], col_levels)]
+        plot(grid_polys_incl, col = col_polys, border = col_polys, add = TRUE)
+        
+        # plot(grid_polys, add = TRUE, border = grey(0.8), col = NA, lwd = 0.5)
+        
+        # Plot coastline, lakes, and rivers (coarse)
+        plot(BC, add = TRUE, col = NA, border = 1)
+        plot(st_geometry(lakes0), border = 1, col = NA, add = TRUE, lwd = 0.7)
+        plot(st_geometry(rivers0), col = 1, add = TRUE, lwd = 0.7)
+        
+        # legend("topright", fill = col_palette, legend = col_levels, bg = "white", title = "% days")
+        
+      }}
+    mtext(side = 3, line = 1.5, paste(cus_to_keep$culabel[i], c("Adult freshwater migration", "Spawning", "Eggs/alevin", "Freshwater juvenile rearing")[j], sep = "-"), outer = TRUE)
+  
+}}
+dev.off()
+
+#-----------------------------------------------------------------------------
+# Illustrate CU-level temperature thresholds
+#-----------------------------------------------------------------------------
+
+n.cu <- length(cuid)
 
 #-----------------------------------------------------------------------------
 # Comparing CUs

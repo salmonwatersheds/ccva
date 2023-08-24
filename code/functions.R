@@ -81,3 +81,77 @@ degdays <- function(
     pmax(0, thresh[1] - x, na.rm = TRUE))/30 # Values below lower threshold
   # divide by 30 years in period to get average annual dd
 }
+
+#------------------------------------------------------------------------------
+# Function to Calculate days outside thresholds (d.o.t.)
+#------------------------------------------------------------------------------
+calcDOT <- function(x, # matrix of temperatures wiht dimension c(grid cells, days) 
+                    thresholds # matrix of min/max temps for each grid cell
+){
+  dot <- numeric(dim(x)[1])  
+  for(i in 1:(dim(x)[1])){
+    dot[i] <- which(x[i, ] < thresholds[1, i] | x[i, ] > thresholds[2, i]) %>% length
+  }
+  return(dot)
+}
+
+#------------------------------------------------------------------------------
+# Function to Calculate days below MAD thresholds 
+#------------------------------------------------------------------------------
+calcDBT <- function(x, # matrix of temperatures wiht dimension c(grid cells, days) 
+                    mad_threshold # flow threshold (usually a % of mean annual discharge)
+){
+  dbt <- numeric(dim(x)[1])  
+  for(i in 1:(dim(x)[1])){
+    dbt[i] <- which(x[i, ] < mad_threshold[i]) %>% length
+  }
+  return(dbt)
+}
+
+#------------------------------------------------------------------------------
+# Plot map
+#------------------------------------------------------------------------------
+
+map.stage <- function(
+    cu_boundary.i,
+    zoi.i,
+    mig_paths.i,
+    grid_polys = NA
+){
+  
+  if(!is.na(zoi.i)){
+    bounds <- cbind(st_bbox(zoi.i), st_bbox(mig_paths.i))
+  bounds <- c(
+    xmin = min(bounds[1, ]), 
+    xmax = max(bounds[3,]), 
+    ymin = min(bounds[2, ]), 
+    ymax = max(bounds[4, ]))
+  } else {
+    bounds <- st_bbox(mig_paths.i)[c(1,3,2,4)]
+  }
+  
+  par(bg = NA)
+  
+  plot(st_geometry(BC), border = NA, col = NA, axes = FALSE, las = 1, ylim = bounds[3:4], xlim = bounds[1:2], bty = "o")
+  # plot(st_geometry(mig_paths.i), lwd = 3, col = cols[3], axes=TRUE, las = 1, ylim = bounds[3:4], xlim = bounds[1:2])
+  # mtext(side = 3, line = 1, cus_to_keep$culabel[i])
+  
+  plot(grid_polys, add = TRUE, border = grey(0.8), col = NA)
+  plot(BC, add = TRUE, col = NA, border = 1)
+  
+  
+  if(!is.na(zoi.i)){
+    plot(st_geometry(zoi.i), border = cols[1], col = paste0(cols[1], 50), lwd = 1.5, add = TRUE)
+  }
+  
+  if(!is.na(cu_boundary.i)){
+  plot(st_geometry(cu_boundary.i), border = 1, col = NA, lwd = 1, add = TRUE)
+  }
+  
+  # coarser lakes and rivers
+  plot(st_geometry(lakes0), border = 1, col = NA, add = TRUE)
+  plot(st_geometry(rivers0), col = 1, add = TRUE)
+  
+  # legend("topleft", fill = c(paste0(cols[1], 50), cols[3], "white"), border = c(cols[1], cols[3], "#000000"), legend = c("Spawn ZOI", "Mig.", "CU boundary"), bg = "white")
+  
+}
