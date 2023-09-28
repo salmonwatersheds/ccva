@@ -1,0 +1,424 @@
+"region","species","culabel","inc_start","inc_end","rear_start","rear_end","mt_start","mt_end","spwn_start","spwn_end"
+"AlaskaTransboundary","CK","Alsek",202.1992086,NA,NA,NA,NA,NA,202.1992086,254.3497827
+"Central Coast","CK","Bella Coola-Bentinck",148.8482982,144,NA,NA,NA,NA,148.8482982,273.9153806
+"Fraser","CK","Boundary Bay (Fall 4-1)",278.153289,163,NA,NA,NA,278.153289,278.153289,360.0486163
+"Central Coast","CK","Dean River",167.178532,NA,NA,NA,NA,NA,167.178532,264.1779576
+"Central Coast","CK","Docee",223.9408569,NA,NA,NA,NA,NA,223.9408569,295.8335625
+"HaidaGwaii","CK","East Haida Gwaii",224.0237072,NA,NA,NA,NA,NA,224.0237072,254.3968286
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-Cowichan and Koksilah (Fall x-1)",246.0748724,120,64,172,NA,NA,246.0748724,315.3962704
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-Georgia Strait (Summer 4-1)",162.7600475,NA,NA,NA,NA,NA,162.7600475,307.8671018
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-Goldstream (Fall x-1)",282.3638091,NA,NA,NA,NA,NA,282.3638091,327.5821311
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-Nanaimo (Spring x-2)",NA,NA,1,365,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-Nanaimo and Chemainus (Fall x-1)",255.4328414,138,NA,NA,NA,NA,255.4328414,302.4270037
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-North (Fall x-1)",235.1414449,NA,NA,NA,NA,NA,235.1414449,296.8576671
+"Vancouver Island & Mainland Inlets","CK","East Vancouver Island-Qualicum and Puntledge (Fall x-1)",256.5181984,109,64,193.5,NA,NA,256.5181984,306.8675077
+"Skeena","CK","Ecstall",214.9012415,NA,NA,NA,192.94,214.9012415,214.9012415,272.5486646
+"Fraser","CK","Fraser Canyon-Nahatlatch (Spring 5-2)",244.8508341,NA,NA,NA,NA,244.8508341,244.8508341,282.162812
+"Vancouver Island & Mainland Inlets","CK","Homathko (Summer x-x)",206.509461,NA,NA,NA,NA,NA,206.509461,264.8933505
+"Skeena","CK","Kalum-Early",209.6288658,NA,NA,NA,145.94,209.6288658,209.6288658,258.311058
+"Skeena","CK","Kalum-Late",216.6210627,NA,NA,NA,192.94,216.6210627,216.6210627,276.2579883
+"Vancouver Island & Mainland Inlets","CK","Klinaklini (Summer 5-2)",168.2733374,120,1,365,NA,NA,168.2733374,267.2739507
+"Skeena","CK","Lakelse",218.0881933,NA,NA,NA,192.94,218.0881933,218.0881933,261.7305916
+"Fraser","CK","Lower Fraser River-Maria Slough (Summer 4-1)",262.9864349,NA,NA,NA,NA,262.9864349,262.9864349,308.598714
+"Fraser","CK","Lower Fraser River-Upper Pitt (Summer 5-2)",215.9022588,NA,NA,NA,NA,215.9022588,215.9022588,261.0910356
+"Fraser","CK","Lower Fraser River (Fall 4-1)",285.1266687,165,NA,NA,NA,285.1266687,285.1266687,341.2657447
+"Fraser","CK","Lower Fraser River (Spring 5-2)",127.3045718,NA,NA,NA,NA,127.3045718,127.3045718,211.4818577
+"Fraser","CK","Lower Fraser River (Summer 5-2)",209.1581667,NA,NA,NA,NA,209.1581667,209.1581667,297.2801564
+"Skeena","CK","Lower Skeena",215.8080872,NA,NA,NA,192.94,215.8080872,215.8080872,256.8153397
+"Fraser","CK","Lower Thompson River (Spring 4-2)",206.6270639,NA,NA,NA,NA,206.6270639,206.6270639,263.293084
+"Fraser","CK","Middle Fraser River-Portage (Fall 5-2)",262.5232654,147.5,1,365,NA,262.5232654,262.5232654,306.0735701
+"Fraser","CK","Middle Fraser River (Spring 5-2)",214.542934,164.5,1,365,NA,214.542934,214.542934,254.1340835
+"Fraser","CK","Middle Fraser River (Summer 5-2)",232.4777457,153,1,365,NA,232.4777457,232.4777457,275.4992482
+"Skeena","CK","Middle Skeena-Large Lakes",225.3793952,NA,NA,NA,192.94,225.3793952,225.3793952,272.0937933
+"Skeena","CK","Middle Skeena-Mainstem Tributaries",212.1434421,NA,NA,NA,192.94,212.1434421,212.1434421,256.3109432
+"Central Coast","CK","North & Central Coast-Early",180.6454925,128,81,166,NA,NA,180.6454925,250.9231571
+"Central Coast","CK","North & Central Coast-Late",199.6890436,NA,NA,NA,NA,NA,199.6890436,261.7848613
+"HaidaGwaii","CK","North Haida Gwaii",150.1476597,NA,NA,NA,NA,NA,150.1476597,270.6801973
+"Fraser","CK","North Thompson River (Spring 5-2)",217.0641916,NA,NA,NA,NA,217.0641916,217.0641916,253.1315004
+"Fraser","CK","North Thompson River (Summer 5-2)",228.9146957,NA,NA,NA,NA,228.9146957,228.9146957,275.592974
+NA,"CK","Okanagan",NA,NA,NA,NA,NA,NA,NA,NA
+"Nass","CK","Portland Sound-Observatory Inlet-Lower Nass",190.9744091,NA,NA,NA,NA,NA,190.9744091,242.3053295
+"Central Coast","CK","Rivers Inlet",212.2289552,NA,NA,NA,NA,NA,212.2289552,266.5696947
+"Fraser","CK","Shuswap River (Summer 4-1)",202.8235731,139,NA,NA,NA,202.8235731,202.8235731,300.9598736
+"Skeena","CK","Sicintine",218.4883479,NA,NA,NA,NA,218.4883479,218.4883479,238.5283327
+"Skeena","CK","Skeena Estuary",229.5705462,NA,NA,NA,192.94,229.5705462,229.5705462,281.4243017
+"Fraser","CK","South Thompson-Adams River Upper",237.9839834,NA,NA,NA,NA,237.9839834,237.9839834,276.7089621
+"Fraser","CK","South Thompson River-Bessette Creek (Summer 4-2)",236.5804793,NA,NA,NA,NA,236.5804793,236.5804793,283.3252193
+"Fraser","CK","South Thompson River (Summer 4-1)",239.2153516,182,NA,NA,NA,239.2153516,239.2153516,300.2468932
+"Fraser","CK","South Thompson River (Summer 5-2)",203.2755681,NA,NA,NA,NA,203.2755681,203.2755681,283.5658975
+"Vancouver Island & Mainland Inlets","CK","Southern Mainland-Georgia Strait (Fall x-1)",215.4943129,139,NA,NA,NA,NA,215.4943129,263.517935
+"Vancouver Island & Mainland Inlets","CK","Southern Mainland-Southern Fjords (Fall x-1)",200.31324,NA,NA,NA,NA,NA,200.31324,263.9660233
+"AlaskaTransboundary","CK","Stikine-Early Timing",NA,NA,1,365,NA,NA,NA,NA
+"AlaskaTransboundary","CK","Stikine-Late Timing",NA,NA,1,365,NA,NA,NA,NA
+"AlaskaTransboundary","CK","Taku-Early Timing",NA,NA,1,365,NA,NA,NA,NA
+"AlaskaTransboundary","CK","Taku-Late Timing",117.1376213,NA,1,365,NA,NA,117.1376213,253.2823055
+"AlaskaTransboundary","CK","Taku-Mid Timing",NA,NA,1,365,NA,NA,NA,NA
+"AlaskaTransboundary","CK","Unuk",NA,NA,1,365,NA,NA,NA,NA
+"Skeena","CK","Upper Bulkley River",201.3775227,NA,1,365,145.94,201.3775227,201.3775227,255.8717811
+"Fraser","CK","Upper Fraser River (Spring 5-2)",212.9120268,162.8,1,365,NA,212.9120268,212.9120268,249.0288307
+"Nass","CK","Upper Nass",201.6968255,NA,NA,NA,NA,NA,201.6968255,265.0684546
+"Skeena","CK","Upper Skeena",216.0697992,NA,NA,NA,192.94,216.0697992,216.0697992,251.7705686
+"Yukon","CK","Upper Yukon",209.4328455,NA,NA,NA,NA,NA,209.4328455,256.9832972
+"Central Coast","CK","Wannock",220.4836732,NA,NA,NA,NA,NA,220.4836732,323.3832061
+"Vancouver Island & Mainland Inlets","CK","West Vancouver Island-Nootka and Kyuquot (Fall x-1)",257.7423932,143,NA,NA,NA,NA,257.7423932,294.4097614
+"Vancouver Island & Mainland Inlets","CK","West Vancouver Island-North (Fall x-1)",251.6185743,NA,NA,NA,NA,NA,251.6185743,286.623907
+"Vancouver Island & Mainland Inlets","CK","West Vancouver Island-South (Fall x-1)",266.7668886,118,NA,NA,NA,NA,266.7668886,308.937329
+"Skeena","CK","Zymoetz",215.52892,NA,NA,NA,192.94,215.52892,215.52892,251.4492368
+"Fraser","CK",NA,286.5928407,NA,NA,NA,NA,286.5928407,286.5928407,340.946553
+"Fraser","CK",NA,135.383746,NA,NA,NA,NA,135.383746,135.383746,222.9182834
+"Fraser","CK",NA,227.203096,NA,NA,NA,NA,227.203096,227.203096,310.0681873
+"HaidaGwaii","CK",NA,246.766939,NA,NA,NA,NA,NA,246.766939,298.0633873
+"Vancouver Island & Mainland Inlets","CK",NA,244.9729149,NA,NA,NA,NA,NA,244.9729149,303.7054849
+"Vancouver Island & Mainland Inlets","CK",NA,296.5937646,NA,NA,NA,NA,NA,296.5937646,330.6137337
+"Central Coast","CM","Bella Coola-Dean Rivers",222.8105965,129.166666666667,NA,NA,NA,NA,222.8105965,269.8868198
+"Central Coast","CM","Bella Coola River-Late",205.611698,116,NA,NA,NA,NA,205.611698,273.1680472
+"Vancouver Island & Mainland Inlets","CM","Bute Inlet",257.2492363,NA,NA,NA,NA,NA,257.2492363,321.5332861
+"Central Coast","CM","Douglas-Gardner",217.8964478,113,NA,NA,NA,NA,217.8964478,261.605544
+"HaidaGwaii","CM","East Haida Gwaii",265.393079,145,NA,NA,NA,NA,265.393079,297.8431194
+"Fraser","CM","Georgia Strait",NA,148,NA,NA,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","CM","Georgia Strait",290.2873815,147.416666666667,NA,NA,NA,NA,290.2873815,337.343194
+"Central Coast","CM","Hecate Lowlands",244.8321312,NA,NA,NA,NA,NA,244.8321312,277.9221478
+"Vancouver Island & Mainland Inlets","CM","Howe Sound-Burrard Inlet",290.7648883,147.2,NA,NA,NA,NA,290.7648883,343.3601153
+"Vancouver Island & Mainland Inlets","CM","Loughborough",275.5208541,NA,NA,NA,NA,NA,275.5208541,318.8179117
+"Fraser","CM","Lower Fraser",289.9542484,142.5,NA,NA,NA,289.9542484,289.9542484,343.5786481
+"Nass","CM","Lower Nass",237.1200691,NA,NA,NA,NA,NA,237.1200691,272.7757761
+"Skeena","CM","Lower Skeena",226.1703982,NA,NA,NA,209,226.1703982,226.1703982,265.5376153
+"Skeena","CM","Middle Skeena",225.4046207,NA,NA,NA,209,225.4046207,225.4046207,261.2417818
+"Central Coast","CM","Mussel-Kynoch",228.8273965,NA,NA,NA,NA,NA,228.8273965,278.8043721
+"HaidaGwaii","CM","North Haida Gwaii",269.1182403,NA,NA,NA,NA,NA,269.1182403,299.9403281
+"HaidaGwaii","CM","North Haida Gwaii-Stanley Creek",231.3915718,NA,NA,NA,NA,NA,231.3915718,269.9488575
+"Vancouver Island & Mainland Inlets","CM","Northeast Vancouver Island",275.6288446,NA,NA,NA,NA,NA,275.6288446,315.0766455
+"Vancouver Island & Mainland Inlets","CM","Northwest Vancouver Island",275.977766,NA,NA,NA,NA,NA,275.977766,305.3188664
+"Yukon","CM","Porcupine",198.8186239,NA,NA,NA,NA,NA,198.8186239,263.3283416
+"Nass","CM","Portland Canal-Observatory",208.9325483,NA,NA,NA,NA,NA,208.9325483,254.4415269
+"Nass","CM","Portland Inlet",218.1938177,NA,NA,NA,NA,NA,218.1938177,260.7131014
+"Central Coast","CM","Rivers Inlet",232.3924885,NA,NA,NA,NA,NA,232.3924885,281.4767891
+"Skeena","CM","Skeena Estuary",244.9495596,NA,NA,NA,209,244.9495596,244.9495596,272.9996624
+"HaidaGwaii","CM","Skidegate",254.9210594,NA,NA,NA,NA,NA,254.9210594,295.9049644
+"Central Coast","CM","Smith Inlet",241.9576604,NA,NA,NA,NA,NA,241.9576604,290.493912
+"Vancouver Island & Mainland Inlets","CM","Southern Coastal Streams",251.9380808,NA,NA,NA,NA,NA,251.9380808,299.0023883
+"Vancouver Island & Mainland Inlets","CM","Southwest & West Vancouver Island",278.1697832,121,NA,NA,NA,NA,278.1697832,320.2156684
+"Central Coast","CM","Spiller-Fitz-Hugh-Burke",242.2485678,145,NA,NA,NA,NA,242.2485678,287.3816918
+"AlaskaTransboundary","CM","Taku",NA,173,NA,NA,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","CM","Upper Knight",242.8622598,129.5,NA,NA,NA,NA,242.8622598,298.2203715
+NA,"CM","Upper Skeena",NA,NA,NA,NA,NA,NA,NA,NA
+"Central Coast","CM","Wannock",267.7870444,NA,NA,NA,NA,NA,267.7870444,329.2964635
+"HaidaGwaii","CM","West Haida Gwaii",256.1095568,NA,NA,NA,NA,NA,256.1095568,290.5790676
+"Fraser","CM",NA,276.3781745,NA,NA,NA,NA,276.3781745,276.3781745,318.5785741
+"Central Coast","CO","Bella Coola-Dean Rivers",257.751898,NA,NA,NA,NA,NA,257.751898,340.4609273
+"Fraser","CO","Boundary Bay",279.493371,NA,1,365,NA,279.493371,279.493371,354.6119324
+"Vancouver Island & Mainland Inlets","CO","Clayoquot",275.8120818,155,1,365,NA,NA,275.8120818,339.0243337
+"Central Coast","CO","Douglas Channel-Kitimat Arm",246.6460197,201,1,365,NA,NA,246.6460197,318.8255974
+"HaidaGwaii","CO","East Haida Gwaii",269.2266877,141,1,365,NA,NA,269.2266877,310.0541081
+"Vancouver Island & Mainland Inlets","CO","East Vancouver Island-Georgia Strait",293.7114113,165.166666666667,1,365,NA,NA,293.7114113,348.8551975
+"Vancouver Island & Mainland Inlets","CO","East Vancouver Island-Johnstone Strait-Southern Fjords",248.3395407,NA,1,365,NA,NA,248.3395407,318.8029346
+"Fraser","CO","Fraser Canyon",296.9744921,NA,NA,NA,NA,296.9744921,296.9744921,353.0107178
+"Vancouver Island & Mainland Inlets","CO","Georgia Strait Mainland",275.9699761,NA,1,365,NA,NA,275.9699761,334.6639971
+"HaidaGwaii","CO","Haida Gwaii-Graham Island Lowlands",250.2383093,NA,NA,NA,NA,NA,250.2383093,310.5546477
+"Central Coast","CO","Hecate Strait Mainland",243.5991214,NA,1,365,NA,NA,243.5991214,292.6557342
+"Vancouver Island & Mainland Inlets","CO","Homathko-Klinaklini Rivers",228.6728784,145.5,1,365,NA,NA,228.6728784,313.9312158
+"Vancouver Island & Mainland Inlets","CO","Howe Sound-Burrard Inlet",272.4687923,162,1,365,NA,NA,272.4687923,341.5424245
+"Fraser","CO","Interior Fraser",284.0212993,164.5,1,365,NA,284.0212993,284.0212993,347.1545449
+"Vancouver Island & Mainland Inlets","CO","Juan de Fuca-Pachena",281.7873751,108.5,1,365,NA,NA,281.7873751,334.3146261
+"Fraser","CO","Lillooet",289.4350344,NA,NA,NA,NA,289.4350344,289.4350344,343.4888345
+"Fraser","CO","Lower Fraser",301.2369789,135,1,365,NA,301.2369789,301.2369789,362.179938
+"Vancouver Island & Mainland Inlets","CO","Lower Fraser",NA,NA,1,365,NA,NA,NA,NA
+"Nass","CO","Lower Nass",258.2259514,NA,1,365,NA,NA,258.2259514,321.0848925
+"Skeena","CO","Lower Skeena",274.3608619,NA,1,365,233,274.3608619,274.3608619,331.7710346
+"AlaskaTransboundary","CO","Lower Stikine",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","CO","Lower Thompson",271.5674825,NA,1,365,NA,271.5674825,271.5674825,339.679077
+"Skeena","CO","Middle Skeena",265.105453,189,1,365,200,265.105453,265.105453,312.2276625
+"Central Coast","CO","Mussel-Kynoch",238.421899,NA,NA,NA,NA,NA,238.421899,289.1433439
+"Vancouver Island & Mainland Inlets","CO","Nahwitti Lowland",264.2321805,NA,1,365,NA,NA,264.2321805,311.3422356
+"Fraser","CO","North Thompson",289.610907,139,NA,NA,NA,289.610907,289.610907,333.5352227
+"Central Coast","CO","Northern Coastal Streams",238.9530788,NA,1,365,NA,NA,238.9530788,307.1783975
+"Nass","CO","Portland Sound-Observatory Inlet-Portland Canal",246.3409907,NA,1,365,NA,NA,246.3409907,313.228392
+"Central Coast","CO","Rivers Inlet",253.4391763,NA,NA,NA,NA,NA,253.4391763,326.7113035
+"Skeena","CO","Skeena Estuary",260.2035033,NA,NA,NA,200,260.2035033,260.2035033,312.2618743
+"Central Coast","CO","Smith Inlet",256.7680566,NA,NA,NA,NA,NA,256.7680566,316.4565886
+"Fraser","CO","South Thompson",282.4866781,174,NA,NA,NA,282.4866781,282.4866781,334.9920398
+"Vancouver Island & Mainland Inlets","CO","Southern Coastal Streams-Queen Charlotte Strait-Johnstone Strait-Southern Fjords",247.9952443,143,1,365,NA,NA,247.9952443,312.7687222
+"AlaskaTransboundary","CO","Taku-Early Timing",182.9896568,169,1,365,NA,NA,182.9896568,249.5365237
+"AlaskaTransboundary","CO","Taku-Late Timing",NA,169,1,365,NA,NA,NA,NA
+"AlaskaTransboundary","CO","Taku-Mid Timing",NA,169,1,365,NA,NA,NA,NA
+"Nass","CO","Upper Nass",248.4014386,NA,NA,NA,NA,NA,248.4014386,312.8496374
+"Skeena","CO","Upper Skeena",251.609148,NA,1,365,200,251.609148,251.609148,301.4637783
+"HaidaGwaii","CO","West Haida Gwaii",266.2402912,NA,NA,NA,NA,NA,266.2402912,307.527611
+"Vancouver Island & Mainland Inlets","CO","West Vancouver Island",276.2519035,156,1,365,NA,NA,276.2519035,337.1743046
+"HaidaGwaii","PKE","East Haida Gwaii (even)",241.2892999,NA,NA,NA,NA,NA,241.2892999,279.5548749
+"Vancouver Island & Mainland Inlets","PKE","Georgia Strait (even)",239.7879058,105,NA,NA,NA,NA,239.7879058,282.4711009
+"Central Coast","PKE","Hecate Lowlands (even)",240.028173,132,NA,NA,NA,NA,240.028173,273.8477317
+"Central Coast","PKE","Hecate Strait-Fjords (even)",222.359278,109,NA,NA,NA,NA,222.359278,267.639207
+"Skeena","PKE","Middle-Upper Skeena (even)",221.5744959,NA,NA,NA,200,221.5744959,221.5744959,259.1660899
+"Skeena","PKE","Nass-Skeena Estuary (even)",225.2826455,NA,NA,NA,200,225.2826455,225.2826455,263.4400033
+"HaidaGwaii","PKE","North Haida Gwaii (even)",232.2814954,149,NA,NA,NA,NA,232.2814954,267.5042226
+"Vancouver Island & Mainland Inlets","PKE","Northwest Vancouver Island (even)",245.4503278,NA,NA,NA,NA,NA,245.4503278,269.9338814
+"Fraser","PKE","Southern Fjords (even)",NA,106,NA,NA,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","PKE","Southern Fjords (even)",228.1975379,105,NA,NA,NA,NA,228.1975379,281.357027
+"Nass","PKE","Upper Nass (odd)",234.0333011,NA,NA,NA,NA,NA,234.0333011,258.8114073
+"HaidaGwaii","PKE","West Haida Gwaii (even)",241.194192,NA,NA,NA,NA,NA,241.194192,275.4319196
+"Vancouver Island & Mainland Inlets","PKE","West Vancouver Island (even)",249.6310833,118,NA,NA,NA,NA,249.6310833,283.3470855
+"Fraser","PKE",NA,266.9907611,NA,NA,NA,NA,266.9907611,266.9907611,326.1738097
+"HaidaGwaii","PKO","East Haida Gwaii (odd)",239.512556,122,NA,NA,NA,NA,239.512556,279.3967947
+"Vancouver Island & Mainland Inlets","PKO","East Howe Sound-Burrard Inlet (odd)",226.6716328,NA,NA,NA,NA,NA,226.6716328,282.3923375
+"Vancouver Island & Mainland Inlets","PKO","East Vancouver Island-Johnstone Strait (odd)",223.0559627,NA,NA,NA,NA,NA,223.0559627,283.1260015
+"Fraser","PKO","Fraser River (odd)",266.8707763,136.428571428571,NA,NA,NA,266.8707763,266.8707763,302.9673854
+"Vancouver Island & Mainland Inlets","PKO","Georgia Strait (odd)",240.2542913,119.5,NA,NA,NA,NA,240.2542913,282.3229251
+"Central Coast","PKO","Hecate Strait-Fjords (odd)",222.0893486,119,NA,NA,NA,NA,222.0893486,267.1358313
+"Central Coast","PKO","Hecate Strait-Lowlands (odd)",240.1081126,138,NA,NA,NA,NA,240.1081126,273.8827359
+"Central Coast","PKO","Homathko-Klinaklini-Smith-Rivers-Bella Coola-Dean (odd)",222.7408891,NA,NA,NA,NA,NA,222.7408891,271.6097102
+"Skeena","PKO","Lower Skeena River (odd)",225.3739071,NA,NA,NA,200,225.3739071,225.3739071,262.3238519
+"Skeena","PKO","Middle-Upper Skeena (odd)",221.8194648,NA,NA,NA,200,221.8194648,221.8194648,259.2847078
+"Vancouver Island & Mainland Inlets","PKO","Nahwitti (odd)",236.7790469,NA,NA,NA,NA,NA,236.7790469,280.3109714
+"Nass","PKO","Nass-Portland-Observatory (odd)",218.6374617,NA,NA,NA,NA,NA,218.6374617,257.5798587
+"Skeena","PKO","Nass-Skeena Estuary (odd)",234.2350085,NA,NA,NA,200,234.2350085,234.2350085,271.6802091
+"HaidaGwaii","PKO","North Haida Gwaii (odd)",232.145552,NA,NA,NA,NA,NA,232.145552,267.5721464
+"Vancouver Island & Mainland Inlets","PKO","Southern Fjords (odd)",230.377698,NA,NA,NA,NA,NA,230.377698,280.9678258
+"Nass","PKO","Upper Nass (even)",232.959762,NA,NA,NA,NA,NA,232.959762,258.7938271
+"HaidaGwaii","PKO","West Haida Gwaii (odd)",240.4769462,NA,NA,NA,NA,NA,240.4769462,275.183757
+"Vancouver Island & Mainland Inlets","PKO","West Vancouver Island (odd)",249.8405357,NA,NA,NA,NA,NA,249.8405357,283.3575109
+"Fraser","SEL","Adams-Early Summer",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SEL","Adams & Momich Lakes-Early Summer",238.2426991,NA,1,365,191.282,238.2426991,238.2426991,262.6065219
+"HaidaGwaii","SEL","Ain-Skundale-Ian",158.123135,NA,NA,NA,NA,NA,158.123135,252.2047907
+"Skeena","SEL","Alastair",228.8026891,NA,1,365,156.328,228.8026891,228.8026891,284.6644206
+"Vancouver Island & Mainland Inlets","SEL","Alice",201.2070852,NA,NA,NA,NA,NA,201.2070852,240.7157111
+"Fraser","SEL","Alouette-Early Summer",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SEL","Anderson-Seton-Early Summer",225.4987424,138,1,365,191.282,225.4987424,225.4987424,266.8010011
+"Skeena","SEL","Asitika",240.2555583,NA,NA,NA,175.06,240.2555583,240.2555583,281.4271727
+"HaidaGwaii","SEL","Awun",149.7998693,NA,NA,NA,NA,NA,149.7998693,252.5728142
+"Skeena","SEL","Azuklotz",232.0012092,NA,NA,NA,175.06,232.0012092,232.0012092,269.2383744
+"Skeena","SEL","Babine (enhanced)",NA,168,1,365,178.56,NA,NA,NA
+"Skeena","SEL","Babine/Onerka",220.5421642,191,1,365,168.06,220.5421642,220.5421642,265.0350821
+"Central Coast","SEL","Backland",196.4853568,NA,NA,NA,NA,NA,196.4853568,275.3731351
+"Central Coast","SEL","Banks",177.8495118,NA,NA,NA,NA,NA,177.8495118,262.3543208
+"Skeena","SEL","Bear",238.6747087,NA,1,365,175.06,238.6747087,238.6747087,273.2832832
+"Central Coast","SEL","Bloomfield",210.8136793,NA,NA,NA,NA,NA,210.8136793,261.0707738
+"Central Coast","SEL","Bolton Creek",174.8941052,NA,NA,NA,NA,NA,174.8941052,251.0578393
+"Central Coast","SEL","Bonilla",176.0134607,NA,NA,NA,NA,NA,176.0134607,266.0768786
+"Central Coast","SEL","Borrowman Creek",207.6665567,NA,NA,NA,NA,NA,207.6665567,266.035111
+"Fraser","SEL","Bowron-Early Summer",217.9949789,NA,NA,NA,191.282,217.9949789,217.9949789,259.8971685
+"Skeena","SEL","Bowser",206.8185735,NA,NA,NA,NA,206.8185735,206.8185735,267.5350274
+"Skeena","SEL","Bulkley/Maxan",217.5502144,NA,NA,NA,161.2,217.5502144,217.5502144,260.7603426
+"Central Coast","SEL","Busey Creek",170.2330198,NA,NA,NA,NA,NA,170.2330198,207.980768
+"Vancouver Island & Mainland Inlets","SEL","Canoe Creek",164.5279167,NA,NA,NA,NA,NA,164.5279167,194.9541067
+"Central Coast","SEL","Canoona",188.0244521,NA,NA,NA,NA,NA,188.0244521,287.153092
+"Central Coast","SEL","Cartwright Creek",192.2466704,NA,NA,NA,NA,NA,192.2466704,234.2537842
+"Vancouver Island & Mainland Inlets","SEL","Cecilia",161.9643664,NA,NA,NA,NA,NA,161.9643664,248.5243032
+"Vancouver Island & Mainland Inlets","SEL","Cheewat",59.69042225,NA,NA,NA,NA,NA,59.69042225,254.0100938
+"Fraser","SEL","Chilko-Early Summer",242.7006286,160,1,365,191.282,242.7006286,242.7006286,264.3633804
+"Fraser","SEL","Chilko-Summer",227.6233935,160,1,365,201.4976,227.6233935,227.6233935,274.6013283
+"Fraser","SEL","Chilliwack-Early Summer (cyclic)",218.676271,NA,1,365,191.282,218.676271,218.676271,245.4345176
+"Central Coast","SEL","Citeyats",203.6801339,NA,NA,NA,NA,NA,203.6801339,253.8055884
+"Vancouver Island & Mainland Inlets","SEL","Clayoquot",273.4032575,NA,NA,NA,NA,NA,273.4032575,328.5097699
+"Nass","SEL","Clements",181.0153799,NA,NA,NA,NA,NA,181.0153799,240.6759547
+"Fraser","SEL","Coquitlam-Early Summer",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SEL","Cultus-Late",265.6708917,NA,1,365,212.0064,265.6708917,265.6708917,334.5697539
+"Central Coast","SEL","Curtis Inlet",185.4026222,NA,NA,NA,NA,NA,185.4026222,248.2842037
+"Central Coast","SEL","Dallain Creek",176.2493799,NA,NA,NA,NA,NA,176.2493799,211.0096838
+"Nass","SEL","Damdochax",207.5119002,NA,NA,NA,NA,NA,207.5119002,263.4398721
+"Skeena","SEL","Damshilgwit",224.3914445,NA,1,365,175.06,224.3914445,224.3914445,270.5776096
+"Central Coast","SEL","Deer",215.0284926,NA,NA,NA,NA,NA,215.0284926,261.0540104
+"Vancouver Island & Mainland Inlets","SEL","Deserted",201.2108385,129,NA,NA,NA,NA,201.2108385,275.1408853
+"Central Coast","SEL","Devon",180.6640663,NA,NA,NA,NA,NA,180.6640663,266.6630007
+"Central Coast","SEL","Dome",233.9976432,NA,NA,NA,NA,NA,233.9976432,248.2351781
+"Central Coast","SEL","Douglas Creek",196.0182557,NA,NA,NA,NA,NA,196.0182557,246.8214116
+"Skeena","SEL","Ecstall/Lower",176.1970788,NA,NA,NA,158.932,176.1970788,176.1970788,268.8081272
+"Central Coast","SEL","Elizabeth",183.9972375,NA,NA,NA,NA,NA,183.9972375,205.6448898
+"Central Coast","SEL","Elsie/Hoy",214.6266609,NA,NA,NA,NA,NA,214.6266609,272.6023133
+"Central Coast","SEL","End Hill Creek",171.4296183,NA,NA,NA,NA,NA,171.4296183,262.14448
+"Central Coast","SEL","Evelyn",199.9145746,NA,NA,NA,NA,NA,199.9145746,275.1306064
+"Central Coast","SEL","Evinrude Inlet",189.2134608,NA,NA,NA,NA,NA,189.2134608,265.0092941
+"HaidaGwaii","SEL","Fairfax",186.1781083,NA,NA,NA,NA,NA,186.1781083,233.3597605
+"Vancouver Island & Mainland Inlets","SEL","Fairy",220.8013904,NA,NA,NA,NA,NA,220.8013904,284.1038032
+"Central Coast","SEL","Fannie Cove",191.3592992,NA,NA,NA,NA,NA,191.3592992,257.7079376
+NA,"SEL","Footsore/Hodder",NA,NA,NA,NA,NA,NA,NA,NA
+"Fraser","SEL","Francois-Fraser-Summer",237.9085309,NA,1,365,201.4976,237.9085309,237.9085309,267.141882
+"Nass","SEL","Fred Wright",228.0284381,NA,NA,NA,NA,NA,228.0284381,271.0348048
+"Central Coast","SEL","Freeda",217.5045338,NA,NA,NA,NA,NA,217.5045338,240.6375625
+"Vancouver Island & Mainland Inlets","SEL","Fulmore",157.1342026,NA,NA,NA,NA,NA,157.1342026,253.389932
+"Skeena","SEL","Gitanyow (Kitwanga/Kitwancool)",205.608544,NA,1,365,171.084,205.608544,205.608544,268.6183673
+"Vancouver Island & Mainland Inlets","SEL","Great Central",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SEL","Harrison-Downstream Migrating-Late",245.767559,NA,NA,NA,212.0064,245.767559,245.767559,282.8314266
+"Fraser","SEL","Harrison-Upstream Migrating-Late",265.208774,NA,1,365,212.0064,265.208774,265.208774,326.1910967
+NA,"SEL","Harrison River (river-type)",NA,NA,NA,NA,NA,NA,NA,NA
+"Central Coast","SEL","Hartley Bay",215.9234464,NA,NA,NA,NA,NA,215.9234464,273.107429
+"Vancouver Island & Mainland Inlets","SEL","Henderson",236.1249262,NA,NA,NA,NA,NA,236.1249262,313.360964
+"Vancouver Island & Mainland Inlets","SEL","Hesquiat",255.609257,NA,NA,NA,NA,NA,255.609257,317.1640603
+"Central Coast","SEL","Hevenor Inlet",175.045941,NA,NA,NA,NA,NA,175.045941,242.7229254
+"Vancouver Island & Mainland Inlets","SEL","Heydon",170.2945125,NA,1,365,NA,NA,170.2945125,224.1986081
+"Central Coast","SEL","Higgins Lagoon",179.399238,NA,NA,NA,NA,NA,179.399238,249.7507887
+"Vancouver Island & Mainland Inlets","SEL","Hobiton",126.747008,NA,1,365,NA,NA,126.747008,253.8587919
+"Vancouver Island & Mainland Inlets","SEL","Ida-Bonanza",240.5354487,NA,NA,NA,NA,NA,240.5354487,296.1228088
+"HaidaGwaii","SEL","Jalun",137.9678411,NA,NA,NA,NA,NA,137.9678411,241.4474952
+"Vancouver Island & Mainland Inlets","SEL","Jansen",188.0205017,NA,NA,NA,NA,NA,188.0205017,245.3537198
+"Skeena","SEL","Johanson",205.7403442,NA,NA,NA,175.06,205.7403442,205.7403442,261.1476068
+"Skeena","SEL","Johnston",210.2247606,NA,1,365,158.932,210.2247606,210.2247606,276.9649809
+"Central Coast","SEL","Kadjusdis River",184.7797609,NA,NA,NA,NA,NA,184.7797609,266.2991885
+"Central Coast","SEL","Kainet Creek",194.7085925,NA,NA,NA,NA,NA,194.7085925,260.8788723
+"Vancouver Island & Mainland Inlets","SEL","Kakweiken",197.3137386,NA,NA,NA,NA,NA,197.3137386,253.2551536
+"Fraser","SEL","Kamloops-Early Summer",232.0590765,NA,1,365,191.282,232.0590765,232.0590765,265.4652564
+"Vancouver Island & Mainland Inlets","SEL","Kanim",75.270995,NA,NA,NA,NA,NA,75.270995,222.5952205
+"Central Coast","SEL","Kdelmashan Creek",181.4526115,NA,NA,NA,NA,NA,181.4526115,269.3955485
+"Central Coast","SEL","Keecha",189.1466514,NA,NA,NA,NA,NA,189.1466514,257.1715972
+"Vancouver Island & Mainland Inlets","SEL","Kennedy",244.5878174,NA,NA,NA,NA,NA,244.5878174,309.849705
+"Central Coast","SEL","Kent Inlet Lagoon Creek",202.7950001,NA,NA,NA,NA,NA,202.7950001,286.0741737
+"Central Coast","SEL","Kenzuwash Creeks",165.4335632,NA,NA,NA,NA,NA,165.4335632,235.9933905
+"Central Coast","SEL","Keswar Creek",170.3336194,NA,NA,NA,NA,NA,170.3336194,243.5823614
+"Central Coast","SEL","Kildidt Creek",201.5186233,NA,NA,NA,NA,NA,201.5186233,237.2539801
+"Central Coast","SEL","Kildidt Lagoon Creek",191.0546924,NA,NA,NA,NA,NA,191.0546924,292.8933735
+"Central Coast","SEL","Kimsquit",187.8608381,NA,NA,NA,NA,NA,187.8608381,294.0895327
+"Central Coast","SEL","Kisameet",191.2668325,NA,NA,NA,NA,NA,191.2668325,277.9587626
+"Central Coast","SEL","Kitkiata",193.6681558,NA,NA,NA,NA,NA,193.6681558,275.6270272
+"Central Coast","SEL","Kitlope",192.3506176,NA,NA,NA,NA,NA,192.3506176,262.3329077
+"Skeena","SEL","Kitsumkalum",236.2736832,NA,1,365,168.2,236.2736832,236.2736832,298.3754231
+"Skeena","SEL","Kluatantan",224.5088956,NA,NA,NA,161.2,224.5088956,224.5088956,270.5116714
+"Skeena","SEL","Kluayaz",224.1634875,NA,NA,NA,161.2,224.1634875,224.1634875,275.6711023
+"Central Coast","SEL","Koeye",165.7374077,NA,NA,NA,NA,NA,165.7374077,266.6683355
+"Central Coast","SEL","Kooryet",183.9532836,NA,NA,NA,NA,NA,183.9532836,253.3908364
+"Central Coast","SEL","Kunsoot River",234.8831253,NA,NA,NA,NA,NA,234.8831253,247.8494565
+"AlaskaTransboundary","SEL","Kuthai",210.5433457,NA,NA,NA,NA,NA,210.5433457,245.57551
+"Central Coast","SEL","Kwakwa Creek",187.7663551,NA,NA,NA,NA,NA,187.7663551,255.5432109
+"Skeena","SEL","Lakelse",219.011997,153,1,365,158.932,219.011997,219.011997,264.9481831
+"Central Coast","SEL","Lewis Creek",170.9259766,NA,NA,NA,NA,NA,170.9259766,243.3104248
+"Fraser","SEL","Lillooet-Harrison-Late",246.503993,NA,1,365,212.0064,246.503993,246.503993,293.6635677
+"Central Coast","SEL","Limestone Creek",210.1051868,NA,NA,NA,NA,NA,210.1051868,286.5067933
+"AlaskaTransboundary","SEL","Little Trapper",209.4025054,NA,NA,NA,NA,NA,209.4025054,245.9134494
+"Central Coast","SEL","Long",218.350132,NA,NA,NA,NA,NA,218.350132,293.1841518
+"Vancouver Island & Mainland Inlets","SEL","Loose",237.8666375,NA,NA,NA,NA,NA,237.8666375,254.1600358
+"Central Coast","SEL","Lowe/Simpson/Weir",215.151172,NA,NA,NA,NA,NA,215.151172,272.126776
+"Vancouver Island & Mainland Inlets","SEL","Mackenzie",168.8854488,NA,NA,NA,NA,NA,168.8854488,263.0537369
+"Vancouver Island & Mainland Inlets","SEL","Maggie",242.5412927,NA,NA,NA,NA,NA,242.5412927,278.4417629
+"HaidaGwaii","SEL","Marian/Eden",171.3720699,NA,NA,NA,NA,NA,171.3720699,261.77609
+"Central Coast","SEL","Mary Cove Creek",196.953583,NA,NA,NA,NA,NA,196.953583,274.8206078
+"HaidaGwaii","SEL","Mathers",140.0153032,NA,1,365,NA,NA,140.0153032,248.6683375
+"Central Coast","SEL","Mcdonald Creek",208.744099,NA,NA,NA,NA,NA,208.744099,263.157744
+"Skeena","SEL","Mcdonell/Dennis/Aldrich",220.7749982,NA,1,365,169.292,220.7749982,220.7749982,262.8145655
+"Central Coast","SEL","Mcloughlin",184.604353,NA,NA,NA,NA,NA,184.604353,265.409266
+"Vancouver Island & Mainland Inlets","SEL","Megin",199.9828018,NA,NA,NA,NA,NA,199.9828018,312.0430657
+"HaidaGwaii","SEL","Mercer",176.0758358,NA,NA,NA,NA,NA,176.0758358,239.5095369
+"Nass","SEL","Meziadin",182.5445609,NA,NA,NA,NA,NA,182.5445609,303.6674678
+"Central Coast","SEL","Mikado",176.4325723,NA,NA,NA,NA,NA,176.4325723,267.9626886
+"Central Coast","SEL","Monckton Inlet Creek",208.1886629,NA,NA,NA,NA,NA,208.1886629,234.3365594
+"Skeena","SEL","Morice/Atna",230.7398352,NA,1,365,161.2,230.7398352,230.7398352,274.9834223
+"Skeena","SEL","Motase",232.3029441,NA,NA,NA,179.316,232.3029441,232.3029441,270.961334
+"Vancouver Island & Mainland Inlets","SEL","Muchalat",179.5537468,NA,NA,NA,NA,NA,179.5537468,294.8548049
+"Vancouver Island & Mainland Inlets","SEL","Muriel",306.300808,NA,1,365,NA,NA,306.300808,329.6533193
+"Fraser","SEL","Nadina-Francois-Early Summer",230.492884,NA,1,365,191.282,230.492884,230.492884,267.2412854
+"Fraser","SEL","Nahatlatch-Early Summer",230.4101287,NA,1,365,191.282,230.4101287,230.4101287,271.4134808
+"Vancouver Island & Mainland Inlets","SEL","Nahwitti",151.0884815,NA,NA,NA,NA,NA,151.0884815,272.3931001
+"Central Coast","SEL","Namu",165.4912597,NA,NA,NA,NA,NA,165.4912597,267.3472757
+"Skeena","SEL","Nilkitkwa",NA,182,1,365,189.06,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SEL","Nimpkish",140.869778,NA,NA,NA,NA,NA,140.869778,287.9208132
+"Vancouver Island & Mainland Inlets","SEL","Nitinat",228.5186334,NA,NA,NA,NA,NA,228.5186334,309.7442768
+"Fraser","SEL","North Barriere-Early Summer",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SEL","North Barriere-Early Summer (de novo)",226.4202275,NA,1,365,191.282,226.4202275,226.4202275,256.4655757
+"Vancouver Island & Mainland Inlets","SEL","O'Connell",204.0526404,NA,NA,NA,NA,NA,204.0526404,252.3401821
+"Columbia","SEL","Osoyoos",253.5102435,124,1,365,NA,NA,253.5102435,318.5911472
+"Nass","SEL","Oweegee",219.9562787,NA,NA,NA,NA,NA,219.9562787,271.3025647
+"Central Coast","SEL","Owikeno",238.0324033,NA,NA,NA,NA,NA,238.0324033,291.4980699
+"Vancouver Island & Mainland Inlets","SEL","Park River",182.4738672,NA,NA,NA,NA,NA,182.4738672,235.7363776
+"Vancouver Island & Mainland Inlets","SEL","Phillips",194.4229528,NA,NA,NA,NA,NA,194.4229528,260.242296
+"Central Coast","SEL","Pine River",192.0156433,NA,NA,NA,NA,NA,192.0156433,246.2809437
+"Fraser","SEL","Pitt-Early Summer",225.0344113,NA,NA,NA,191.282,225.0344113,225.0344113,271.6516065
+"Central Coast","SEL","Port John",187.1381141,130,1,365,NA,NA,187.1381141,284.1223112
+"Vancouver Island & Mainland Inlets","SEL","Power",224.5926844,NA,NA,NA,NA,NA,224.5926844,271.5029455
+"Central Coast","SEL","Powles Creek",204.6428122,NA,NA,NA,NA,NA,204.6428122,227.0554174
+"Central Coast","SEL","Price Creek",195.6119306,NA,NA,NA,NA,NA,195.6119306,258.3076001
+"Skeena","SEL","Prudhomme",245.3583876,NA,NA,NA,NA,245.3583876,245.3583876,279.7591401
+"Vancouver Island & Mainland Inlets","SEL","Quatse",145.5919876,NA,NA,NA,NA,NA,145.5919876,246.7029315
+"Fraser","SEL","Quesnel-Summer (cyclic)",244.9336814,162,1,365,201.4976,244.9336814,244.9336814,272.8629917
+"Central Coast","SEL","Roderick",203.6603153,NA,NA,NA,NA,NA,203.6603153,263.6605667
+"Central Coast","SEL","Ryan Creek",197.8451126,NA,NA,NA,NA,NA,197.8451126,253.763422
+"Vancouver Island & Mainland Inlets","SEL","Sakinaw",199.8426348,NA,NA,NA,NA,NA,199.8426348,300.2697174
+"Central Coast","SEL","Salter",202.6745212,NA,NA,NA,NA,NA,202.6745212,246.5351005
+"Central Coast","SEL","Scoular/Kilpatrick",196.0292489,NA,NA,NA,NA,NA,196.0292489,260.1599551
+"Fraser","SEL","Seton-Late (de novo)",281.3630876,133,1,365,212.0064,281.3630876,281.3630876,313.2142615
+"Fraser","SEL","Seton-Summer",NA,NA,1,365,NA,NA,NA,NA
+"Skeena","SEL","Shawatlan",251.0113553,NA,NA,NA,NA,251.0113553,251.0113553,289.8751529
+"Central Coast","SEL","Sheneeza Inlet",191.2005388,NA,NA,NA,NA,NA,191.2005388,241.213485
+"Central Coast","SEL","Ship Point Creek",182.1972273,NA,NA,NA,NA,NA,182.1972273,243.3805506
+"Vancouver Island & Mainland Inlets","SEL","Shushartie",150.2327325,NA,NA,NA,NA,NA,150.2327325,248.6492575
+"Fraser","SEL","Shuswap-Early Summer (cyclic)",235.3225258,NA,1,365,191.282,235.3225258,235.3225258,275.4172496
+"Fraser","SEL","Shuswap-Late (cyclic)",275.1189938,NA,1,365,212.0064,275.1189938,275.1189938,309.4965987
+NA,"SEL","Sicintine",NA,NA,NA,NA,NA,NA,NA,NA
+"HaidaGwaii","SEL","Skidegate",120.6193648,NA,NA,NA,NA,NA,120.6193648,250.6703449
+"Skeena","SEL","Slamgeesh",218.6253465,NA,1,365,175.06,218.6253465,218.6253465,268.8530348
+"Skeena","SEL","Spawning",224.1741976,NA,NA,NA,175.06,224.1741976,224.1741976,262.4034551
+"Central Coast","SEL","Spencer Creek",194.5031012,NA,NA,NA,NA,NA,194.5031012,240.976432
+"Vancouver Island & Mainland Inlets","SEL","Sproat",NA,NA,1,365,NA,NA,NA,NA
+"Central Coast","SEL","Stannard Creek",216.9141648,NA,NA,NA,NA,NA,216.9141648,249.9080934
+"Skeena","SEL","Stephens",234.3292612,NA,1,365,170.804,234.3292612,234.3292612,274.4813364
+"Skeena","SEL","Sustut",216.5176213,NA,1,365,175.06,216.5176213,216.5176213,267.13157
+"Skeena","SEL","Swan/Club",NA,NA,1,365,170.804,NA,NA,NA
+"Skeena","SEL","Tahlo/Morrison",231.560802,NA,1,365,175.06,231.560802,231.560802,268.4937691
+"AlaskaTransboundary","SEL","Tahltan",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SEL","Takla-Trembleur-Early Stuart (cyclic)",209.2559074,155,1,365,171.6524,209.2559074,209.2559074,231.8725369
+"Fraser","SEL","Takla-Trembleur-Stuart-Summer (cyclic)",245.4128439,NA,1,365,201.4976,245.4128439,245.4128439,272.2039168
+"Central Coast","SEL","Talamoosa Creek",205.127134,NA,NA,NA,NA,NA,205.127134,257.3062657
+"Central Coast","SEL","Tankeeah River",204.3527218,NA,NA,NA,NA,NA,204.3527218,269.2360667
+"Fraser","SEL","Taseko-Early Summer",220.7639634,NA,NA,NA,191.282,220.7639634,220.7639634,260.3446185
+"AlaskaTransboundary","SEL","Tatsamenie",206.2394241,NA,1,365,NA,NA,206.2394241,248.7591088
+"Central Coast","SEL","Treneman Creek",209.7867881,NA,NA,NA,NA,NA,209.7867881,288.7899651
+"Central Coast","SEL","Tsimtack/Moore/Roger",208.3127152,NA,NA,NA,NA,NA,208.3127152,277.7575012
+"Central Coast","SEL","Tuno Creek East",199.496842,NA,NA,NA,NA,NA,199.496842,267.0453468
+"Central Coast","SEL","Tuno Creek West",199.857486,NA,NA,NA,NA,NA,199.857486,258.0708667
+"Central Coast","SEL","Tyler Creek",207.7947661,NA,NA,NA,NA,NA,207.7947661,235.0113829
+"Vancouver Island & Mainland Inlets","SEL","Tzoonie",200.2289236,NA,NA,NA,NA,NA,200.2289236,236.6122753
+"Central Coast","SEL","Wale Creek",204.8215912,NA,NA,NA,NA,NA,204.8215912,267.3508085
+"Central Coast","SEL","Wannock (Owikeno)",216.7891625,NA,NA,NA,NA,NA,216.7891625,320.4789606
+"Central Coast","SEL","Watt Bay",168.4898102,NA,NA,NA,NA,NA,168.4898102,214.4964779
+"Central Coast","SEL","West Creek",181.5481075,NA,NA,NA,NA,NA,181.5481075,246.0202736
+NA,"SEL","Widgeon (river-type)",NA,NA,NA,NA,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SEL","William-Brink",167.2500537,NA,NA,NA,NA,NA,167.2500537,195.9265324
+"Central Coast","SEL","Yaaklele Lagoon",157.9372085,NA,NA,NA,NA,NA,157.9372085,239.3984131
+"HaidaGwaii","SEL","Yakoun",128.7700615,NA,NA,NA,NA,NA,128.7700615,255.0610347
+"Central Coast","SEL","Yeo",209.2196231,NA,NA,NA,NA,NA,209.2196231,255.069389
+"Central Coast","SEL",NA,253.9534848,NA,NA,NA,NA,NA,253.9534848,309.7716353
+"Central Coast","SEL",NA,245.3657429,NA,NA,NA,NA,NA,245.3657429,268.7457841
+"Fraser","SEL",NA,252.6926283,NA,NA,NA,NA,252.6926283,252.6926283,300.704846
+"Fraser","SEL",NA,233.1151036,NA,NA,NA,NA,233.1151036,233.1151036,259.1186162
+"Fraser","SEL",NA,242.7207713,NA,NA,NA,NA,242.7207713,242.7207713,263.8958515
+"Fraser","SEL",NA,242.7237801,NA,NA,NA,NA,242.7237801,242.7237801,268.8885687
+"Fraser","SEL",NA,242.484611,NA,NA,NA,NA,242.484611,242.484611,313.9257447
+"Fraser","SEL",NA,237.5409837,NA,NA,NA,NA,237.5409837,237.5409837,254.4649507
+"Fraser","SEL",NA,229.9329213,NA,NA,NA,NA,229.9329213,229.9329213,256.8524113
+"Nass","SEL",NA,200.0399782,NA,NA,NA,NA,NA,200.0399782,241.5435301
+"Vancouver Island & Mainland Inlets","SEL",NA,219.2661102,NA,NA,NA,NA,NA,219.2661102,284.7074324
+"Vancouver Island & Mainland Inlets","SEL",NA,166.4707034,NA,NA,NA,NA,NA,166.4707034,230.7917367
+"Vancouver Island & Mainland Inlets","SEL",NA,248.5359834,NA,NA,NA,NA,NA,248.5359834,298.8936203
+"Vancouver Island & Mainland Inlets","SEL",NA,203.7522608,NA,NA,NA,NA,NA,203.7522608,260.5588527
+"Vancouver Island & Mainland Inlets","SEL",NA,131.6666965,NA,NA,NA,NA,NA,131.6666965,279.655493
+"AlaskaTransboundary","SER","Alsek (river-type)",196.887191,NA,NA,NA,NA,NA,196.887191,254.0015589
+"HaidaGwaii","SER","East Haida Gwaii (river-type)",245.0528671,NA,NA,NA,NA,NA,245.0528671,271.5405051
+"Vancouver Island & Mainland Inlets","SER","East Vancouver Island & Georgia Strait (river-type)",233.0481752,127,NA,NA,NA,NA,233.0481752,282.8834023
+"Fraser","SER","Harrison River (river-type)",292.9744406,NA,NA,NA,NA,292.9744406,292.9744406,323.506116
+"Nass","SER","Lower Nass-Portland (river-type)",196.6054651,NA,1,365,NA,NA,196.6054651,230.7416899
+"HaidaGwaii","SER","North Haida Gwaii (river-type)",202.4662671,NA,NA,NA,NA,NA,202.4662671,226.2644762
+"Central Coast","SER","Northern Coastal Fjords (river-type)",219.2970842,NA,1,365,NA,NA,219.2970842,274.8040033
+"Central Coast","SER","Northern Coastal Streams (river-type)",200.8256626,NA,NA,NA,NA,NA,200.8256626,234.0456561
+"AlaskaTransboundary","SER","Northern Transboundary Fjords (river-type)",201.1411267,181,1,365,NA,NA,201.1411267,254.7651217
+"AlaskaTransboundary","SER","Northern Transboundary Fjords (river-type)",201.1411267,181,NA,NA,NA,NA,201.1411267,254.7651217
+"Vancouver Island & Mainland Inlets","SER","NW Vancouver Island (river-type)",248.5682408,NA,NA,NA,NA,NA,248.5682408,279.1348931
+"Central Coast","SER","Rivers-Smith Inlets (river-type)",232.2178035,NA,NA,NA,NA,NA,232.2178035,274.8845974
+"Skeena","SER","Skeena River-High Interior (river-type)",242.5647036,NA,NA,NA,NA,242.5647036,242.5647036,268.1041909
+"Skeena","SER","Skeena River (river-type)",216.3681565,NA,NA,NA,NA,216.3681565,216.3681565,260.3617872
+"Vancouver Island & Mainland Inlets","SER","Southern Fjords (river-type)",215.3691025,NA,1,365,NA,NA,215.3691025,258.4154821
+"Nass","SER","Upper Nass River (river-type)",253.319364,NA,NA,NA,NA,NA,253.319364,295.1626728
+"HaidaGwaii","SER","West Haida Gwaii (river-type)",214.2427731,NA,NA,NA,NA,NA,214.2427731,234.5104073
+"Vancouver Island & Mainland Inlets","SER","West Vancouver Island (river-type)",253.5706312,NA,NA,NA,NA,NA,253.5706312,304.5598737
+"Fraser","SER","Widgeon (river-type)",296.0975256,NA,NA,NA,NA,296.0975256,296.0975256,315.1392115
+"Fraser","SER",NA,235.3268957,NA,NA,NA,NA,235.3268957,235.3268957,246.1488697
+"Fraser","SER",NA,230.2333223,NA,NA,NA,NA,230.2333223,230.2333223,284.4826265
+"Fraser","SH","Boundary Bay Winter",NA,NA,1,365,NA,NA,NA,NA
+"Central Coast","SH","Cent. Coast Winter",NA,253,NA,NA,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SH","E. Vancouver Is. Summer",NA,NA,1,365,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SH","E. Vancouver Is. Winter",NA,170,1,365,NA,NA,NA,NA
+"Fraser","SH","L. Fraser Winter",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SH","Mid Fraser  Summer",NA,NA,1,365,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SH","MIX",NA,NA,1,365,NA,NA,NA,NA
+"Nass","SH","Nass  Summer",NA,NA,1,365,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SH","S. Coast  Summer",NA,NA,1,365,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SH","S. Coast  Winter",NA,NA,1,365,NA,NA,NA,NA
+"Skeena","SH","Skeena  Summer",NA,NA,1,365,NA,NA,NA,NA
+"Fraser","SH","Thompson Summer",NA,267,NA,NA,NA,NA,NA,NA
+"Vancouver Island & Mainland Inlets","SH","W. Vancouver Is. Winter",NA,NA,1,365,NA,NA,NA,NA
