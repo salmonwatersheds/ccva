@@ -1,9 +1,32 @@
-.Rproj.user
+# History files
 .Rhistory
-.RData
-.Ruserdata
+.Rapp.history
 
-data/*
-code/ignore/
-code/example-CU
-output/*
+# Session Data files
+.RData
+
+# RStudio files
+.Rproj.user/
+
+# knitr and R markdown default cache directories
+/*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
+rsconnect/
+
+# macOS desktop services store
+.DS_Store
+
+# Large data and output files
+freshwater/data
+freshwater/code/ignore
+freshwater/output
+
+marine/data
+marine/code/ignore
+marine/output
