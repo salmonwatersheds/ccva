@@ -18,6 +18,7 @@ library(zoo) # package with rollmean function
 
 cols <- wes_palette("Darjeeling1")
 
+setwd("freshwater/")
 ###############################################################################
 # Load background spatial layers
 ###############################################################################
@@ -66,25 +67,29 @@ cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE)
 # Create space variables for plotting
 ###############################################################################
 
-grid_points <- read.csv("output/PCIC_grid-points_Fraser.csv") %>%
+grid_points <- read.csv("output/PCIC-grid-points_Fraser.csv") %>%
   st_as_sf(coords = c("lon", "lat"), crs = 4269)
 
 #------------------------------------------------------------------------------
 # List of CUs in the PSE
 #------------------------------------------------------------------------------
 
-cu_list <- read.csv("data/cu_list.csv") %>% 
+cu_list <- read.csv("../data/cu_list.csv") %>% 
   subset(Species == "Lake sockeye" & Region == "Fraser" & Notes != "Extinct")
 
 n.CUs <- length(unique(cu_list$Conservation.Unit))
 
+#------------------------------------------------------------------------------
+# Timing
+#------------------------------------------------------------------------------
 
+timing <- read.csv("output/freshwater_timing_FraserSEL.csv")
 ###############################################################################
 # CU Overlay plots:
 # Calculate median and range across models for each CU, by life-stage
 ###############################################################################
 
-fw_output <- readRDS("output/freshwater_output_FraserSEL.rds")
+fw_output <- readRDS("output/freshwater_output_FraserSEL_2023-09-28.rds")
 # dimensions:
 #   gcms$modelName,
 #   cu_list$Conservation.Unit, 

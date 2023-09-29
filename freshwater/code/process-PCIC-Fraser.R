@@ -6,8 +6,10 @@
 # Contact: Stephanie Peacock <speacock@psf.ca>
 # Date: Aug 31, 2023
 ###############################################################################
+library(ncdf4)
+library(dplyr)
 
-source('code/load-PCIC-Fraser.R')
+source('freshwater/code/freshwater-functions.R')
 
 ###############################################################################
 # Possible Global Climate Models (GCMs)
@@ -37,7 +39,7 @@ n.models <- length(gcms$modelName)
 # Loop through each GCM and save output
 ###############################################################################
 
-for(m in 2:n.models){ # for each model
+for(m in 1:n.models){ # for each model
   
   #----------------------------------------------------------------------------
   # Stream temperature
@@ -84,7 +86,7 @@ for(m in 2:n.models){ # for each model
   # Save output
   #----------------------------------------------------------------------------
   
-  saveRDS(var, paste0("data/processed-data/PCIC_", gcms$modelName[m], "_processed.rds"))
+  saveRDS(var, paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_processed.rds"))
   
   print(paste0("End ", gcms$modelName[m]))
 } #end m

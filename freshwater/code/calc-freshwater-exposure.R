@@ -19,7 +19,7 @@ library(zoo) # package with rollmean function
 
 cols <- wes_palette("Darjeeling1")
 
-source("code/functions.R")
+source("freshwater/code/freshwater-functions.R")
 
 ###############################################################################
 # Define space and time variables for Fraser basin
@@ -47,10 +47,10 @@ period.years <- cbind(
   late = c(2070:2099))
 
 # Spatial grid
-grid_points <- read.csv("output/PCIC-grid-points_Fraser.csv")
+grid_points <- read.csv("freshwater/output/PCIC-grid-points_Fraser.csv")
 
 # Grid cells corresponding to each CU and stage for Fraser SEL
-incl.stages <- readRDS("output/freshwater-grid_included-cells.rds")
+incl.stages <- readRDS("freshwater/output/freshwater-grid_included-cells.rds")
 
 #-----------------------------------------------------------------------------
 # Define freshwater stages
@@ -209,7 +209,7 @@ time.for.models <- matrix(NA, nrow = n.CUs, ncol = n.models)
 for(m in 1:n.models){
   
   # Load model output; this takes a minute
-  GCM_var <- readRDS(paste0("data/processed-data/PCIC_", gcms$modelName[m], "_processed.rds")) 
+  GCM_var <- readRDS(paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_processed.rds")) 
   
   Ts.weeklyMax <- GCM_var[[1]]
   Qs.weeklyMean <- GCM_var[[2]]
@@ -357,7 +357,10 @@ for(m in 1:n.models){
         #----------------------------------------------------------------------
         # ** Might need to think about also imposing higher crit_max for northern CUs where historical temp distribution is cold...
         thresh["crit_max", which(thresh["crit_max", ] > 26)] <- 26 # Critical max 26˚C, Richter & Kolmes (2005)
+        thresh["crit_max", which(thresh["crit_max", ] < 12)] <- 14 # Critical max 26˚C, Richter & Kolmes (2005)
+        
         thresh["opt_max", which(thresh["opt_max", ] > 24)] <- 24 # Chronic max 24˚C, Sullivan 2000
+        thresh["opt_max", which(thresh["opt_max", ] < 12)] <- 12 # Chronic min max. 12˚C
         
         #  ** Ignore minimum thresholds for now **
         # thresh["opt_min", which(thresh["opt_min", ] < c(8, 10, 8, 7)[j])] <- c(8, 10, 8, 7)[j] # Example of minimum temps from Mayer (in review)
@@ -475,8 +478,8 @@ print(Sys.time() - start.time)
 # Save output
 ###############################################################################
 
-write.csv(tempThresh, file = paste0("output/tempThresholds_FraserSEL_", Sys.Date(), ".csv"))
-saveRDS(fw_spat, file = paste0("output/freshwater_spat_FraserSEL_", Sys.Date(), ".rds"))
-saveRDS(fw_output, file = paste0("output/freshwater_output_FraserSEL_",  Sys.Date(), ".rds"))
+write.csv(tempThresh, file = paste0("freshwater/output/tempThresholds_FraserSEL_", Sys.Date(), ".csv"))
+saveRDS(fw_spat, file = paste0("freshwater/output/freshwater_spat_FraserSEL_", Sys.Date(), ".rds"))
+saveRDS(fw_output, file = paste0("freshwater/output/freshwater_output_FraserSEL_",  Sys.Date(), ".rds"))
 
 # write.csv(grid_points, file = "output/PCIC_grid-points_Fraser.csv")
