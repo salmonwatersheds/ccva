@@ -79,6 +79,7 @@ date_keep <- which(date >= as.Date("1970-01-01") - 7)
 Ts <- varExtracted1[, date_keep] 
 
 rm(varExtracted1, varExtracted0)
+
 #------------------------------------------------------------------------------
 # Dates since 1970-01-01 minus 7 days (for averaging)
 #------------------------------------------------------------------------------
