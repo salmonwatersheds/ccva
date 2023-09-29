@@ -20,7 +20,8 @@
 *.html
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
-rsconnect/
+docs/rsconnect
+docs/data
 
 # macOS desktop services store
 .DS_Store
