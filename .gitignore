@@ -16,6 +16,9 @@
 *.utf8.md
 *.knit.md
 
+# Large html files created by R markdown
+*.html
+
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
 
