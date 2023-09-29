@@ -429,3 +429,50 @@ for(p in 1:4){
 }
 
 abline(h = 0.2*mad[20])
+
+
+###############################################################################
+# Summarize output for Shiny app
+###############################################################################
+
+#-----------------------------------------------------------------------------
+# Spatial summary: median across models
+#-----------------------------------------------------------------------------
+
+# Median across models for each grid cell, each CU, each stage; mid-century ONLY
+fw_spat_summary <- list()
+length(fw_spat_summary) <- n.CUs*length(stages) 
+dim(fw_spat_summary) <- c(n.CUs, length(stages))
+
+p <- 3 # Mid century only
+
+for(i in 1:n.CUs){
+  for(j in 1:4){
+    fw_spat_summary[[i,j]] <- array(data = NA, 
+                                    dim = c(length(incl.stages[[i,j]]), 2))
+    for(k in 1:2){
+      fw_spat_summary[[i,j]][, k] <- apply(fw_spat[[i,j]][, c(1,3)[k], p, ], 2, median, na.rm = TRUE)
+    }
+  }
+}
+   
+saveRDS(fw_spat_summary, "docs/data/output/fw_spat_summary.rds")                                                   
+#-----------------------------------------------------------------------------
+# Output summary: median and range across models
+#-----------------------------------------------------------------------------
+fw_output_summary <- array(NA, dim = c(n.CUs, length(stages), 2, 4, 3),
+                           dimnames = list(cu_list$Conservation.Unit, stages, c("Stream temperature", "Low flow"), c("hist", "early", "mid", "late"), c("median", "min", "max")))
+
+for(i in 1:n.CUs){
+  for(j in 1:4){
+    for(k in 1:2){
+      for(p in 1:4){
+        fw_output_summary[i, j, k, p, 1] <- median(fw_output[, i, j, c(1,3)[k], p, 1])
+        fw_output_summary[i, j, k, p, 2] <- min(fw_output[, i, j, c(1,3)[k], p, 1])
+        fw_output_summary[i, j, k, p, 3] <- max(fw_output[, i, j, c(1,3)[k], p, 1])
+      }
+    }
+  }
+}
+
+saveRDS(fw_output_summary, "docs/data/output/fw_output_summary.rds")                                              

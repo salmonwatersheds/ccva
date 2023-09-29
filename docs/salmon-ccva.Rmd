@@ -10,8 +10,9 @@ header-includes:
 output: 
  html_document:
     toc: true
-    toc_depth: 4
-    toc_float: true
+    theme: united
+    # toc_depth: 4
+    # toc_float: true
     number_sections: false
 editor_options: 
   chunk_output_type: console
@@ -81,62 +82,50 @@ library(wesanderson)
 library(ncdf4) # package for netcdf manipulation
 library(zoo) # package with rollmean function
 library(shiny)
+library(leaflet)
 
 cols <- wes_palette("Darjeeling1")
 
-root_dir <- "../freshwater/"
 ###############################################################################
 # Load background spatial layers
 ###############################################################################
-
-# Set broad bounds for clipping broad spatial layers
-bounds <- c(xmin = -124.5, ymin = 50.85, xmax = -123.6, ymax = 51.7)
-
-# Load shapefiles silencing sf messages
-
-
-#------------------------------------------------------------------------------
-# Lakes, rivers, and shorelines
-#------------------------------------------------------------------------------
-
-bounds0 <- c(xmin = -127, ymin = 49, xmax = -116.5, ymax = 56)
-lakes0 <- readRDS(paste0(root_dir, "data/spatial/layers/waterbodies_lowRes.rds")) # %>% st_crop(bounds)
-rivers0 <- readRDS(paste0(root_dir, "data/spatial/layers/watercourse_lowRes.rds")) #%>% st_crop(bounds)
-shoreline <- st_read(dsn = paste0(root_dir, "data/spatial/layers/GSHHS_i_L1.shp"))
-
-#------------------------------------------------------------------------------
-# Spawning Zone of Influence: Fraser SEL
-#------------------------------------------------------------------------------
-
-spawn_zoi <- st_read(dsn = paste0(root_dir, "data/spatial/ZOI/fraser-spawning-zoi/fraser_spawning_zoi_SEL.shp")) %>% st_transform(crs = 4269)
-
-#------------------------------------------------------------------------------
-# Adult migration lines: Fraser SEL
-#------------------------------------------------------------------------------
-mig_paths <- st_read(dsn = paste0(root_dir, "data/spatial/fw-migration/spawn_timing_migration_paths_wCU_fraser.shp")) %>% st_transform(crs = 4269)
 
 #------------------------------------------------------------------------------
 # Conservation Unit Boundaries: SEL
 #------------------------------------------------------------------------------
 
-# PSF version of shapefiles
-shp_path <- paste0(root_dir, "data/spatial/CU-boundaries/PSF_CUs_updatedDec2021")
-cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE) %>%
-  subset(regionname == "Fraser" & species %in% c("Lake sockeye", "Sockeye-Lake"))
+# # PSF version of shapefiles
+# shp_path <- "data/spatial/CU-boundaries/PSF_CUs_updatedDec2021"
+# cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE) %>%
+#   subset(regionname == "Fraser" & species %in% c("Lake sockeye", "Sockeye-Lake"))
+# 
+# saveRDS(cu_boundary, "data/cu_boundary_FraserSEL.rds")
 
-
+cu_boundary <- readRDS("data/cu_boundary_FraserSEL.rds")
 ###############################################################################
 # Create space variables for plotting
 ###############################################################################
 
-grid_points <- read.csv(paste0(root_dir, "output/PCIC-grid-points_Fraser.csv")) %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4269)
+grid_points0 <- read.csv("data/PCIC-grid-points_Fraser.csv")
 
+lon <- sort(unique(grid_points0$lon))
+lat <- rev(sort(unique(grid_points0$lat)))
+
+ grid_points <- st_as_sf(grid_points0, coords = c("lon", "lat"), crs = 4269)
+
+# Load grid cell ids for each CU and life stage
+incl.stages <- readRDS("data/freshwater-grid_included-cells.rds")
+
+# Load grid cell ids for each CU
+incl.CU <- readRDS("data/freshwater-grid_included-cells_byCU.rds")
+
+# Grid spacing
+d <- 1/16
 #------------------------------------------------------------------------------
 # List of CUs in the PSE
 #------------------------------------------------------------------------------
 
-cu_list <- read.csv("../data/cu_list.csv") %>% 
+cu_list <- read.csv("data/cu_list.csv") %>% 
   subset(Species == "Lake sockeye" & Region == "Fraser" & Notes != "Extinct")
 
 n.CUs <- length(unique(cu_list$Conservation.Unit))
@@ -145,12 +134,13 @@ n.CUs <- length(unique(cu_list$Conservation.Unit))
 # Timing
 #------------------------------------------------------------------------------
 
-timing <- read.csv(paste0(root_dir, "output/freshwater_timing_FraserSEL.csv"))
+timing <- read.csv("data/freshwater_timing_FraserSEL.csv")
 
 ###############################################################################
 # Load output
 ###############################################################################
-fw_output <- readRDS(paste0(root_dir, "output/freshwater_output_FraserSEL_2023-09-28.rds"))
+
+fw_output_summary <- readRDS("data/output/fw_output_summary.rds")
 # dimensions:
 #   gcms$modelName,
 #   cu_list$Conservation.Unit, 
@@ -159,12 +149,15 @@ fw_output <- readRDS(paste0(root_dir, "output/freshwater_output_FraserSEL_2023-0
 #   c("hist", "early", "mid", "late"), 
 #   c("median", "lower", "upper")))
 
+# Spatial output
+fw_spat_summary <- readRDS("data/output/fw_spat_summary.rds")
+
 #------------------------------------------------------------------------------
 # Define stages
 #------------------------------------------------------------------------------
-stages <- dimnames(fw_output)[[3]]
+stages <- dimnames(fw_output_summary)[[2]]
 stages.all <- c(stages, "early_marine", "marine_rearing")
-stage.names <- c(c("Adult\nmigration", "Spawning", "Incubation", "Freshwater\nrearing", "Early\nmarine", "Marine\nrearing"))
+stage.names <- c(c("Adult\nfreshwater\nmigration", "Spawning", "Incubation", "Freshwater\njuvenile", "Early\nmarine", "Marine\nrearing"))
 oj <- rev(c(3, 4, 5, 6, 1, 2)) # Order in which we want stages to appear
 
 #------------------------------------------------------------------------------
@@ -179,7 +172,12 @@ for(i in 1:n.CUs){
 ```
 
 
-**Below**: The proportion of days above (stream temperature) or below (low flow) the threshold (see [Methods](#methods)) for each applicable life stage of a selected CU in the historical (1970-1999), early-century (2010-2039), mid-century (2040-2069), and late-century (2070-2099) periods. The average number of days in each life stage for the selected CU is shown on the right side of the graph. Users can choose between stream temperature and low flow using the left drop-down menu, and select a CU using the right drop-down menu. **Note** that these results are only available for Fraser lake-type sockeye at this point.
+### CU-level exposure to stream temperature and low flow
+**Below left**: The proportion of days above (for stream temperature) or below (for low flow) the threshold (see [Methods](#methods)) for each applicable life stage of a selected CU in the historical (1970-1999), early-century (2010-2039), mid-century (2040-2069), and late-century (2070-2099) periods (point types; see Legend). The points and whiskers represent the median and range in the proportion of days from six different Global Climate Models (GCM). The average number of days in each life stage for the selected CU is shown on the right side of the graph. 
+
+**Below right**: Within each GCM, the median proportion across all grid cells is used for the left figure, but the spatial distribution of exposure may be of interest. This map shows the CU boundary (solid black line) and PCIC grid cells applicable to the CU (grey rectangles). When a stage is selected from the menu above, the applicable grid cells for that stage are coloured according to the median proportion of days among all GCMs (same colour scale from 0 to 1 as the plot on the left) in the selected life stage **in the mid-century period (2040-2069)**. Note that the colour of the cells will change between, e.g., spawning and incubation because these stages are present in different times of the year.
+
+<!-- Users can choose between stream temperature and low flow using the left drop-down menu, and select a CU using the right drop-down menu. **Note** that these results are only available for Fraser lake-type sockeye at this point. -->
 
 ```{r echo = FALSE}
 #------------------------------------------------------------------------------
@@ -196,17 +194,32 @@ col_palette <- paste0(colorRampPalette(colors = cols[c(5,3,1)])(n = length(col_l
 shinyApp(
 
   ui = fluidPage(
+    br(),
     fluidRow(
-      column(width = 4,
+      column(width = 3,
              selectInput("var", "Climate change attribute:",
                 choices = c("Stream temperature", "Low flow"))
              ),
       column(width = 6, 
               selectInput("cu", "Conservation Unit:",
                 choices = cu_list$Conservation.Unit)
+             ),
+      column(width = 3, 
+              selectInput("stage", "Highlight life stage on map:",
+                          choices = c("None", "Incubation", "Freshwater juvenile", "Adult freshwater migration", "Spawning"))
              )
       ), # end fluidRow
-    plotOutput("CUplot")
+    
+    fluidRow(
+      # CU plot
+      column(width = 6,
+             plotOutput("CUplot", height = 400)),
+      # Leaflet map
+      column(width = 6,
+             leafletOutput("map", width = "100%", height = 600)
+             )
+      ) # end fluidRow
+
   ),
 
   server = function(input, output) {
@@ -214,10 +227,11 @@ shinyApp(
 
       # Set selections
       i <- which(cu_list$Conservation.Unit == input$cu)
-      k <- c(1,3)[match(input$var, c("Stream temperature", "Low flow"))]
+      k <- match(input$var, c("Stream temperature", "Low flow"))
+      j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater juvenile"))
 
       # Initiate plot
-       par(mar =c(4, 8, 5, 3), bg = "white")
+       par(mar =c(4, 7, 5, 3), bg = "white")
     plot(c(0, 1), c(0.5, 6.5), "n", yaxt ="n", bty = "n", xlab = "Proportion of days", ylab = "", xaxs = "i", yaxs = "i", xaxt = "n")
 
     # Add colour legend at bottom
@@ -231,36 +245,43 @@ shinyApp(
     segments(x0 = seq(0, 1, 0.1), y0 = 0.5, x1 = seq(0, 1, 0.1), y1 = 6.5, col = grey(0.8), xpd = NA)
     segments(x0 = 0, y0 = 0.5, x1 = -10, y1 = 0.5, xpd = NA)
 
-    text(rep(-0.1, 6), c(1:6), stage.names[oj], xpd = NA)
+    text(rep(-0.2, 6), c(1:6), stage.names[oj], xpd = NA)
 
     # Grey out marine stages
     polygon(x = c(-10, 10, 10, -10), y = c(2.5, 2.5, 4.5, 4.5), col = "#00000030", border = NA, xpd = NA)
     text(rep(0.5, 2), c(3, 4), "Not Applicable", col = "white", font = 2)
 
-    for(j in 1:4){
+    for(jj in 1:4){
       for(p in 1:4){
-        x <- median(fw_output[, i, j, k, p, 1])
-        pCol <- col_palette[findInterval(x, col_levels)]
+       pCol <- col_palette[findInterval(fw_output_summary[i, jj, k, p, 1], col_levels)]
 
         points(
-          x,
-          oj[j] + c(-0.3, -0.1, 0.1, 0.3)[p],
+          fw_output_summary[i, jj, k, p, 1],
+          oj[jj] + c(-0.3, -0.1, 0.1, 0.3)[p],
           col = pCol,
           bg = pCol,
           pch = c(22, 25, 21, 24)[p],
           cex = 1.5, xpd = NA)
         segments(
-          x0 = min(fw_output[, i, j, k, p, 1]),
-          y0 = oj[j] + c(-0.3, -0.1, 0.1, 0.3)[p],
-          x1 = max(fw_output[, i, j, k, p, 1]),
-          y1 = oj[j] + c(-0.3, -0.1, 0.1, 0.3)[p],
+          x0 = fw_output_summary[i, jj, k, p, 2],
+          y0 = oj[jj] + c(-0.3, -0.1, 0.1, 0.3)[p],
+          x1 = fw_output_summary[i, jj, k, p, 3],
+          y1 = oj[jj] + c(-0.3, -0.1, 0.1, 0.3)[p],
           col = pCol,
           lwd = 1.5
         )
 
       } # end p
-      text(1.03, oj[j], numDays[i,j], xpd = NA, font = 2)
-    } # end j
+      text(1.08, oj[jj], numDays[i,jj], xpd = NA, font = 2)
+    } # end jj
+    
+    # If a stage is selected, highlight it
+    if(!is.na(j)){
+      u <- par('usr')
+      # Draw box around plot
+      polygon(x = u[c(1,2,2,1)], y = oj[j] + c(-0.5, -0.5, 0.5, 0.5), col = NA, border = 1, lwd = 2, xpd = NA)
+     }
+    
 
     legend(-0.2, 7.2, ncol = 4, pch = c(22, 25, 21, 24), pt.cex = 1.5, col = 1, pt.bg = 1, c("Historical", "Early-century", "Mid-century", "Late-century"), xpd = NA, bty = "n", bg = NA)
 
@@ -268,9 +289,216 @@ shinyApp(
 
 
     })
-  },
+    
+    output$map <- renderLeaflet({
+      
+      # Set selections
+      i <- which(cu_list$Conservation.Unit == input$cu)
+       
+       # Highlight all stages CU cells
+        grid_polys_CU <- st_as_sf(
+          data.frame(
+            id = rep(grid_points$id[incl.CU[[i]]], each = 5),
+            rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl.CU[[i]])),
+            lon = c(rep(rep(lon, length(lat))[incl.CU[[i]]], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl.CU[[i]]))),
+            lat = c(rep(rep(lat, each = length(lon))[incl.CU[[i]]], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl.CU[[i]])))
+          ), coords = c("lon", "lat"), crs = 4269) %>% 
+          group_by(id) %>%
+          summarise(geometry = st_combine(geometry)) %>%
+          st_cast("POLYGON")
+        
+      bounds1 <- as.numeric(st_bbox(grid_polys_CU))
+      # bounds0 <- as.numeric(st_bbox(cu_boundary))
+      
+      leaflet() %>%
+        addProviderTiles(providers$Esri.WorldTopoMap,
+                         options = providerTileOptions(noWrap = TRUE)) %>%
+        fitBounds(lng1 = bounds1[1], lat1 = bounds1[2], lng2 = bounds1[3], lat2 = bounds1[4])  %>%
+        addPolygons(data = cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[i]),], color = "#000000", weight = 1.2, opacity = 1, fillOpacity = 0)
+      
+    })
+    
+    #----
+    # Add grid colours depending on lifestage selected
+    #----
+    observe({
 
-  options = list(height = 500, width = 800)
+       # Set selections
+        i <- which(cu_list$Conservation.Unit == input$cu)
+        k <- match(input$var, c("Stream temperature", "Low flow"))
+        j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater juvenile"))
+
+        # Highlight all stages CU cells
+        grid_polys_CU <- st_as_sf(
+          data.frame(
+            id = rep(grid_points$id[incl.CU[[i]]], each = 5),
+            rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl.CU[[i]])),
+            lon = c(rep(rep(lon, length(lat))[incl.CU[[i]]], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl.CU[[i]]))),
+            lat = c(rep(rep(lat, each = length(lon))[incl.CU[[i]]], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl.CU[[i]])))
+          ), coords = c("lon", "lat"), crs = 4269) %>% 
+          group_by(id) %>%
+          summarise(geometry = st_combine(geometry)) %>%
+          st_cast("POLYGON")
+        
+      bounds1 <- as.numeric(st_bbox(grid_polys_CU))
+      
+       myLeaf <- leafletProxy("map") %>%
+          # fitBounds(lng1 = bounds1[1], lat1 = bounds1[2], lng2 = bounds1[3], lat2 = bounds1[4]) %>%
+			clearShapes() 
+          
+        # Add all stages (no colour)
+          myLeaf <-  addPolygons(myLeaf, data = grid_polys_CU, color = "#000000", weight = 1, opacity = 0.4, fillOpacity = 0)
+          
+      # If a life stage is selected
+      if(input$stage != "None"){
+        # Highlight stage-specific grid cells
+        incl <- incl.stages[[i,j]]
+
+        grid_polys_incl <- st_as_sf(data.frame(
+          id = rep(grid_points$id[incl], each = 5),
+          rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl)),
+          lon = c(rep(rep(lon, length(lat))[incl], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl))),
+          lat = c(rep(rep(lat, each = length(lon))[incl], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl)))
+        ), coords = c("lon", "lat"), crs = 4269) %>%
+          group_by(id) %>%
+          summarise(geometry = st_combine(geometry)) %>%
+          st_cast("POLYGON")
+
+           col_polys <- col_palette[findInterval(fw_spat_summary[[i,j]][, k], col_levels)]
+
+         myLeaf <-  addPolygons(myLeaf, data = grid_polys_incl, color = col_polys, weight = 1, opacity = 1, fillOpacity = 0.8)
+         
+         
+      } 
+
+    # Add CU boundary
+          myLeaf <- addPolygons(myLeaf, data = cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[i]),], color = "#000000", weight = 1.2, opacity = 1, fillOpacity = 0)
+          
+      myLeaf
+      })
+    
+  },
+  options = list(height = 700)
+)
+
+```
+
+
+### Comparison among CUs
+**Below**: Colour chart illustrating the median exposure in the **mid-century period (2040-2069)** to a) stream temperatures above threshold and b) low flows below threshold, measured as the proportion of days for each life stage timing window. The colour scheme goes from 0 (blue) to 1 (red), the same as in the above plots.
+
+```{r echo = FALSE, width = 8, height = 10}
+
+# Order cUs according to decreasing overall exposure
+ oCU <- order(apply(fw_output_summary[, , , 3, 1], 1, sum, na.rm = TRUE), decreasing = FALSE)
+
+par(mfrow = c(1,2), mar = c(6, 0, 2, 1), oma = c(0, 15, 2, 0))
+
+for(k in 1:2){
+    plot(c(0.5, 4.5), c(0.5, n.CUs+0.5), "n", bty = "o", yaxt = "n", ylab = "", yaxs = "i", xaxs = "i", xaxt = "n", xlab = "")
+  text(c(1:4), rep(-0.1, 4), stage.names[1:4], srt = 90, xpd = NA, cex =0.8, adj = 1)
+  u <- par('usr')
+  if(k == 1){
+    text(rep(0.1, n.CUs), c(1:n.CUs), cu_list$Conservation.Unit[oCU], xpd = NA, adj = 1, cex = 0.8)
+  abline(h = c(0:n.CUs)+0.5, xpd = NA, col = grey(0.8))
+  }
+  abline(v = seq(1.5, 3.5, 1))
+  
+  p <- 3
+  for(i in 1:n.CUs){
+    for(j in 1:4){
+      x <- fw_output_summary[oCU[i], j, k, p, 1]
+      pCol <- col_palette[findInterval(x, col_levels)]
+      
+      polygon(x = j + c(-0.5, 0.5, 0.5, -0.5),
+              y = i + c(-0.5, - 0.5, 0.5, 0.5),
+              border = 1,
+              col = pCol)
+    }}
+  mtext(side = 3, line = 0.5, c("a) Stream temperature", "b) Low flow")[k], adj = 0, cex = 0.8)
+}
+```
+
+**Below**: This chart allows for a comparison of exposure (proportion of days above the temperature threshold for Stream temperature or below the a 20% MAD threshold for low flow; see [Methods](#methods)) among CUs for the selected life stage.
+
+```{r echo = FALSE}
+#------------------------------------------------------------------------------
+# Shiny app for CU comparison plots
+#------------------------------------------------------------------------------
+
+shinyApp(
+
+  ui = fluidPage(
+    br(),
+    fluidRow(
+      column(width = 4,
+             selectInput("var", "Climate change attribute:",
+                choices = c("Stream temperature", "Low flow"))
+             ),
+      column(width = 3, 
+              selectInput("stage", "Life stage:",
+                          choices = c("Incubation", "Freshwater juvenile", "Adult freshwater migration", "Spawning"),
+                          selected = "Spawning")
+             )
+      ), # end fluidRow
+    
+   # CU comparison plot
+    plotOutput("compPlot", height = 700)
+
+  ),
+
+  server = function(input, output) {
+    output$compPlot = renderPlot({
+
+      # Set selections
+      k <- match(input$var, c("Stream temperature", "Low flow"))
+      j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater juvenile"))
+
+      # Initiate plot
+      oCU <- order(fw_output_summary[ , j, k, 3, 1], decreasing = FALSE)
+  
+  par(mar = c(4, 20, 2, 1))
+  plot(c(0, 1), c(0.5, n.CUs+0.5), "n", bty = "n", yaxt = "n", ylab = "", yaxs = "i", xaxs = "i", xaxt = "n", xlab = "Proportion of days")
+  u <- par('usr')
+  text(rep(-0.02*(u[2] - u[1]), n.CUs), c(1:n.CUs), cu_list$Conservation.Unit[oCU], xpd = NA, adj = 1)
+  
+  for(q in 1:n){
+    polygon(x = c(0, 1/n, 1/n, 0)+ (q-1) * 1/n, y = c(-0.5, -0.5, 0.5, 0.5), border = NA, col = col_palette[q], xpd = NA)
+  }
+  
+  axis(side = 1, tck = -0.02)
+  abline(h = c(1:n.CUs)+0.5, xpd = NA, col = grey(0.8))
+  segments(x0 = 0, y0 = 0.5, x1 = 0, y1 = n.CUs+0.5, xpd = NA)
+  segments(x0 = 0, y0 = 0.5, x1 = -10, y1 = 0.5, xpd = NA)
+  
+  for(i in 1:n.CUs){
+    for(p in 1:4){
+      x <- fw_output_summary[oCU[i], j, k, p, 1]
+      pCol <- col_palette[findInterval(x, col_levels)]
+      
+      points(
+        x, 
+        i + c(-0.3, -0.1, 0.1, 0.3)[p], 
+        col = pCol,
+        bg = pCol,
+        pch = c(22, 25, 21, 24)[p],
+        cex = 1.2, xpd = NA)
+      segments(
+        x0 = fw_output_summary[oCU[i], j, k, p, 2],
+        y0 = i + c(-0.3, -0.1, 0.1, 0.3)[p],
+        x1 = fw_output_summary[oCU[i], j, k, p, 3],
+        y1 = i + c(-0.3, -0.1, 0.1, 0.3)[p],
+        col = pCol
+      )
+      
+    } # end p
+  } # end j
+  mtext(side = 3, paste0("Fraser SEL - ", input$var, " exposure for ", input$stage))
+
+    })
+    
+  },
+  options = list(height = 800)
 )
 
 ```
@@ -289,9 +517,11 @@ We initially set out to quantify three components of vulnerability:
 
 Here, we describe our current approach and draft results for quantifying the **potential impact** of climate change on salmon and steelhead CUs, defined as the combination of exposure and sensitivity (see below).
 
-```{r ccva-framework, include=TRUE, echo = FALSE, out.width='80%', fig.align='center', fig.cap='A common conceptual framework for Climate Change Vulnerability Assessments describes three components of vulnerability, with **exposure** and **sensitivity** combining to yield the **potential impact**, which is then evaluated in light of the **adaptive capacity** of the system to arrive an overall **vulnerability**. Here we describe our efforts to quantifying potential impact (black boxes) on Pacific salmon and steelhead conservation Units.'}
+<br>
+```{r ccva-framework, include=TRUE, echo = FALSE, out.width='50%', fig.align='center', fig.cap='A common conceptual framework for Climate Change Vulnerability Assessments describes three components of vulnerability, with **exposure** and **sensitivity** combining to yield the **potential impact**, which is then evaluated in light of the **adaptive capacity** of the system to arrive an overall **vulnerability**. Here we describe our efforts to quantifying potential impact (black boxes) on Pacific salmon and steelhead conservation Units.'}
 knitr::include_graphics("ccva-framework.png")
 ```
+<br>
 
 # Methods
 
@@ -335,6 +565,5 @@ Marine exposure attributes that have readily available projections include sea s
 We summarized exposure of life stages within a CU by taking the median proportion of days above threshold across all grid cells within the spatial distribution of that stage. We then repeated the above calculations for each of 6 different GCMs, and report the median and range in the proportion of days across the GCMs.
 
 The range across GCMs captures some of the uncertainty in how climate change will progress, and differences among GCMs in their projections tend to increase further into the future. This range does not account for the spatial variability in exposure across grid cells - we also calculated the median exposure in each grid cell across GCMs to provide a visual representation on a map of how geographically variable exposure was.
-
 
 # References
