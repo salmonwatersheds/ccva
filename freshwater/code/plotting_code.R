@@ -18,7 +18,34 @@ library(zoo) # package with rollmean function
 
 cols <- wes_palette("Darjeeling1")
 
-setwd("freshwater/")
+# Set root for spatial datasets
+dat_root <- "freshwater/data/spatial/"
+
+# Set root for X Drive (user dependent; assuming ccva repo is in X Drive/1_PROJECTS)
+XDrive_root <- paste(strsplit(getwd(), "/")[[1]][1:6], collapse = "/")
+
+#------------------------------------------------------------------------------
+# Up-to-date CU list (taken from database)
+#------------------------------------------------------------------------------
+
+cu_list <- read.csv("data/conservationunits_decoder.csv") %>%
+  subset(region == "Fraser") 
+
+# Create variable for pooled species
+cu_list$species_pooled <- cu_list$species_name
+cu_list$species_pooled[cu_list$species_name %in% c("Pink (odd)", "Pink (even)")] <- "Pink"
+cu_list$species_pooled[cu_list$species_name %in% c("Lake sockeye", "River sockeye")] <- "Sockeye"
+
+# Remove CUs that are considered Extinct
+cu_list <- cu_list[which(cu_list$cu_type != "Extinct" | is.na(cu_list$cu_type)), ]
+
+# Number of CUs
+cuid <- cu_list$pooledcuid[order(cu_list$species_abbr)]
+n.CUs <- length(cuid)
+
+# Order cu_list to match cuid
+cu_list <- cu_list[match(cuid, cu_list$pooledcuid), ]
+
 ###############################################################################
 # Load background spatial layers
 ###############################################################################
@@ -39,77 +66,74 @@ rivers0 <- readRDS("data/spatial/layers/watercourse_lowRes.rds") #%>% st_crop(bo
 BC <- readRDS("data/spatial/layers/BC_lowRes.rds")
 shoreline <- st_read(dsn = "data/spatial/layers/GSHHS_i_L1.shp")
 
+# #------------------------------------------------------------------------------
+# # Spawning Zone of Influence: Fraser SEL
+# #------------------------------------------------------------------------------
+# 
+# spawn_zoi <- st_read(dsn = "data/spatial/ZOI/fraser-spawning-zoi/fraser_spawning_zoi_SEL.shp") %>% st_transform(crs = 4269)
+
+# #------------------------------------------------------------------------------
+# # Adult migration lines: Fraser SEL
+# #------------------------------------------------------------------------------
+# mig_paths <- st_read(dsn = "data/spatial/fw-migration/spawn_timing_migration_paths_wCU_fraser.shp") %>% st_transform(crs = 4269)
+
 #------------------------------------------------------------------------------
-# Spawning Zone of Influence: Fraser SEL
+# Conservation Unit boundaries for Fraser CUs (all species)
 #------------------------------------------------------------------------------
 
-spawn_zoi <- st_read(dsn = "data/spatial/ZOI/fraser-spawning-zoi/fraser_spawning_zoi_SEL.shp") %>% st_transform(crs = 4269)
-
-#------------------------------------------------------------------------------
-# Adult migration lines: Fraser SEL
-#------------------------------------------------------------------------------
-mig_paths <- st_read(dsn = "data/spatial/fw-migration/spawn_timing_migration_paths_wCU_fraser.shp") %>% st_transform(crs = 4269)
-
-#------------------------------------------------------------------------------
-# Conservation Unit Boundaries: SEL
-#------------------------------------------------------------------------------
-
-# DFO shapefiels from Open Data Canada
-# shp_path <- "data/spatial/CU-boundaries/Lake_Type_Sockeye_Salmon_CU_Boundary/SEL_CU_BOUNDARY_En"
-# cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE)
-
-# PSF version of shapefiles
-shp_path <- "data/spatial/CU-boundaries/PSF_CUs_updatedDec2021"
-cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE) %>%
-  subset(regionname == "Fraser" & species %in% c("Lake sockeye", "Sockeye-Lake"))
+cu_boundary <- st_read(paste0(XDrive_root, "/5_DATA/CUs_Master/GDB/PSF_CUs_Master.gdb")) %>%
+  subset(regionname == "Fraser") %>%
+  st_transform(crs = 4269)
 
 ###############################################################################
 # Create space variables for plotting
 ###############################################################################
 
-grid_points <- read.csv("output/PCIC-grid-points_Fraser.csv") %>%
+grid_points <- read.csv("freshwater/data/processed-data/PCIC-grid-points_fraser.csv") %>%
   st_as_sf(coords = c("lon", "lat"), crs = 4269)
 
-#------------------------------------------------------------------------------
-# List of CUs in the PSE
-#------------------------------------------------------------------------------
-
-cu_list <- read.csv("../data/cu_list.csv") %>% 
-  subset(Species == "Lake sockeye" & Region == "Fraser" & Notes != "Extinct")
-
-n.CUs <- length(unique(cu_list$Conservation.Unit))
 
 #------------------------------------------------------------------------------
 # Timing
 #------------------------------------------------------------------------------
 
-timing <- read.csv("output/freshwater_timing_FraserSEL.csv")
+timing <- read.csv("freshwater/output/freshwater_timing_fraser.csv")
+
 ###############################################################################
 # CU Overlay plots:
 # Calculate median and range across models for each CU, by life-stage
 ###############################################################################
 
-fw_output <- readRDS("output/freshwater_output_FraserSEL_2023-09-28.rds")
-# dimensions:
+fw_output45 <- readRDS("freshwater/output/freshwater_output_fraser_rcp45_2024-01-05.rds")
+fw_output85 <- readRDS("freshwater/output/freshwater_output_fraser_rcp85_2024-01-05.rds")
+
+fw_output <- list(
+  rcp45 = fw_output45,
+  rcp85 = fw_output85
+)
+
+rm(fw_output85, fw_output45)
+
+# list with each element having dimensions:
 #   gcms$modelName,
-#   cu_list$Conservation.Unit, 
+#   cu_list$cuid, 
 #   stages,
-#   c("optimalTemp", "criticalTemp", "optimalFlow", "criticalFlow"),
+#   c("temp", "flow"),
 #   c("hist", "early", "mid", "late"), 
 #   c("median", "lower", "upper")))
 
 
 # Define stages
-stages <- dimnames(fw_output)[[3]]
+stages <- dimnames(fw_output[[1]])[[3]]
 stages.all <- c(stages, "early_marine", "marine_rearing")
 stage.names <- c(c("Adult\nmigration", "Spawning", "Incubation", "Freshwater\nrearing", "Early\nmarine", "Marine\nrearing"))
 oj <- rev(c(3, 4, 5, 6, 1, 2)) # Order in which we want stages to appear
 
 # How much time does each CU spend in each stage?
-numDays <- array(NA, dim = c(n.CUs, 4), dimnames = list(cu_list$Conservation.Unit, stages))
+numDays <- array(NA, dim = c(n.CUs, 4), dimnames = list(cuid, stages))
 for(i in 1:n.CUs){
   for(j in 1:4){
-    numDays[i,j] <- timing$n.days[which(timing$culabel == cu_list$Conservation.Unit[i] & timing$stage == stages[j])]
+    numDays[i,j] <- timing$n.days[which(timing$cuid == cuid[i] & timing$stage == stages[j])]
   }}
 
 # # Create dataframe to store CU summary outputs
@@ -130,7 +154,7 @@ col_palette <- paste0(colorRampPalette(colors = cols[c(5,3,1)])(n = length(col_l
 pdf(file = paste0("output/figures/FW-exposure_CUlevel_FraserSEL_", Sys.time(), ".pdf"), width = 6.5, height = 6)
 # Loop through each CU and plot; or select CU and variable to plot
 for(i in 1:n.CUs){
-  for(k in 1:4){
+  for(k in 1:2){
     
 # i <- 1
 # k <- 1
@@ -157,7 +181,7 @@ for(i in 1:n.CUs){
     
     for(j in 1:4){
       for(p in 1:4){
-        x <- median(fw_output[, i, j, k, p, 1]) 
+        x <- median(fw_output[[r]][, i, j, k, p, 1]) 
         pCol <- col_palette[findInterval(x, col_levels)]
         
         points(
@@ -168,9 +192,9 @@ for(i in 1:n.CUs){
           pch = c(22, 25, 21, 24)[p],
           cex = 1.5, xpd = NA)
         segments(
-          x0 = min(fw_output[, i, j, k, p, 1]),
+          x0 = min(fw_output[[r]][, i, j, k, p, 1]),
           y0 = oj[j] + c(-0.3, -0.1, 0.1, 0.3)[p],
-          x1 = max(fw_output[, i, j, k, p, 1]),
+          x1 = max(fw_output[[r]][, i, j, k, p, 1]),
           y1 = oj[j] + c(-0.3, -0.1, 0.1, 0.3)[p],
           col = pCol,
           lwd = 1.5

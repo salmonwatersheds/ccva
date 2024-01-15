@@ -11,16 +11,12 @@
 
 loadPCIC <- function(
     variable = "waterTemp", # Which variable to load? One of waterTemp or discharge
-    model = "CanESM2" # Which GCM?
+    model = "CanESM2", # Which GCM?
+    rcp = 45 # Which emissions scenario? Options 45 or 85
 ){
   
-  # Define location of data
-  root_dat <- "freshwater/data/raw-data/PCIC/hydro_model_out/fraser/"
-  
-  #-----------------------------------------------------------------------------
-  # There are different GCMs for the updated output
-  # Want to load both discharge and waterTemp data for each model
-  #-----------------------------------------------------------------------------
+  # Define location of data (external drive)
+  root_dat <- "/Volumes/ClimateData/PCIC/hydro_model_out/fraser/"
   
   # Two variables in VICGL output
   varNames <- data.frame(
@@ -28,7 +24,12 @@ loadPCIC <- function(
     Name = c("waterTemperature", "discharge")
   )
   
-  i <- which(varNames$fileName == variable)
+  v <- which(varNames$fileName == variable)
+  
+  #-----------------------------------------------------------------------------
+  # There are different GCMs for the updated output
+  # Want to load both discharge and waterTemp data for each model
+  #-----------------------------------------------------------------------------
   
   # Vector of global climate model names (to extract netcdf output)
   gcms <- data.frame(
@@ -48,10 +49,11 @@ loadPCIC <- function(
       "r3i1p1"
     )
   )
+  
   j <- which(gcms$modelName == model)
   
   # Open netcdf file
-  z <- nc_open(paste0(root_dat, varNames$fileName[i], "_day_dynWat-VICGL_", gcms$modelName[j], "_rcp45_", gcms$simulation[j], "_19450101-20991231_fraser.nc"))
+  z <- nc_open(paste0(root_dat, varNames$fileName[v], "_day_dynWat-VICGL_", gcms$modelName[j], "_rcp", rcp, "_", gcms$simulation[j], "_19450101-20991231_fraser.nc"))
   
   # # Explore dataset. What are the variables?
   # print(paste("File",z$filename,"contains",z$nvars,"variables"))
@@ -70,7 +72,7 @@ loadPCIC <- function(
   # print(z)
   # sink()
   
-  varExtracted0 <-  ncvar_get(z, varNames$Name[i])
+  varExtracted0 <-  ncvar_get(z, varNames$Name[v])
   
   # Spatial variables
   lon <- ncvar_get(z, "lon")
@@ -78,11 +80,11 @@ loadPCIC <- function(
   
   # grid_points <- data.frame(
   #   id = c(1:(length(lon)*length(lat))),
-  #   lon = rep(lon, length(lat)), 
+  #   lon = rep(lon, length(lat)),
   #   lat = rep(lat, each = length(lon)),
   #   lon_id = rep(c(1:length(lon)), length(lat)),
   #   lat_id = rep(c(1:length(lat)), each = length(lon)))
-  # write.csv(grid_points, "output/PCIC-grid-points_Fraser.csv")
+  # write.csv(grid_points, file = "freshwater/output/PCIC-grid-points_bccoast.csv")
   
   # Create time variable: all output runs from 19450101 to 20991231
   date <- as.Date(c(0:56612), origin = "1945-01-01")
@@ -103,15 +105,7 @@ loadPCIC <- function(
   #------------------------------------------------------------------------------
   
   # PCIC included grid cells for each CU and life stage
-  incl.stages <- readRDS("freshwater/output/freshwater-grid_included-cells.rds")
-  
-  # Complete list of grid cells used in analysis
-  spat.incl <- c()
-  for(i in 1:(dim(incl.stages)[1])){
-    for(j in 1:(dim(incl.stages)[2])){
-      spat.incl <- sort(unique(c(spat.incl, incl.stages[[i,j]])))
-    }
-  } 
+  spat.incl <- sort(read.csv("freshwater/output/PCIC_incl_overall.csv")$x)
   
   #------------------------------------------------------------------------------
   # Trim to spatial and temporal extent needed
@@ -127,8 +121,6 @@ loadPCIC <- function(
   return(varExtracted2)
   
 }
-
-
 
 
 #------------------------------------------------------------------------------

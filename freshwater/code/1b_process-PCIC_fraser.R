@@ -1,7 +1,7 @@
 ###############################################################################
 # Code to load PCIC model output, trim to spatial and temporal domain of interest,
 # calculate weekly rolling max or average, and save output RDS file
-# for use in calc-freshwater-exposure.R
+# for use in 2_calc-freshwater-exposure.R
 # 
 # Contact: Stephanie Peacock <speacock@psf.ca>
 # Date: Aug 31, 2023
@@ -46,8 +46,9 @@ for(m in 1:n.models){ # for each model
   #----------------------------------------------------------------------------
   # Load model output; this takes a minute
   Ts <- loadPCIC(
-    variable = "waterTemp", # Which variable to load? One of waterTemp or discharge
-    model = gcms$modelName[m] # Which GCM?
+    variable = "waterTemp", # Which variable to load? One of waterTemperature or discharge
+    model = gcms$modelName[m],
+    rcp = 85 # Which GCM?
   )
   
   # Change Ts from degrees Kelvin to Celsius
@@ -67,7 +68,8 @@ for(m in 1:n.models){ # for each model
   
   Qs <- loadPCIC(
     variable = "discharge",
-    model = gcms$modelName[m]
+    model = gcms$modelName[m], 
+    rcp = 85
   )
   
   Qs.weeklyMean <- t(apply(Qs, 1, weeklyStat, stat = "mean"))
@@ -86,7 +88,7 @@ for(m in 1:n.models){ # for each model
   # Save output
   #----------------------------------------------------------------------------
   
-  saveRDS(var, paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_processed.rds"))
+  saveRDS(var, paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_rcp85_processed.rds"))
   
   print(paste0("End ", gcms$modelName[m]))
 } #end m
