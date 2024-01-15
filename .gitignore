@@ -19,9 +19,12 @@
 # Large html files created by R markdown
 *.html
 
+README.Rmd
+
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 docs/rsconnect
 docs/data
+docs/ignore
 
 # macOS desktop services store
 .DS_Store
@@ -34,3 +37,5 @@ freshwater/output
 marine/data
 marine/code/ignore
 marine/output
+
+data
