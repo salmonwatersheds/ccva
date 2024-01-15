@@ -1,8 +1,9 @@
 ---
-title: "Preliminary methods & results of PSF's Climate Change Vulnerability Assessments for Pacific salmon & steelhead"
-author: "Salmon Watersheds Program, Steph Peacock"
+title: "Climate Change Vulnerability Assessments for Pacific Salmon & Steelhead"
+subtitle: "Draft Methods & Results"
+author: "Steph Peacock, Salmon Watersheds Program, Pacific Salmon Foundation"
 date: "`r Sys.Date()`"
-bibliography: references.bib
+bibliography: references.json
 csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl 
 link-citations: true
 header-includes:
@@ -10,10 +11,9 @@ header-includes:
 output: 
  html_document:
     toc: true
-    theme: united
-    # toc_depth: 4
-    # toc_float: true
-    number_sections: false
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
 editor_options: 
   chunk_output_type: console
 runtime: shiny
@@ -58,6 +58,85 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+
+# Background
+
+Climate Change Vulnerability Assessments (CCVAs) aim to describe how climate change may impact certain valued attributes of a particular system to inform the identification and prioritization of conservation and mitigation actions. Although CCVAs have been performed for salmon [e.g., @CrozierEtAl2019ClimateVulnerabilityAssessment; @CrozierEtAl2021ClimateChangeThreatens] and steelhead [@WadeEtAl2013SteelheadVulnerabilityClimate] in the US, there is no comparable information available for Canadian-origin salmon and steelhead.
+
+In 2021, the Pacific Salmon Foundation's [Salmon Watershed Program](https://www.salmonwatersheds.ca) received funding from the BC Salmon Restoration and Innovation Fund (BC SRIF) to, in part, undertake CCVAs for salmon in BC and share that information via the [Pacific Salmon Explorer](https://www.salmonexplorer.ca). Our goal is to quantify the relative **exposure** of different Conservation Units (CUs) to climate changes throughout their life cycles, with the aim to understand which CUs are likely to be most strongly affected and why. This information is key to informing proactive and forward-looking strategies for improving the resilience of salmon under climate change. 
+
+Here, we describe our current approach and draft results for quantifying the exposure of salmon and steelhead CUs to climate changes.
+
+<!-- <br> -->
+<!-- ```{r ccva-framework, include=TRUE, echo = FALSE, out.width='50%', fig.align='center', fig.cap='A common conceptual framework for Climate Change Vulnerability Assessments describes three components of vulnerability, with **exposure** and **sensitivity** combining to yield the **potential impact**, which is then evaluated in light of the **adaptive capacity** of the system to arrive an overall **vulnerability**. Here we describe our efforts to quantifying potential impact (black boxes) on Pacific salmon and steelhead conservation Units.'} -->
+<!-- knitr::include_graphics("ccva-framework.png") -->
+<!-- ``` -->
+<!-- <br> -->
+
+# Methods
+
+## Life stages
+
+For each CU, we assessed exposure to climate changes for each of six life stages, defined based on life-history timing and spatial distribution. We put considerable effort into compiling life-history timing data, particularly for freshwater rearing life stages, and the details of that exercise can be found [here](https://bookdown.org/salmonwatersheds/life-cycle-timing).
+
+
+| Stage                      | Timing                                                      | Spatial distribution                                                                             |
+|--------------|---------------------|---------------------------------|
+| Incubation                 | Start of spawning to end of fry migration                   | Accessible stream reaches with optimal gradient for spawning for the given species, using [bcfishpass](https://smnorris.github.io/bcfishpass/) model output.                                                                       |
+| Freshwater rearing        | Start of fry migration to end of ocean entry                | Accessible stream reaches with optimal gradient for rearing for the given species using [bcfishpass](https://smnorris.github.io/bcfishpass/) model output, or known rearing lake for lake-type sockeye CUs. |
+| Early marine               | 3 months before to 3 months after peak ocean entry date     | A 400 - 750 km buffer zone around point of marine entry                                          |
+| Marine rearing             | 4 months after ocean entry to end of run timing             |  Pacific Ocean (north of 35˚N) and Bering Sea                                                                                  |
+| Adult freshwater migration | Start of run timing (freshwater entry) to start of spawning | Migration route(s) from freshwater entry point to spawning stream reaches                               |
+| Spawning                   | Start to end of spawning period                             | Accessible stream reaches with optimal gradient for spawning for the given species, using [bcfishpass](https://smnorris.github.io/bcfishpass/) model output.                                                                 |
+Table: Salmon and steelhead life stages that are differentiated when assessing exposure, and corresponding timing and spatial distribution.
+
+<!-- Some of these stages will extend for more than a single calendar year, meaning that multiple cohorts from a CU may overlap in their habitat use. For example, steelhead typically spend 2+ years in freshwater as juveniles, and so two or even three cohorts may be found rearing in the same habitats. These periods of overlap may have a disproportionate impact on the exposure of a CU to climate changes.  When assessing exposure of a CU, we therefore take a "cohort approach" that looks at the duration of exposure by cohort, rather than by calendar year, such that climate outputs may be "double-counted" during periods when two or more cohorts overlap. -->
+
+## Freshwater exposure
+
+We based our assessments of freshwater exposure on downscaled hydrologic model projections of daily mean stream temperature and flow provided by the [Pacific Climate Impacts Consortium (PCIC)](https://www.pacificclimate.org). PCIC's [Gridded Hydrologic Model Output](https://www.pacificclimate.org/data/gridded-hydrologic-model-output) does not currently display stream temperature and flow, and the output we used were provided directly (M. Schnorbus, pers. comm.) and should be considered **preliminary**. Daily projections were provided from 1945 to 2099, on a spatial grid 1/16th of a degree (\~ 30 km) for six different Global Climate Models from the CMIP5 ensemble [@TaylorEtAl2012OverviewCMIP5Experiment], under the RCP 4.5 and RCP 8.5 emissions scenarios [@PacificClimateImpactsConsortium2023VICGLBCCAQCMIP5]. The current analysis only includes the Fraser basin, but we anticipate that additional regions will be added as the hydrologic downscaling is complete.
+
+### Stream temperature
+
+For each spatial grid cell, we smoothed stream temperature using the 7-day running **maximum** of the modeled daily mean (`7DMax`), which approximates the 7-day mean of the daily maximum - a statistic that is widely regarded as relevant for fish exposure to high temperatures [@UnitedStatesEnvironmentalProtectionAgency2003EPARegion10]. Exposure to stream temperature was calculated in each applicable grid cell for each life stage as the number of days for which the `7DMax`exceeded the temperature threshold.
+
+<!-- Temperature thresholds were set in each grid cell based on the distribution of temperatures over the stage window in the historical period (1970-1999). Using a temperature threshold based on the historical model output, rather than general absolute temperature thresholds that have been suggested by some agencies [@UnitedStatesEnvironmentalProtectionAgency2003EPARegion10; @OliverFidler2001WaterQualityGuideline], recognizes that the gridded model output is an abstraction and may not represent actual stream-level temperatures experienced by individual fish. Thus, comparisons of change in future periods may be more accurate. We specifically used the 90th quantile of the historical temperature distribution, based on experimental evidence that the aerobic scope of locally adapted salmon populations is related to the distribution of historical temperatures experienced by that population, and declines above the \~90th quantile of historical temperatures [@EliasonEtAl2011DifferencesThermalTolerance]. -->
+
+Temperature thresholds were based on species- and life-stage specific guidelines from the Province of BC [@OliverFidler2001WaterQualityGuideline]. These guidelines were developed based on a literature review of studies examining the thermal tolerance and preference of salmonids. We adjusted the maximum threshold during migration to 18 ˚C for all species, as the BC Guidelines were much lower than currently observed temperatures for this lifestage.
+
+More recent research  has suggested that salmon can be locally adapted to the historical thermal regime of their habitats, resulting in considerable intraspecific variation in thermal tolerance [@EliasonEtAl2011DifferencesThermalTolerance, @MayerEtAl2023ThermalTolerancePacific]. It is therefore likely that CUs of the same species may respond differently to increases in stream temperature. However, there is currently insufficient information on CU-specific thresholds across species and life-stages to incorporate into our analysis. It is also unknown how observed differences in current thermal tolerance among populations may relate to their adaptive capacity over longer-term climate changes. For these reasons, and for ease of interpretation, we apply the same stage- and species-specific temperature thresholds to all CUs of a given species.
+
+```{r topt, include=TRUE, echo = FALSE}
+topt <- read.csv("data/optimum-temps_BC2001.csv")
+knitr::kable(topt, col.names = c("Species", "Stage", "Upper temperature threshold (˚C)"), caption = "Upper thresholds for optimal temperature range from the BC Provincial Water Quality Guidelines (Oliver 2001).")
+
+```
+^* Upper temperature thresholds for migration were 15.6 ˚C for most species (and not provided for steelhead) in the BC Water Quality Guidelines [@OliverFidler2001WaterQualityGuideline]. Given that current temperatures frequently exceed 15.6 ˚C during migration, we chose to follow other agencies (e.g., [Fraser River Environment Watch](https://www.pac.dfo-mpo.gc.ca/science/habitat/frw-rfo/index-eng.html)) and apply 18 ˚C as a guideline for temperatures above which salmon may experience negative consequences on performance.
+
+### Stream flow
+
+We smoothed flow using the 7-day running mean of the daily flow to bettre capture extended periods of low flow that may be harmful to fish. As for stream temperature, for each grid cell we calculated the proportion of days for each life stage that flow was below a threshold of 20% mean annual discharge (MAD). The 20% MAD threshold was calculated for each grid cell using the mean annual discharge in the historical period (i.e., mean of all daily flows in 1970-1999).
+
+We recognize the potential importance of high flows in impacting salmon under climate change, and are currently working to determine if there is a generalizable approach to summarizing changes in high flow that are relevant to salmon. Unlike low flows, the impact of high flows (e.g. measured as some % MAD) will be substantially different depending on the hydrology of a particular stream. For example, the same discharge will result in vastly different conditions for salmon in a tight canyon versus a broad flood plain. There is also a site-specific distinction between high channel-forming flows that are beneficial for salmon and damaging high flows that can flush out eggs and junveiles or impede migrations, making it challenging to apply a common approach across a broad geography. Nonetheless, we are in the process of considering how high flows at known migration barriers, such as Hell's Gate on the Fraser River, may be incorporated into our assessments.
+
+## Marine exposure 
+
+Marine exposure attributes that have readily available projections include sea surface temperature, sea surface salinity, sea level rise, ocean pH, and primary productivity. We are currently working to develop relevant thresholds and assess exposure to these marine attributes.
+
+## Summarizing output 
+
+To capture trends in exposure due to climate change and minimize the impacts of stochasticity in the models, we averaged our exposure output over each of four 30-year periods:
+* Historical (1970-1999)
+* Early century (2010-2039)
+* Mid century (2040-2069)
+* Late century (2070-2099).
+
+Within each period, we summarized exposure of each stage and CU as the average number of days above or below the given threshold, within the relevant timing window. We then repeated the above calculations for each of 6 different GCMs. The median exposure across GCMs for each grid cell in the mid-century period is shown in the section [Spatial details of exposure](#maps) for the selected stage and CU. 
+
+To summarize exposure across the spatial distribution for each stage and CU, we calculated the median number of days above or below threshold across all grid cells within the spatial distribution of that stage. 
+
+The range across GCMs captures some of the uncertainty in how climate change will progress, and differences among GCMs in their projections tend to increase further into the future. We separate projections under RCP 4.5 and RCP 8.5 emissions scenarios, which is another assessment of the uncertainty in how climate changes will progress. The median and range in output across models for the four periods and two emissions scenarios is shown in the [CU-level plots](#cu-plots).
+
 # Results
 
 ::: {.blackbox data-latex=""}
@@ -65,7 +144,7 @@ knitr::opts_chunk$set(echo = TRUE)
 **This work is in the draft stage and all methods & results should be considered preliminary and subject to change.**
 :::
 
-The widgets allow exploration of **draft** results for freshwater climate exposure of lake-type sockeye in the Fraser region. Please see the [Background](#background) and [Methods](#methods) sections for further information on what is shown.
+The widgets allow exploration of **draft** results for freshwater climate exposure of salmon and steelhead Conservation Units in the Fraser region. 
 
 :::
 
@@ -91,50 +170,45 @@ cols <- wes_palette("Darjeeling1")
 ###############################################################################
 
 #------------------------------------------------------------------------------
-# Conservation Unit Boundaries: SEL
+# Conservation Unit Boundaries
 #------------------------------------------------------------------------------
 
-# # PSF version of shapefiles
-# shp_path <- "data/spatial/CU-boundaries/PSF_CUs_updatedDec2021"
-# cu_boundary <- st_read(dsn = paste0(shp_path, ".shp"), promote_to_multi = FALSE) %>%
-#   subset(regionname == "Fraser" & species %in% c("Lake sockeye", "Sockeye-Lake"))
-# 
-# saveRDS(cu_boundary, "data/cu_boundary_FraserSEL.rds")
+cu_boundary <- readRDS("data/cu_boundary_fraser.rds")
 
-cu_boundary <- readRDS("data/cu_boundary_FraserSEL.rds")
 ###############################################################################
-# Create space variables for plotting
+# Load variables for plotting
 ###############################################################################
 
-grid_points0 <- read.csv("data/PCIC-grid-points_Fraser.csv")
-
-lon <- sort(unique(grid_points0$lon))
-lat <- rev(sort(unique(grid_points0$lat)))
-
- grid_points <- st_as_sf(grid_points0, coords = c("lon", "lat"), crs = 4269)
+#------------------------------------------------------------------------------
+# spatial distribution
+#------------------------------------------------------------------------------
 
 # Load grid cell ids for each CU and life stage
-incl.stages <- readRDS("data/freshwater-grid_included-cells.rds")
+incl.stages <- readRDS("data/PCIC_incl.rds")
 
-# Load grid cell ids for each CU
-incl.CU <- readRDS("data/freshwater-grid_included-cells_byCU.rds")
-
-# Grid spacing
-d <- 1/16
-#------------------------------------------------------------------------------
-# List of CUs in the PSE
-#------------------------------------------------------------------------------
-
-cu_list <- read.csv("data/cu_list.csv") %>% 
-  subset(Species == "Lake sockeye" & Region == "Fraser" & Notes != "Extinct")
-
-n.CUs <- length(unique(cu_list$Conservation.Unit))
+# Load grid cells
+grid_polys <- readRDS("data/output/grid_polys.rds")
 
 #------------------------------------------------------------------------------
 # Timing
 #------------------------------------------------------------------------------
 
-timing <- read.csv("data/freshwater_timing_FraserSEL.csv")
+timing <- read.csv("data/freshwater_timing_fraser.csv")
+species_lookup <- data.frame(
+  species = c("CK", "CM", "CO", "PKE", "PKO", "SEL", "SER", "SH"),
+  species_name = c("Chinook", "Chum", "Coho", "Pink", "Pink", "Sockeye", "Sockeye", "Steelhead"))
+timing$species_name <- species_lookup$species_name[match(timing$species, species_lookup$species)]
+  
+#------------------------------------------------------------------------------
+# List of CUs in the PSE
+#------------------------------------------------------------------------------
+
+cuid <- unique(timing$cuid)
+cu_name <- timing$cu_name_pse[match(cuid, timing$cuid)]
+species_cu_name <- paste0(timing$species_name[match(cuid, timing$cuid)], ": ", cu_name)
+n.CUs <- length(cuid)
+
+cu_norear <- which(timing$species_name[match(cuid, timing$cuid)] %in% c("Pink", "Chum"))
 
 ###############################################################################
 # Load output
@@ -142,12 +216,12 @@ timing <- read.csv("data/freshwater_timing_FraserSEL.csv")
 
 fw_output_summary <- readRDS("data/output/fw_output_summary.rds")
 # dimensions:
-#   gcms$modelName,
-#   cu_list$Conservation.Unit, 
-#   stages,
-#   c("optimalTemp", "criticalTemp", "optimalFlow", "criticalFlow"),
+#   n.CUs,
+#  stages,
+# c("Stream temperature" "Low flow"),
 #   c("hist", "early", "mid", "late"), 
-#   c("median", "lower", "upper")))
+# c("rcp45" "rcp85")
+#   c("median" "min"    "max"))) # among models
 
 # Spatial output
 fw_spat_summary <- readRDS("data/output/fw_spat_summary.rds")
@@ -155,37 +229,135 @@ fw_spat_summary <- readRDS("data/output/fw_spat_summary.rds")
 #------------------------------------------------------------------------------
 # Define stages
 #------------------------------------------------------------------------------
+
 stages <- dimnames(fw_output_summary)[[2]]
 stages.all <- c(stages, "early_marine", "marine_rearing")
-stage.names <- c(c("Adult\nfreshwater\nmigration", "Spawning", "Incubation", "Freshwater\njuvenile", "Early\nmarine", "Marine\nrearing"))
+stage.names <- c(c("Adult\nfreshwater\nmigration", "Spawning", "Incubation", "Freshwater\nrearing", "Early\nmarine", "Marine\nrearing"))
 oj <- rev(c(3, 4, 5, 6, 1, 2)) # Order in which we want stages to appear
 
-#------------------------------------------------------------------------------
-# How much time does each CU spend in each stage?
-#------------------------------------------------------------------------------
-numDays <- array(NA, dim = c(n.CUs, 4), dimnames = list(cu_list$Conservation.Unit, stages))
-for(i in 1:n.CUs){
-  for(j in 1:4){
-    numDays[i,j] <- timing$n.days[which(timing$culabel == cu_list$Conservation.Unit[i] & timing$stage == stages[j])]
-  }}
+# #------------------------------------------------------------------------------
+# # How much time does each CU spend in each stage?
+# #------------------------------------------------------------------------------
+# 
+# numDays <- array(NA, dim = c(n.CUs, 4), dimnames = list(cuid, stages))
+# for(i in 1:n.CUs){
+#   for(j in 1:4){
+#     numDays[i,j] <- timing$n.days[which(timing$cuid == cuid[i] & timing$stage == stages[j])]
+#   }}
+
+# Set pink and chum freshwater to 0 for now
+fw_output_summary[cu_norear, which(stages == "fw_rearing"), , , , ] <- 0
+fw_spat_summary[cu_norear, which(stages == "fw_rearing")] <- 0
 
 ```
 
 
-### CU-level exposure to stream temperature and low flow
-**Below left**: The proportion of days above (for stream temperature) or below (for low flow) the threshold (see [Methods](#methods)) for each applicable life stage of a selected CU in the historical (1970-1999), early-century (2010-2039), mid-century (2040-2069), and late-century (2070-2099) periods (point types; see Legend). The points and whiskers represent the median and range in the proportion of days from six different Global Climate Models (GCM). The average number of days in each life stage for the selected CU is shown on the right side of the graph. 
+### CU-level exposure to stream temperature and low flow {#cu-plots}
 
-**Below right**: Within each GCM, the median proportion across all grid cells is used for the left figure, but the spatial distribution of exposure may be of interest. This map shows the CU boundary (solid black line) and PCIC grid cells applicable to the CU (grey rectangles). When a stage is selected from the menu above, the applicable grid cells for that stage are coloured according to the median proportion of days among all GCMs (same colour scale from 0 to 1 as the plot on the left) in the selected life stage **in the mid-century period (2040-2069)**. Note that the colour of the cells will change between, e.g., spawning and incubation because these stages are present in different times of the year.
+Highlights:
+
+
+**Below**: The median number of days among GCMs (y-axis) that were above (for stream temperature) or below (for low flow) the threshold (see [Methods](#methods)) for each applicable life stage of a selected CU in the historical (1970-1999), early-century (2010-2039), mid-century (2040-2069), and late-century (2070-2099) periods (x-axis). The grey lines are all CUs and both emissions scenarios for the stage and the selected CU is highlighted for the RCP 4.5 (orange) and RCP 8.5 (red) scenarios, with the shaded polygon showing the range in the number of days among six different GCMs.
 
 <!-- Users can choose between stream temperature and low flow using the left drop-down menu, and select a CU using the right drop-down menu. **Note** that these results are only available for Fraser lake-type sockeye at this point. -->
+
+```{r echo = FALSE}
+
+#------------------------------------------------------------------------------
+# Shiny app for CU-level plots
+#------------------------------------------------------------------------------
+
+shinyApp(
+
+  ui = fluidPage(
+    br(),
+    fluidRow(
+      column(width = 12, 
+              selectInput("cu", "Conservation Unit:",
+                choices = species_cu_name)
+             )
+      ), # end fluidRow
+    
+    fluidRow(# CU plot
+      column(width = 12,
+             plotOutput("CUplot", height = 500))
+    ) # end fluidRow
+  ),
+
+  server = function(input, output) {
+    output$CUplot = renderPlot({
+
+      # Set selections
+      i <- which(species_cu_name == input$cu)
+
+       par(mfrow = c(2, 4), mar = c(3, 4, 1, 1), oma = c(1,2,4,1))
+       
+       for(k in 1:2){ # For temperature and low flow
+         for(j in c(3, 4, 1, 2)){
+    
+           plot(1:4, fw_output_summary[i, j, k, , 1, 1], "n", ylim = range(fw_output_summary[, j, k, , , 1]), xlab = "", xaxt = "n", las = 1, bty = "l", ylab = "", cex.axis = 1.2)
+           axis(side = 1, at = c(1:4), c("hist", "early", "mid", "late"), cex.axis = 1.2)
+           for(ii in 1:n.CUs){
+             lines(1:4, fw_output_summary[ii, j, k, , 1, 1], col = grey(0.8))
+             lines(1:4, fw_output_summary[ii, j, k, , 2, 1], col = grey(0.8))
+           }
+           
+           for(r in 1:2){ # RCP4.5 or 8.5
+             polygon(
+               x = c(1:4, 4:1), 
+               y = c(fw_output_summary[i, j, k, , r, 2], rev(fw_output_summary[i, j, k, , r, 3])),
+               col = paste0(cols[c(3,1)[r]], 50),
+               border = NA)
+             points(1:4, fw_output_summary[i, j, k, , r, 1], "o", pch = 19, lwd = 2, col = cols[c(3,1)[r]])
+           } # end rcp
+           
+           if(k == 1){
+             mtext(side = 3, adj = 0, line = 1, paste0(c("c", "d", "a", "b")[j], ") ", c("Adult migration", "Spawning", "Incubation", "Freshwater rearing")[j]))
+           }
+           
+          if(j == 3){
+            mtext(side = 2, paste0("Days ", c("above temp.", "below flow")[k], " threshold"), line = 3)
+          }
+           
+          } # end stage
+        
+         # mtext(side = 3, adj = 0, outer = TRUE, species_cu_name[i], line = 1)
+  
+  if(k == 1){# Add legend
+  u <- par('usr')
+  legend(-8, u[4] + (u[4] - u[3])*0.3, xpd = NA, lwd = 1, col = c(grey(0.8)), legend = c("All CUs, all scenarios"), cex = 1.5, bty = "n")
+  legend(-3, u[4] + (u[4] - u[3])*0.3, xpd = NA, ncol = 2, lwd = 2, pch = 19, col = cols[c(3,1)], legend = c("RCP 4.5", "RCP 8.5"), cex = 1.5, bty = "n")
+  }
+       } # end k
+  mtext(side = 1, outer = TRUE, "Time period", line = -0.5)
+
+    })
+
+  },
+  options = list(height = 700)
+)
+
+```
+
+### Spatial details of exposure {#maps}
+ 
+For CUs with broad distributions and/or long migrations, there may be considerable spatial variability in exposure to changes in stream temperature and flow. The following map shows the number of days either above temperature thresholds or below low-flow thresholds in each grid cell that is relevant to the selected CU and life stage **in the mid-century period (2040-2069) under RCP 4.5**. 
 
 ```{r echo = FALSE}
 #------------------------------------------------------------------------------
 # set colour palette
 #------------------------------------------------------------------------------
-col_levels <- seq(0, 0.9, 0.1)
-n <- length(col_levels)
-col_palette <- paste0(colorRampPalette(colors = cols[c(5,3,1)])(n = length(col_levels) + 1))
+levels_max <- c(adult_migration = 100,
+                spawning = 40,
+                eggs_alevin = 150,
+                fw_rearing  = 200)
+n <- 10
+col_levels <- cbind(seq(0, levels_max[1], length.out = n),
+                    seq(0, levels_max[2], length.out = n),
+                    seq(0, levels_max[3], length.out = n),
+                    seq(0, levels_max[4], length.out = n))
+              
+col_palette <- paste0(colorRampPalette(colors = cols[c(5,3,1)])(n + 1))
 
 #------------------------------------------------------------------------------
 # Shiny app for CU-level plots
@@ -202,110 +374,31 @@ shinyApp(
              ),
       column(width = 6, 
               selectInput("cu", "Conservation Unit:",
-                choices = cu_list$Conservation.Unit)
+                choices = species_cu_name)
              ),
       column(width = 3, 
-              selectInput("stage", "Highlight life stage on map:",
-                          choices = c("None", "Incubation", "Freshwater juvenile", "Adult freshwater migration", "Spawning"))
+              selectInput("stage", "Life stage:",
+                          choices = c("Incubation", "Freshwater rearing", "Adult freshwater migration", "Spawning"))
              )
       ), # end fluidRow
     
-    fluidRow(
-      # CU plot
-      column(width = 6,
-             plotOutput("CUplot", height = 400)),
-      # Leaflet map
-      column(width = 6,
-             leafletOutput("map", width = "100%", height = 600)
-             )
-      ) # end fluidRow
+    fluidRow( # Leaflet map
+      column(width = 12,
+             leafletOutput("map", width = "100%", height = 500)
+      )
+    ) # end fluidRow
 
   ),
 
   server = function(input, output) {
-    output$CUplot = renderPlot({
-
-      # Set selections
-      i <- which(cu_list$Conservation.Unit == input$cu)
-      k <- match(input$var, c("Stream temperature", "Low flow"))
-      j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater juvenile"))
-
-      # Initiate plot
-       par(mar =c(4, 7, 5, 3), bg = "white")
-    plot(c(0, 1), c(0.5, 6.5), "n", yaxt ="n", bty = "n", xlab = "Proportion of days", ylab = "", xaxs = "i", yaxs = "i", xaxt = "n")
-
-    # Add colour legend at bottom
-    for(q in 1:n){
-      polygon(x = c(0, 1/n, 1/n, 0)+ (q-1) * 1/n, y = c(0, 0, 0.5, 0.5), border = NA, col = col_palette[q], xpd = NA)
-    }
-
-    axis(side = 1, tck = -0.02)
-    abline(h = c(1:6) + 0.5, xpd = NA)
-    segments(x0 = 0, y0 = 0.5, x1 = 0, y1 = 6.5, xpd = NA)
-    segments(x0 = seq(0, 1, 0.1), y0 = 0.5, x1 = seq(0, 1, 0.1), y1 = 6.5, col = grey(0.8), xpd = NA)
-    segments(x0 = 0, y0 = 0.5, x1 = -10, y1 = 0.5, xpd = NA)
-
-    text(rep(-0.2, 6), c(1:6), stage.names[oj], xpd = NA)
-
-    # Grey out marine stages
-    polygon(x = c(-10, 10, 10, -10), y = c(2.5, 2.5, 4.5, 4.5), col = "#00000030", border = NA, xpd = NA)
-    text(rep(0.5, 2), c(3, 4), "Not Applicable", col = "white", font = 2)
-
-    for(jj in 1:4){
-      for(p in 1:4){
-       pCol <- col_palette[findInterval(fw_output_summary[i, jj, k, p, 1], col_levels)]
-
-        points(
-          fw_output_summary[i, jj, k, p, 1],
-          oj[jj] + c(-0.3, -0.1, 0.1, 0.3)[p],
-          col = pCol,
-          bg = pCol,
-          pch = c(22, 25, 21, 24)[p],
-          cex = 1.5, xpd = NA)
-        segments(
-          x0 = fw_output_summary[i, jj, k, p, 2],
-          y0 = oj[jj] + c(-0.3, -0.1, 0.1, 0.3)[p],
-          x1 = fw_output_summary[i, jj, k, p, 3],
-          y1 = oj[jj] + c(-0.3, -0.1, 0.1, 0.3)[p],
-          col = pCol,
-          lwd = 1.5
-        )
-
-      } # end p
-      text(1.08, oj[jj], numDays[i,jj], xpd = NA, font = 2)
-    } # end jj
-    
-    # If a stage is selected, highlight it
-    if(!is.na(j)){
-      u <- par('usr')
-      # Draw box around plot
-      polygon(x = u[c(1,2,2,1)], y = oj[j] + c(-0.5, -0.5, 0.5, 0.5), col = NA, border = 1, lwd = 2, xpd = NA)
-     }
-    
-
-    legend(-0.2, 7.2, ncol = 4, pch = c(22, 25, 21, 24), pt.cex = 1.5, col = 1, pt.bg = 1, c("Historical", "Early-century", "Mid-century", "Late-century"), xpd = NA, bty = "n", bg = NA)
-
-    mtext(side = 3, paste0("Fraser SEL - ", input$cu, "\n", input$var), line = 3)
-
-
-    })
     
     output$map <- renderLeaflet({
       
       # Set selections
-      i <- which(cu_list$Conservation.Unit == input$cu)
+      i <- which(species_cu_name == input$cu)
        
        # Highlight all stages CU cells
-        grid_polys_CU <- st_as_sf(
-          data.frame(
-            id = rep(grid_points$id[incl.CU[[i]]], each = 5),
-            rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl.CU[[i]])),
-            lon = c(rep(rep(lon, length(lat))[incl.CU[[i]]], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl.CU[[i]]))),
-            lat = c(rep(rep(lat, each = length(lon))[incl.CU[[i]]], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl.CU[[i]])))
-          ), coords = c("lon", "lat"), crs = 4269) %>% 
-          group_by(id) %>%
-          summarise(geometry = st_combine(geometry)) %>%
-          st_cast("POLYGON")
+        grid_polys_CU <- grid_polys[which(grid_polys$id %in% unique(c(incl.stages[[i, 1]], incl.stages[[i, 2]], incl.stages[[i, 3]], incl.stages[[i, 4]]))), ]
         
       bounds1 <- as.numeric(st_bbox(grid_polys_CU))
       # bounds0 <- as.numeric(st_bbox(cu_boundary))
@@ -314,7 +407,7 @@ shinyApp(
         addProviderTiles(providers$Esri.WorldTopoMap,
                          options = providerTileOptions(noWrap = TRUE)) %>%
         fitBounds(lng1 = bounds1[1], lat1 = bounds1[2], lng2 = bounds1[3], lat2 = bounds1[4])  %>%
-        addPolygons(data = cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[i]),], color = "#000000", weight = 1.2, opacity = 1, fillOpacity = 0)
+        addPolygons(data = cu_boundary[which(cu_boundary$CUID == cuid[i]),], color = "#000000", weight = 1.2, opacity = 1, fillOpacity = 0) 
       
     })
     
@@ -324,47 +417,33 @@ shinyApp(
     observe({
 
        # Set selections
-        i <- which(cu_list$Conservation.Unit == input$cu)
+        i <- which(species_cu_name == input$cu)
         k <- match(input$var, c("Stream temperature", "Low flow"))
-        j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater juvenile"))
+        j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater rearing"))
 
         # Highlight all stages CU cells
-        grid_polys_CU <- st_as_sf(
-          data.frame(
-            id = rep(grid_points$id[incl.CU[[i]]], each = 5),
-            rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl.CU[[i]])),
-            lon = c(rep(rep(lon, length(lat))[incl.CU[[i]]], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl.CU[[i]]))),
-            lat = c(rep(rep(lat, each = length(lon))[incl.CU[[i]]], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl.CU[[i]])))
-          ), coords = c("lon", "lat"), crs = 4269) %>% 
-          group_by(id) %>%
-          summarise(geometry = st_combine(geometry)) %>%
-          st_cast("POLYGON")
+        grid_polys_CU <- grid_polys[which(grid_polys$id %in% unique(c(incl.stages[[i, 1]], incl.stages[[i, 2]], incl.stages[[i, 3]], incl.stages[[i, 4]]))), ]
         
       bounds1 <- as.numeric(st_bbox(grid_polys_CU))
       
        myLeaf <- leafletProxy("map") %>%
-          # fitBounds(lng1 = bounds1[1], lat1 = bounds1[2], lng2 = bounds1[3], lat2 = bounds1[4]) %>%
-			clearShapes() 
-          
+          clearShapes() %>%
+         clearControls()
+     
         # Add all stages (no colour)
           myLeaf <-  addPolygons(myLeaf, data = grid_polys_CU, color = "#000000", weight = 1, opacity = 0.4, fillOpacity = 0)
+          
+          # add legend
+          myLeaf <- addLegend(myLeaf, position = "topright", colors = col_palette, labels = round(c(col_levels[, j], col_levels[n, j] + diff(col_levels[, j])[1])), title = "Days", opacity = 0.8)
           
       # If a life stage is selected
       if(input$stage != "None"){
         # Highlight stage-specific grid cells
         incl <- incl.stages[[i,j]]
 
-        grid_polys_incl <- st_as_sf(data.frame(
-          id = rep(grid_points$id[incl], each = 5),
-          rep(c("SW0", "NW", "NE", "SE", "SW1"), length(incl)),
-          lon = c(rep(rep(lon, length(lat))[incl], each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), length(incl))),
-          lat = c(rep(rep(lat, each = length(lon))[incl], each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), length(incl)))
-        ), coords = c("lon", "lat"), crs = 4269) %>%
-          group_by(id) %>%
-          summarise(geometry = st_combine(geometry)) %>%
-          st_cast("POLYGON")
+        grid_polys_incl <- grid_polys[match(incl.stages[[i, j]], grid_polys$id), ]
 
-           col_polys <- col_palette[findInterval(fw_spat_summary[[i,j]][, k], col_levels)]
+           col_polys <- col_palette[findInterval(fw_spat_summary[[i,j]][, k], col_levels[, j])]
 
          myLeaf <-  addPolygons(myLeaf, data = grid_polys_incl, color = col_polys, weight = 1, opacity = 1, fillOpacity = 0.8)
          
@@ -372,43 +451,43 @@ shinyApp(
       } 
 
     # Add CU boundary
-          myLeaf <- addPolygons(myLeaf, data = cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[i]),], color = "#000000", weight = 1.2, opacity = 1, fillOpacity = 0)
+          myLeaf <- addPolygons(myLeaf, data = cu_boundary[which(cu_boundary$CUID == cuid[i]),], color = "#000000", weight = 1.2, opacity = 1, fillOpacity = 0)
           
       myLeaf
       })
     
   },
-  options = list(height = 700)
+  options = list(height = 800)
 )
 
 ```
 
-
 ### Comparison among CUs
-**Below**: Colour chart illustrating the median exposure in the **mid-century period (2040-2069)** to a) stream temperatures above threshold and b) low flows below threshold, measured as the proportion of days for each life stage timing window. The colour scheme goes from 0 (blue) to 1 (red), the same as in the above plots.
+**Below**: Colour chart illustrating the median number of days in each life-stage for which a) stream temperatures are projected to be above threshold and b) low flows are projected to be below threshold in the **mid-century period (2040-2069) under RCP 4.5**. The colour scheme goes from 0 (blue) to maximum number of days among CUs for that life stage (red; adult migration = 100 days, spawning = 40 days, incubation = 150 days, freshwater rearing = 200 days).
 
-```{r echo = FALSE, width = 8, height = 10}
-
-# Order cUs according to decreasing overall exposure
- oCU <- order(apply(fw_output_summary[, , , 3, 1], 1, sum, na.rm = TRUE), decreasing = FALSE)
+```{r echo = FALSE, fig.height = 12}
+# Order CUs according to decreasing overall exposure
+ oCU <- order(apply(fw_output_summary[, , , 3, 1, 1], 1, sum, na.rm = TRUE), decreasing = FALSE)
 
 par(mfrow = c(1,2), mar = c(6, 0, 2, 1), oma = c(0, 15, 2, 0))
 
 for(k in 1:2){
-    plot(c(0.5, 4.5), c(0.5, n.CUs+0.5), "n", bty = "o", yaxt = "n", ylab = "", yaxs = "i", xaxs = "i", xaxt = "n", xlab = "")
+  
+  plot(c(0.5, 4.5), c(0.5, n.CUs+0.5), "n", bty = "o", yaxt = "n", ylab = "", yaxs = "i", xaxs = "i", xaxt = "n", xlab = "")
   text(c(1:4), rep(-0.1, 4), stage.names[1:4], srt = 90, xpd = NA, cex =0.8, adj = 1)
   u <- par('usr')
+  
   if(k == 1){
-    text(rep(0.1, n.CUs), c(1:n.CUs), cu_list$Conservation.Unit[oCU], xpd = NA, adj = 1, cex = 0.8)
-  abline(h = c(0:n.CUs)+0.5, xpd = NA, col = grey(0.8))
+    text(rep(-6, n.CUs), c(1:n.CUs), species_cu_name[oCU], xpd = NA, adj = 0, cex = 0.8)
+    abline(h = seq(0, n.CUs, 2) + 0.5, xpd = NA, col = grey(0.8))
   }
   abline(v = seq(1.5, 3.5, 1))
   
   p <- 3
   for(i in 1:n.CUs){
     for(j in 1:4){
-      x <- fw_output_summary[oCU[i], j, k, p, 1]
-      pCol <- col_palette[findInterval(x, col_levels)]
+      x <- fw_output_summary[oCU[i], j, k, p, 1, 1]
+      pCol <- col_palette[findInterval(x, col_levels[, j])]
       
       polygon(x = j + c(-0.5, 0.5, 0.5, -0.5),
               y = i + c(-0.5, - 0.5, 0.5, 0.5),
@@ -419,151 +498,89 @@ for(k in 1:2){
 }
 ```
 
-**Below**: This chart allows for a comparison of exposure (proportion of days above the temperature threshold for Stream temperature or below the a 20% MAD threshold for low flow; see [Methods](#methods)) among CUs for the selected life stage.
+<!-- **Below**: This chart allows for a comparison of exposure (proportion of days above the temperature threshold for Stream temperature or below the a 20% MAD threshold for low flow; see [Methods](#methods)) among CUs for the selected life stage. -->
 
 ```{r echo = FALSE}
-#------------------------------------------------------------------------------
-# Shiny app for CU comparison plots
-#------------------------------------------------------------------------------
-
-shinyApp(
-
-  ui = fluidPage(
-    br(),
-    fluidRow(
-      column(width = 4,
-             selectInput("var", "Climate change attribute:",
-                choices = c("Stream temperature", "Low flow"))
-             ),
-      column(width = 3, 
-              selectInput("stage", "Life stage:",
-                          choices = c("Incubation", "Freshwater juvenile", "Adult freshwater migration", "Spawning"),
-                          selected = "Spawning")
-             )
-      ), # end fluidRow
-    
-   # CU comparison plot
-    plotOutput("compPlot", height = 700)
-
-  ),
-
-  server = function(input, output) {
-    output$compPlot = renderPlot({
-
-      # Set selections
-      k <- match(input$var, c("Stream temperature", "Low flow"))
-      j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater juvenile"))
-
-      # Initiate plot
-      oCU <- order(fw_output_summary[ , j, k, 3, 1], decreasing = FALSE)
-  
-  par(mar = c(4, 20, 2, 1))
-  plot(c(0, 1), c(0.5, n.CUs+0.5), "n", bty = "n", yaxt = "n", ylab = "", yaxs = "i", xaxs = "i", xaxt = "n", xlab = "Proportion of days")
-  u <- par('usr')
-  text(rep(-0.02*(u[2] - u[1]), n.CUs), c(1:n.CUs), cu_list$Conservation.Unit[oCU], xpd = NA, adj = 1)
-  
-  for(q in 1:n){
-    polygon(x = c(0, 1/n, 1/n, 0)+ (q-1) * 1/n, y = c(-0.5, -0.5, 0.5, 0.5), border = NA, col = col_palette[q], xpd = NA)
-  }
-  
-  axis(side = 1, tck = -0.02)
-  abline(h = c(1:n.CUs)+0.5, xpd = NA, col = grey(0.8))
-  segments(x0 = 0, y0 = 0.5, x1 = 0, y1 = n.CUs+0.5, xpd = NA)
-  segments(x0 = 0, y0 = 0.5, x1 = -10, y1 = 0.5, xpd = NA)
-  
-  for(i in 1:n.CUs){
-    for(p in 1:4){
-      x <- fw_output_summary[oCU[i], j, k, p, 1]
-      pCol <- col_palette[findInterval(x, col_levels)]
-      
-      points(
-        x, 
-        i + c(-0.3, -0.1, 0.1, 0.3)[p], 
-        col = pCol,
-        bg = pCol,
-        pch = c(22, 25, 21, 24)[p],
-        cex = 1.2, xpd = NA)
-      segments(
-        x0 = fw_output_summary[oCU[i], j, k, p, 2],
-        y0 = i + c(-0.3, -0.1, 0.1, 0.3)[p],
-        x1 = fw_output_summary[oCU[i], j, k, p, 3],
-        y1 = i + c(-0.3, -0.1, 0.1, 0.3)[p],
-        col = pCol
-      )
-      
-    } # end p
-  } # end j
-  mtext(side = 3, paste0("Fraser SEL - ", input$var, " exposure for ", input$stage))
-
-    })
-    
-  },
-  options = list(height = 800)
-)
+# #------------------------------------------------------------------------------
+# # Shiny app for CU comparison plots
+# #------------------------------------------------------------------------------
+# 
+# shinyApp(
+# 
+#   ui = fluidPage(
+#     br(),
+#     fluidRow(
+#       column(width = 4,
+#              selectInput("var", "Climate change attribute:",
+#                 choices = c("Stream temperature", "Low flow"))
+#              ),
+#       column(width = 3, 
+#               selectInput("stage", "Life stage:",
+#                           choices = c("Incubation", "Freshwater rearing", "Adult freshwater migration", "Spawning"),
+#                           selected = "Spawning")
+#              )
+#       ), # end fluidRow
+#     
+#    # CU comparison plot
+#     plotOutput("compPlot", height = 700)
+# 
+#   ),
+# 
+#   server = function(input, output) {
+#     output$compPlot = renderPlot({
+# 
+#       # Set selections
+#       k <- match(input$var, c("Stream temperature", "Low flow"))
+#       j <- match(input$stage, c("Adult freshwater migration", "Spawning", "Incubation", "Freshwater rearing"))
+# 
+#       # Initiate plot
+#       oCU <- order(fw_output_summary[ , j, k, 3, 1], decreasing = FALSE)
+#   
+#   par(mar = c(4, 20, 2, 1))
+#   plot(c(0, 1), c(0.5, n.CUs+0.5), "n", bty = "n", yaxt = "n", ylab = "", yaxs = "i", xaxs = "i", xaxt = "n", xlab = "Proportion of days")
+#   u <- par('usr')
+#   text(rep(-0.02*(u[2] - u[1]), n.CUs), c(1:n.CUs), cu_list$Conservation.Unit[oCU], xpd = NA, adj = 1)
+#   
+#   for(q in 1:n){
+#     polygon(x = c(0, 1/n, 1/n, 0)+ (q-1) * 1/n, y = c(-0.5, -0.5, 0.5, 0.5), border = NA, col = col_palette[q], xpd = NA)
+#   }
+#   
+#   axis(side = 1, tck = -0.02)
+#   abline(h = c(1:n.CUs)+0.5, xpd = NA, col = grey(0.8))
+#   segments(x0 = 0, y0 = 0.5, x1 = 0, y1 = n.CUs+0.5, xpd = NA)
+#   segments(x0 = 0, y0 = 0.5, x1 = -10, y1 = 0.5, xpd = NA)
+#   
+#   for(i in 1:n.CUs){
+#     for(p in 1:4){
+#       x <- fw_output_summary[oCU[i], j, k, p, 1]
+#       pCol <- col_palette[findInterval(x, col_levels)]
+#       
+#       points(
+#         x, 
+#         i + c(-0.3, -0.1, 0.1, 0.3)[p], 
+#         col = pCol,
+#         bg = pCol,
+#         pch = c(22, 25, 21, 24)[p],
+#         cex = 1.2, xpd = NA)
+#       segments(
+#         x0 = fw_output_summary[oCU[i], j, k, p, 2],
+#         y0 = i + c(-0.3, -0.1, 0.1, 0.3)[p],
+#         x1 = fw_output_summary[oCU[i], j, k, p, 3],
+#         y1 = i + c(-0.3, -0.1, 0.1, 0.3)[p],
+#         col = pCol
+#       )
+#       
+#     } # end p
+#   } # end j
+#   mtext(side = 3, paste0("Fraser SEL - ", input$var, " exposure for ", input$stage))
+# 
+#     })
+#     
+#   },
+#   options = list(height = 800)
+# )
 
 ```
 
-# Background
-
-Climate Change Vulnerability Assessments (CCVAs) aim to describe how climate change may impact certain valued attributes of a particular system to inform the identification and prioritization of conservation and mitigation actions. Although CCVAs have been performed for salmon [e.g., @Crozier2019; @crozier2021] and steelhead [@Wade2013] in the US, there is no analogous information available for Canadian populations. In 2021, the Pacific Salmon Foundation's Salmon Watershed Program received funding from the BC Salmon Restoration and Innovation Fund (BC SRIF) to, in part, undertake CCVAs for salmon in BC and share that information via the [Pacific Salmon Explorer](https://www.salmonexplorer.ca). We are interested in understanding the potential impact of climate change on the viability of Pacific salmon and steelhead Conservation Units (CUs), with the aim to understand which CUs are likely to be most strongly affected and why.
-
-We initially set out to quantify three components of vulnerability:
-
-1\. Exposure to climate change, based on projected environmental variables such as stream temperature, flow, and sea surface temperature in future periods;
-
-2\. Sensitivity of both CUs and their habitats to those projected changes, which might be influenced by characteristics such as life-history timing (CUs) or degree of degradation (habitats);
-
-3\. Adaptive capacity of CUs to change in ways that minimize the impact of climate change, which can depend on characteristics of the CU such as populations size and life-history flexibility.
-
-Here, we describe our current approach and draft results for quantifying the **potential impact** of climate change on salmon and steelhead CUs, defined as the combination of exposure and sensitivity (see below).
-
-<br>
-```{r ccva-framework, include=TRUE, echo = FALSE, out.width='50%', fig.align='center', fig.cap='A common conceptual framework for Climate Change Vulnerability Assessments describes three components of vulnerability, with **exposure** and **sensitivity** combining to yield the **potential impact**, which is then evaluated in light of the **adaptive capacity** of the system to arrive an overall **vulnerability**. Here we describe our efforts to quantifying potential impact (black boxes) on Pacific salmon and steelhead conservation Units.'}
-knitr::include_graphics("ccva-framework.png")
-```
-<br>
-
-# Methods
-
-## Life stages
-
-For each CU, we assessed exposure to climate changes for each of six life stages, defined based on life-history timing and spatial distribution as described in the following table. We put considerable effort into compiling life-history timing data, particularly for freshwater juvenile life stages, and the details of that exercise can be found [here](https://bookdown.org/salmonwatersheds/life-cycle-timing).
-
-| Stage                      | Timing                                                      | Spatial distribution                                                                             |
-|------------------|---------------------------|---------------------------|
-| Incubation                 | Start of spawning to end of fry migration                   | Spawning Zone of Influence                                                                       |
-| Freshwater juvenile        | Start of fry migration to end of ocean entry                | Freshwater rearing lake (SEL) or watersheds and downstream migration route from spawning grounds |
-| Early marine               | 3 months before to 3 months after peak ocean entry date     | A 400 - 750 km buffer zone around point of marine entry                                          |
-| Marine rearing             | 4 months after ocean entry to end of run timing             | North Pacific\*                                                                                  |
-| Adult freshwater migration | Start of run timing (freshwater entry) to start of spawning | Migration route(s) from freshwater entry point to spawning grounds                               |
-| Spawning                   | Start to end of spawning period                             | Spawning Zone of Influence                                                                       |
-
-We note that some of these stages will exceed 365 days, meaning that multiple cohorts from a CU may overlap in habitat use. For example, if fry migration typically begins May 1st and ocean entry typically ends July 1st the following year (i.e., the juvenile rearing stage lasts 465 days), then simple calculating exposure over a 365-day window would ignore the greater influence of the period May 1st - July 1st when cohorts overlap. As such, when calculating exposure or assessing historical temperature distributions, we considered cohorts rather than years, and thus "double-counted" projected climate data over periods of overlap.
-
-## Freshwater exposure
-
-We based our assessments of freshwater exposure on downscaled hydrologic model projections of daily mean stream temperature and flow provided by the [Pacific Climate Impacts Consortium (PCIC)](https://www.pacificclimate.org). PCIC's [Gridded Hydrologic Model Output](https://www.pacificclimate.org/data/gridded-hydrologic-model-output) does not currently display stream temperature and flow, and the data we used were provided directly (M. Schnorbus, pers. comm.) and should be considered **preliminary**. Daily projections were provided from 1945 to 2099, on a spatial grid 1/16th of a degree (\~ 30 km) for six different Global Climate Models from the CMIP5 ensemble, under the RCP 4.5 emissions scenario [@PCIC2020]. The current analysis only includes the Fraser basin, but we anticipate that additional regions will be added as the hydrologic downscaling is complete.
-
-### Stream temperature
-
-We smoothed stream temperature using the 7-day running **maximum** of the modelled daily mean (`7DMax`), which is close to the 7-day mean of the daily maximum - a statistic that is widely regarded as relevant for fish exposure to high temperatures [@USEPA2003]. Exposure to stream temperature was calculated in each applicable grid cell for each life stage as the proportion of days in the stage timing window in which the `7DMax`exceeded the temperature threshold.
-
-Temperature thresholds were set in each grid cell based on the distribution of temperatures over the stage window in the historical period (1970-1999). Using a temperature threshold based on the historical model output, rather than general absolute temperature thresholds that have been suggested by some agencies [@USEPA2003; @Oliver2001], recognizes that the gridded model output is an abstraction and may not represent actual stream-level temperatures experienced by individual fish. Thus, comparisons of change in future periods may be more accurate. We specifically used the 90th quantile of the historical temperature distribution, based on experimental evidence that the aerobic scope of locally adapted salmon populations is related to the distribution of historical temperatures experienced by that population, and declines above the \~90th quantile of historical temperatures [@Eliason2011].
-
-### Stream flow
-
-We smoothed flow using the 7-day running mean of the daily flow to bettre capture extended periods of low flow that may be harmful to fish. As for stream temperature, for each grid cell we calculated the proportion of days for each life stage that flow was below a threshold of 20% mean annual discharge (MAD). The 20% MAD threshold was set for each grid cell based on the mean annual discharge in the historical period (i.e., mean of all daily flows in 1970-1999).
-
-We recognize the potential importance of high flows in impacting salmon under climate change, and are currently working to determine if there is a generalizable approach to summarizing changes in high flow that are relevant to salmon. Unlike low flows, the impact of high flows (e.g. measured as some % MAD) will be substantially different depending on the hydrology of a particular stream. For example, the same discharge will result in vastly different conditions for salmon in a tight canyon versus a broad flood plain. There is also a site-specific distinction between high channel-forming flows that are beneficial for salmon and damaging high flows that can flush out eggs and junveiles or impede migrations, making it challenging to apply a common approach across a broad geography.
-
-## Marine exposure 
-
-Marine exposure attributes that have readily available projections include sea surface temperature, sea surface salinity, sea level rise, ocean pH, and primary productivity. We are currently working to develop relevant thresholds and assess exposure to these marine attributes.
-
-## Summarizing output 
-
-We summarized exposure of life stages within a CU by taking the median proportion of days above threshold across all grid cells within the spatial distribution of that stage. We then repeated the above calculations for each of 6 different GCMs, and report the median and range in the proportion of days across the GCMs.
-
-The range across GCMs captures some of the uncertainty in how climate change will progress, and differences among GCMs in their projections tend to increase further into the future. This range does not account for the spatial variability in exposure across grid cells - we also calculated the median exposure in each grid cell across GCMs to provide a visual representation on a map of how geographically variable exposure was.
 
 # References
