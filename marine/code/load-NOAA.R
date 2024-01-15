@@ -14,11 +14,11 @@ library(abind)
 
 loadNOAA <- function(
     variable = "SST", # Which variable to load? One of "PP", "pH", "SSS", "SST"
-    model = "Can-ESM2" # Which GCM? One of "ACCESS1-0", "Can-ESM2", "CCSM4", "CNRM-CM5", "HADGEM2-ES", "MPI-ESM-LR"
-    ){
+    model = "Can-ESM2", # Which GCM? One of "ACCESS1-0", "Can-ESM2", "CCSM4", "CNRM-CM5", "HADGEM2-ES", "MPI-ESM-LR"
+    spat_id = NULL){
   
   # Define location of data
-  root_dat <- "data/raw-data/NOAA/CMIP5/"
+  root_dat <- "marine/data/raw-data/NOAA/CMIP5/"
   
   #-----------------------------------------------------------------------------
   # There are different GCMs for the updated output
@@ -69,6 +69,7 @@ loadNOAA <- function(
   # print(z)
   # sink()
   
+  # Get projected
   varExtracted_proj <-  ncvar_get(z, varNames$fileName[i])
   
   # Get historical
@@ -98,13 +99,17 @@ loadNOAA <- function(
   varExtracted1 <- varExtracted
   dim(varExtracted1) <- c(length(lon)*length(lat), length(dates))
   
+   
   #------------------------------------------------------------------------------
-  # Remove grid points with no data
+  # Trim to relevant spatial extent; if not given then trim where there's no data
   #------------------------------------------------------------------------------
+  if(!missing(spat_id)){
+    spat_keep <- spat_id
+  } else {
+    spat_keep <- which(!is.na(varExtracted1[, 1]))
+  }
   
-  # Which spatial cells (first dimension) are not NA?
-  notNA <- which(!is.na(varExtracted1[, 2300]))
-  # length(notNA)/(dim(varExtracted1)[1]) # Reduces to 62% of data
+  spat_keep <- spat_keep[which(!is.na(varExtracted1[spat_keep, 1]))]
   
   #------------------------------------------------------------------------------
   # Dates since 1970-01-01 minus 7 days (for averaging)
@@ -117,17 +122,17 @@ loadNOAA <- function(
   #------------------------------------------------------------------------------
   # Trim to spatial and temporal extent needed
   #------------------------------------------------------------------------------
-  varExtracted2 <- varExtracted1[notNA, date_keep] # approx 10% of the size
+  varExtracted2 <- varExtracted1[spat_keep, date_keep] # approx 10% of the size
 
   dimnames(varExtracted2) <- list(
-    notNA,
+    spat_keep,
     as.character(dates[date_keep])
   )
   
-  rm(varExtracted0, varExtracted1)
+  rm(varExtracted, varExtracted1)
   
   # Convert K to C
-  if(min(varExtracted2[1:100,1:100]) > 200){
+  if(min(varExtracted2[1:100,1:100], na.rm = TRUE) > 200){
     varExtracted2 <- varExtracted2 - 273.15
   }
   return(varExtracted2)
