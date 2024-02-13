@@ -46,6 +46,7 @@ grid_polys <- st_as_sf(data.frame(
   summarise(geometry = st_combine(geometry)) %>%
   st_cast("POLYGON")  %>%
   st_transform(crs = 3832)
+
 #------------------------------------------------------------------------------
 # Read in shapefile of North Pacific regions
 #------------------------------------------------------------------------------
@@ -53,6 +54,10 @@ pacific <- st_read(dsn = "marine/data/spatial/iho/iho.shp") %>%
   # st_transform(crs = 4269)
   st_transform(crs = 3832)
 sf_use_s2(FALSE)
+
+# # Check: is the "has data" field of grid_points correct?
+# plot(st_geometry(pacific), col = cols[5], border = NA)
+# plot(st_geometry(grid_points[grid_points$hasData == 0, ]), pch = 4, cex = 0.5, add = TRUE, col = grey(0.8))
 
 #------------------------------------------------------------------------------
 # Read in shapefile of Continental margin
@@ -85,7 +90,6 @@ breakpt <- data.frame(lat = 5990419, lon = 9536413) %>%
   st_as_sf(coords = c("lon", "lat"), crs = 3832) %>%
   st_bbox()
 
-
 Ncrop <- st_bbox(fraser_1000)
 Ncrop['ymin'] <- breakpt['ymin']
 Scrop <- st_bbox(fraser_1000)
@@ -94,13 +98,6 @@ Scrop['ymax'] <- breakpt['ymax']
 fraser_750N <- st_crop(fraser_750, y = Ncrop)
 fraser_300S <-  st_crop(fraser_300, y = Scrop)
 coastBreak <- st_union(fraser_750N, fraser_300S)
-# # addCorner <- data.frame(ID = c(1:4), lat = c(6755951, 6755951,6285305,6285305),  lon = c(9527219, 8737202, 8737202, 9527219)) %>%
-#   st_as_sf(coords = c("lon", "lat"), crs = 3832) %>%
-#   group_by(ID) %>% 
-#   aggregate(by = "ID") %>%
-#   st_cast("POLYGON")
-# 
-#   plot(st_geometry(coastBreak), add = TRUE)
 
 # Take difference of coastBreak and continental shelf
 interior <- st_difference(x = coastBreak, y = cont_2000_buff)
@@ -113,12 +110,15 @@ plot(st_geometry(fraser_750), lty = 2)
 plot(st_geometry(fraser_300), add = TRUE, lty = 2)
 # plot(st_geometry(coastBreak), lwd = 1.5, add = TRUE)
 plot(st_geometry(pacific), add = TRUE, col = paste0(cols[2], 40), border = NA)
-# plot(st_geometry(cont), add = TRUE, border = cols[2], lty = 3)
+plot(st_geometry(cont), add = TRUE, border = cols[2], lty = 3)
 plot(st_geometry(cont_2000_buff), add = TRUE, border = cols[2])
 plot(st_geometry(em_zone), add = TRUE, col = paste0(cols[1], 80), border = NA)
 plot(st_geometry(fraser_oe), pch = 19, add = TRUE)
-plot(st_geometry(grid_points), cex = 0.3, add = TRUE, col = grey(0.7))
+# plot(st_geometry(grid_points), cex = 0.3, add = TRUE, col = grey(0.7))
 plot(st_geometry(grid_polys), col = NA, lwd = 0.5, add = TRUE, border = grey(0.7))
+# plot(st_geometry(grid_polys[which(grid_polys$id %in% grid_points$id[grid_points$hasData == 1]), ]), col = NA, lwd = 0.5, add = TRUE, border = 1)
+
+plot(st_geometry(grid_points[grid_points$hasData == 1, ]), cex = 0.3, add = TRUE)
 plot(st_geometry(grid_points[grid_points$hasData == 1, ]), cex = 0.3, add = TRUE)
 
 # saveRDS(em_zone, file = "marine/output/fraser_EM_zone.rds")
@@ -127,10 +127,33 @@ plot(st_geometry(grid_points[grid_points$hasData == 1, ]), cex = 0.3, add = TRUE
 # determine NOAA grid cells that intersect in em_zone and have data
 #------------------------------------------------------------------------------
 
-grid_polys_in <- st_intersection(grid_polys[grid_polys$id %in% grid_points$id[grid_points$hasData == 1], ], em_zone)
+# grid_polys_in <- st_intersection(grid_polys[grid_polys$id %in% grid_points$id[grid_points$hasData == 1], ], em_zone)
+# id_in <- unique(grid_polys_in$id)
+# 
+# plot(st_geometry(grid_points[grid_points$id %in% id_in, ]), col = cols[3], cex = 1.5, pch = 19, add = TRUE)
+# 
+
+
+#
+z <- locator(10)
+z_poly <- st_as_sf(data.frame(
+  id = rep(1, 10),
+  lon = z$x,
+  lat = z$y
+), coords = c("lon", "lat"), crs = 3832) %>% 
+  group_by(id) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
+plot(st_geometry(z_poly), lwd = 2, add = TRUE)
+
+# Subset grid points in Fraser_1000
+grid_points_in <- st_intersection(grid_points[grid_points$hasData == 1, ], fraser_1000)
+grid_points_in_buff <- st_buffer(grid_points_in, dist = 55*1000)
+
+grid_polys_in <- st_intersection(grid_points_in_buff, z_poly)
 id_in <- unique(grid_polys_in$id)
 
-plot(st_geometry(grid_points[grid_points$id %in% id_in, ]), col = cols[3], cex = 1.5, pch = 19, add = TRUE)
+plot(st_geometry(grid_points[grid_points$id %in% id_in, ]), pch = 19, add = TRUE)
 
 write.csv(id_in, "marine/output/incl_NOAA_EM.csv")
 
@@ -153,7 +176,7 @@ intrscts <- st_intersects(grid_points, pacific_incl, sparse = FALSE)
 incl <- which(apply(intrscts, 1, sum) == TRUE)
 
 # Only include points north of 35 
-incl_N35 <- grid_points0$id[which(grid_points0$id %in% incl & grid_points$hasData == 1 & grid_points0$lat >= 35)]
+incl_N35 <- grid_points0$id[which(grid_points0$id %in% incl & grid_points0$hasData == 1 & grid_points0$lat >= 35)]
 
 write.csv(incl_N35, file = "marine/output/incl_NOAA_marRear.csv")
 
