@@ -24,7 +24,7 @@ source("freshwater/code/freshwater-functions.R")
 # Which rcp to run? 45 or 85
 # Change here manually; output labelled accordingly (instead of looping through, since
 # code takes a while to run.)
-rcp <- 85
+rcp <- 45
 ###############################################################################
 # Define space and time variables for Fraser basin
 ###############################################################################
@@ -134,11 +134,11 @@ timing0$rear_days <- 0
 timing0$rear_days[which(timing0$oe_age == "1+")] <- 365
 timing0$rear_days[which(timing0$species == "SH")] <- 2*365 # (All Fraser steelhead are 2+)
 
-# Pink and chum immediately migration after emergence
+# Pink and chum: no rearing
 timing0$fm_start[which(timing0$species %in% c("CM", "PKE", "PKO"))]
 
 timing$start[timing$stage == "fw_rearing"] <- round(timing0$fm_start)
-timing$start[timing$stage == "fw_rearing" & timing$cuid %in% cu_list$pooledcuid[cu_list$species_abbr %in% c("CM", "PKO", "PKE")]] <- round(timing0$oe_start[which(timing0$species %in% c("CM", "PKE", "PKO"))])
+# timing$start[timing$stage == "fw_rearing" & timing$cuid %in% cu_list$pooledcuid[cu_list$species_abbr %in% c("CM", "PKO", "PKE")]] <- round(timing0$oe_start[which(timing0$species %in% c("CM", "PKE", "PKO"))])
 
 timing$n.days[timing$stage == "fw_rearing"] <- timing0$rear_days + round(timing0$oe_end) - timing$start[timing$stage == "fw_rearing"]
 
@@ -275,7 +275,7 @@ for(m in 1:n.models){
   # Extract grid_points$id for rows of Ts.weeklyMax and Qs.weeklyMean
   # These numbers are what are referred to in incl.stages
   grid.ref <- as.numeric(dimnames(Ts.weeklyMax)[[1]])
-
+  
   rm(GCM_var)
   
   #------------------------------------------------------------------------------
@@ -292,169 +292,175 @@ for(m in 1:n.models){
       
       # If there are timing data
       if(length(which(timing$cuid == cuid[i] & timing$stage == stages[j])) == 0){
-        warning(paste0("No timing data for cuid ", cu_list$cuid[i], " ", stages[j]))
+        stop(paste0("No timing data for cuid ", cu_list$cuid[i], " ", stages[j]))
         
       } else {
         
-        # Extract timing and covert to day-of-year
-        timing.ij <- timing[which(timing$cuid == cuid[i] & timing$stage == stages[j])[1], c("start", "n.days")]
-        
-        #-----------------------------------------------------------------------------
-        # Identify grid cells for given life stage
-        #-----------------------------------------------------------------------------
-        
-        # See freshwater-grid.R for code that identifies which grid cells should be used
-        # for each life stage.
-        
-        incl <- incl.stages[[i,j]]
-       
-        # Dimensions
-        n.grid <- length(incl)
-        
-        #-----------------------------------------------------------------------------
-        # Subset stream temp relevant to CU and stage
-        #-----------------------------------------------------------------------------
-        Ts.ij <- Qs.ij <- array(NA,
-                       dim = c(n.grid, 4, timing.ij$n.days, 30),
-                       dimnames = list(incl, c("hist", "early", "mid", "late"), NULL, NULL))
-        # Note: for stages that span >365 days, some temps may be counted twice, because essentially two cohorts occupy that space at the same time.
-        
-        for(p in 1:4){ # for each period
-          for(y in 1:30){ # for each year in the period
+        if(cu_list$species_pooled[i] %in% c("Pink", "Chum") & stages[j] == "fw_rearing"){
+          # No freshwater rearing for pink and chum = zero exposure during this stage
+          fw_output[m, i, j, , , ] <- 0
+          fw_spat[[i,j]][m, , , ] <- 0
+          
+        } else {
+          # Extract timing and covert to day-of-year
+          timing.ij <- timing[which(timing$cuid == cuid[i] & timing$stage == stages[j])[1], c("start", "n.days")]
+          
+          #-----------------------------------------------------------------------------
+          # Identify grid cells for given life stage
+          #-----------------------------------------------------------------------------
+          
+          # See freshwater-grid.R for code that identifies which grid cells should be used
+          # for each life stage.
+          
+          incl <- incl.stages[[i,j]]
+          
+          # Dimensions
+          n.grid <- length(incl)
+          
+          #-----------------------------------------------------------------------------
+          # Subset stream temp relevant to CU and stage
+          #-----------------------------------------------------------------------------
+          Ts.ij <- Qs.ij <- array(NA,
+                                  dim = c(n.grid, 4, timing.ij$n.days, 30),
+                                  dimnames = list(incl, c("hist", "early", "mid", "late"), NULL, NULL))
+          # Note: for stages that span >365 days, some temps may be counted twice, because essentially two cohorts occupy that space at the same time.
+          
+          for(p in 1:4){ # for each period
+            for(y in 1:30){ # for each year in the period
+              start.ind <- which(period == c("hist", "early", "mid", "late")[p] & years == period.years[y, p] & DOY == timing.ij$start)
+              
+              # For the last year in late century, can't extend if start + n.days > 365
+              if((start.ind + timing.ij$n.days - 1) > dim(Ts.weeklyMax)[2]){
+                
+                n.available <- length(start.ind:(dim(Ts.weeklyMax)[2]))
+                
+                Ts.ij[, p, 1:n.available, y] <- Ts.weeklyMax[match(incl, grid.ref), start.ind:(dim(Ts.weeklyMax)[2])]
+                Qs.ij[, p, 1:n.available, y] <- Qs.weeklyMean[match(incl, grid.ref), start.ind:(dim(Ts.weeklyMax)[2])]
+                
+              } else {
+                
+                Ts.ij[, p, , y] <- Ts.weeklyMax[match(incl, grid.ref), start.ind:(start.ind + timing.ij$n.days - 1)]
+                Qs.ij[, p, , y] <- Qs.weeklyMean[match(incl, grid.ref), start.ind:(start.ind + timing.ij$n.days - 1)]
+              }
+              
+            }}
+          
+          # Plot flow
+          if(3 == 2){
+            
+            
+            
+          }
+          
+          # Plot temperature
+          if(3 == 2){
+            xx <- 1 # which grid cell
             start.ind <- which(period == c("hist", "early", "mid", "late")[p] & years == period.years[y, p] & DOY == timing.ij$start)
             
-            # For the last year in late century, can't extend if start + n.days > 365
-            if((start.ind + timing.ij$n.days - 1) > dim(Ts.weeklyMax)[2]){
-              
-              n.available <- length(start.ind:(dim(Ts.weeklyMax)[2]))
-              
-              Ts.ij[, p, 1:n.available, y] <- Ts.weeklyMax[match(incl, grid.ref), start.ind:(dim(Ts.weeklyMax)[2])]
-              Qs.ij[, p, 1:n.available, y] <- Qs.weeklyMean[match(incl, grid.ref), start.ind:(dim(Ts.weeklyMax)[2])]
-              
-            } else {
-              
-              Ts.ij[, p, , y] <- Ts.weeklyMax[match(incl, grid.ref), start.ind:(start.ind + timing.ij$n.days - 1)]
-              Qs.ij[, p, , y] <- Qs.weeklyMean[match(incl, grid.ref), start.ind:(start.ind + timing.ij$n.days - 1)]
-            }
+            # Plot 5 years
+            par(mar = c(4,4,4,1), bg = "white")
+            plot(date[years %in% period.years[1:5, p]], Ts.weeklyMax[match(incl[xx], grid.ref), which(years %in% period.years[1:5, p])], "l", xlab = "Year", ylab = "Weekly max. temp (˚C)", las = 1, bty = "l", xaxs ="i", col = grey(0.5))
             
-        }}
-        
-        # Plot flow
-        if(3 == 2){
+            for(y in 1:5){
+              start.ind <- which(years %in% period.years[y, p] & DOY == timing.ij$start)
+              points(date[start.ind:(start.ind + timing.ij$n.days - 1)], Ts.ij[xx, p, , y], pch = 19, cex =0.6)
+              segments(x0 = date[start.ind],
+                       y0 = 31 + (y-1),
+                       x1 = date[(start.ind + timing.ij$n.days - 1)],
+                       y1 = 31 + (y-1),
+                       col = paste0(cols[y], 60), 
+                       lwd = 10,
+                       xpd = NA
+              )
+            }
+            mtext(side = 3, paste(cu_list$Conservation.Unit[i], cu_list$Species[i], "-", stages[j]), line = 3)
+            abline(h = pmax(quantile(Ts.ij[xx, 1, , ], c(0.9, 0.975), na.rm = TRUE), c(24, 26)), lty = c(2, 3)) 
+            
+          } # end if 3 == 2 plot
           
+          # Collapse Ts.ij years and days for easy
+          dim(Ts.ij) <- c(n.grid, 4, 30*timing.ij$n.days) 
+          dim(Qs.ij) <- c(n.grid, 4, 30*timing.ij$n.days) 
           
+          #-----------------------------------------------------------------------------
+          # Stream temperature 
+          #-----------------------------------------------------------------------------
           
-        }
-        
-        # Plot temperature
-        if(3 == 2){
-          xx <- 1 # which grid cell
-          start.ind <- which(period == c("hist", "early", "mid", "late")[p] & years == period.years[y, p] & DOY == timing.ij$start)
+          #----------------------------------------------------------------------
+          # Calculate days above threshold (DAT) and % DAT
+          #----------------------------------------------------------------------
+          Ts.dat <- Ts.perc <- array(NA, 
+                                     dim = c(4, n.grid),
+                                     dimnames = list(c("hist", "early", "mid", 'late'), NULL)
+          )
           
-         # Plot 5 years
-          par(mar = c(4,4,4,1), bg = "white")
-          plot(date[years %in% period.years[1:5, p]], Ts.weeklyMax[match(incl[xx], grid.ref), which(years %in% period.years[1:5, p])], "l", xlab = "Year", ylab = "Weekly max. temp (˚C)", las = 1, bty = "l", xaxs ="i", col = grey(0.5))
-          
-          for(y in 1:5){
-            start.ind <- which(years %in% period.years[y, p] & DOY == timing.ij$start)
-            points(date[start.ind:(start.ind + timing.ij$n.days - 1)], Ts.ij[xx, p, , y], pch = 19, cex =0.6)
-            segments(x0 = date[start.ind],
-                     y0 = 31 + (y-1),
-                     x1 = date[(start.ind + timing.ij$n.days - 1)],
-                     y1 = 31 + (y-1),
-                     col = paste0(cols[y], 60), 
-                     lwd = 10,
-                     xpd = NA
-                     )
-          }
-          mtext(side = 3, paste(cu_list$Conservation.Unit[i], cu_list$Species[i], "-", stages[j]), line = 3)
-         abline(h = pmax(quantile(Ts.ij[xx, 1, , ], c(0.9, 0.975), na.rm = TRUE), c(24, 26)), lty = c(2, 3)) 
-          
-        } # end if 3 == 2 plot
-        
-        # Collapse Ts.ij years and days for easy
-        dim(Ts.ij) <- c(n.grid, 4, 30*timing.ij$n.days) 
-        dim(Qs.ij) <- c(n.grid, 4, 30*timing.ij$n.days) 
-        
-        #-----------------------------------------------------------------------------
-        # Stream temperature 
-        #-----------------------------------------------------------------------------
-       
-        #----------------------------------------------------------------------
-        # Calculate days above threshold (DAT) and % DAT
-        #----------------------------------------------------------------------
-        Ts.dat <- Ts.perc <- array(NA, 
-                        dim = c(4, n.grid),
-                        dimnames = list(c("hist", "early", "mid", 'late'), NULL)
-        )
-        
-        for(p in 1:4){ # For each period
-          Ts.dat[p, ] <- apply(Ts.ij[, p, ] > matrix(rep(tmax[i, j], 30*timing.ij$n.days), n.grid, 30*timing.ij$n.days), 1, sum, na.rm = TRUE)
-          
+          for(p in 1:4){ # For each period
+            Ts.dat[p, ] <- apply(Ts.ij[, p, ] > matrix(rep(tmax[i, j], 30*timing.ij$n.days), n.grid, 30*timing.ij$n.days), 1, sum, na.rm = TRUE)
+            
             # Percentage of days;
             # Need to account for late-century period not being able to extend into next year for 2099 if timing.ij$start + timing.ij$n.days > 365
             Ts.perc[p, ] <- Ts.dat[p, ] / sum(!is.na(Ts.ij[1, p, ]))
-        } # end p
-        
-        # Store full spatial output
-        fw_spat[[i,j]][m, "temp", , ] <- Ts.perc
-        
-        # store summary output
-        for(p in 1:4){ # for each period
-          # Store output in end array
+          } # end p
+          
+          # Store full spatial output
+          fw_spat[[i,j]][m, "temp", , ] <- Ts.perc
+          
+          # store summary output
+          for(p in 1:4){ # for each period
+            # Store output in end array
             fw_output[m, i, j, "temp", p, ] <- c(
               median(Ts.perc[p, ]),
               range(Ts.perc[p, ]))
             
           } # end p
-        
-        #-----------------------------------------------------------------------------
-        # Flow
-        #-----------------------------------------------------------------------------
-        
-        # Calculate MAD over historical period for each included grid cell
-        # (Use all DOY, not Qs.ij for life stage)
-        if(n.grid > 1){
-          mad <- apply(Qs.weeklyMean[match(incl, grid.ref), which(period == "hist")], 1, mean, na.rm = TRUE)
-        } else { # if just one grid cell
-          mad <- mean(Qs.weeklyMean[match(incl, grid.ref), which(period == "hist")], na.rm = TRUE)
-        }
-        
-        # Calculate acute (critical) and chronic (optimal) temperature thresholds
-        thresh_mad <- mad %*% matrix(c(0.2, 0.1), nrow = 1)
-        colnames(thresh_mad) <- c("opt", "crit")
-        
-        # Calculate days below % mad threshold
-        Qs.dbt <- Qs.perc <- array(NA, 
-                        dim = c(4, n.grid),
-                        dimnames = list(c("hist", "early", "mid", 'late'), 
-                                        NULL)
-        )
-        
-         k <- 1 # Use 20% MAD threshold for now
-        
-         for(p in 1:4){
-           Qs.dbt[p, ] <- apply(Qs.ij[, p, ] < matrix(rep(thresh_mad[, k], 30*timing.ij$n.days), n.grid, 30*timing.ij$n.days), 1, sum, na.rm = TRUE)
+          
+          #-----------------------------------------------------------------------------
+          # Flow
+          #-----------------------------------------------------------------------------
+          
+          # Calculate MAD over historical period for each included grid cell
+          # (Use all DOY, not Qs.ij for life stage)
+          if(n.grid > 1){
+            mad <- apply(Qs.weeklyMean[match(incl, grid.ref), which(period == "hist")], 1, mean, na.rm = TRUE)
+          } else { # if just one grid cell
+            mad <- mean(Qs.weeklyMean[match(incl, grid.ref), which(period == "hist")], na.rm = TRUE)
+          }
+          
+          # Calculate acute (critical) and chronic (optimal) temperature thresholds
+          thresh_mad <- mad %*% matrix(c(0.2, 0.1), nrow = 1)
+          colnames(thresh_mad) <- c("opt", "crit")
+          
+          # Calculate days below % mad threshold
+          Qs.dbt <- Qs.perc <- array(NA, 
+                                     dim = c(4, n.grid),
+                                     dimnames = list(c("hist", "early", "mid", 'late'), 
+                                                     NULL)
+          )
+          
+          k <- 1 # Use 20% MAD threshold for now
+          
+          for(p in 1:4){
+            Qs.dbt[p, ] <- apply(Qs.ij[, p, ] < matrix(rep(thresh_mad[, k], 30*timing.ij$n.days), n.grid, 30*timing.ij$n.days), 1, sum, na.rm = TRUE)
             
             # Percentage of days;
             # Need to account for late-century period not being able to extend into next year for 2099 if timing.ij$start + timing.ij$n.days > 365
             Qs.perc[p, ] <- Qs.dbt[p, ] / sum(!is.na(Qs.ij[1, p, ]))
             
           } # end p
-        
-        
-       # Store full spatial output
-        fw_spat[[i,j]][m, "flow", , ] <- Qs.perc
-        
-        for(p in 1:4){ # for each period
-          # Store output in end array
+          
+          
+          # Store full spatial output
+          fw_spat[[i,j]][m, "flow", , ] <- Qs.perc
+          
+          for(p in 1:4){ # for each period
+            # Store output in end array
             fw_output[m, i, j, "flow", p, ] <- c(
               median(Qs.perc[p, ]),
               range(Qs.perc[p, ]))
           }
-        
-      } # end if timing data
-      # print(".")
+          
+        } # if if not pink/chum fw_rearing
+      } # end if there are timing data
       
     } # end life stage j
     

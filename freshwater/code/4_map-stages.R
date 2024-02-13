@@ -40,6 +40,7 @@ grid_points <- data.frame(
   lon_id = rep(c(1:length(lon)), length(lat)),
   lat_id = rep(c(1:length(lat)), each = length(lon)))
 
+
 n <- length(grid_points$id)
 d <- 1/16
 
@@ -57,7 +58,7 @@ grid_polys_all <- st_as_sf(data.frame(
 #-----------------------------------------------------------------------------
 # Select CU
 #-----------------------------------------------------------------------------
-i <- 19
+i <- 47
 
 cuid <- cu_list$CUID[i]
 cu_boundary.i <- cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[i]),]
