@@ -21,10 +21,11 @@
 
 README.Rmd
 
+# Output figures and data files
+output
+
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
-docs/rsconnect
-docs/data
-docs/ignore
+docs
 
 # macOS desktop services store
 .DS_Store
