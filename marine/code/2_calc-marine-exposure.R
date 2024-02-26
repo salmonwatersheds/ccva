@@ -23,7 +23,7 @@ source("marine/code/marine-functions.R")
 # Which rcp to run? 45 or 85
 # Change here manually; output labelled accordingly (instead of looping through, since
 # code takes a while to run.)
-rcp <- 85
+rcp <- 45
 
 ###############################################################################
 # Define space and time variables 
@@ -286,7 +286,16 @@ for(m in 1:n.models){
             points(date[start.ind:(start.ind + timing.ij$duration - 1)], T.ij[xx, p, , y], pch = 19, cex =0.8, col = cols[c(5,3,4,1)[p]])
           }}
           
-      
+      # Plot salinity
+          xxx <- 50578 #middle of Pacific
+          # xxx <- incl[xx]
+          plot(date[years %in% period.years[10:14, 3]], SSS[match(xxx, grid.ref), which(years %in% period.years[10:14, 3])], "o", xlab = "Year", ylab = "Salinity", las = 1, bty = "l", xaxs ="i", col = cols[3], lwd = 1.5, pch = 19)
+          lines(date[years %in% period.years[10:14, 3]], SSS[match(xxx, grid.ref), which(years %in% period.years[10:14, 1])], "o", col = cols[5], pch = 19, xpd = NA)
+          abline(h = quantile(SSS[match(xxx, grid.ref), which(years %in% period.years[, 1])], 0.025), lty = 2)
+          
+          hist(SSS[match(xxx, grid.ref), which(years %in% period.years[, 1])], col = cols[5], main = "Historical", xlab = "Salinity (ppt)", yaxs = "i", border = "white", breaks = seq(31.5, 33, 0.1))
+          hist(SSS[match(xxx, grid.ref), which(years %in% period.years[, 3])], col = cols[3], add = TRUE, breaks = seq(31.5, 33, 0.1), xpd = NA)
+          abline(v = quantile(SSS[match(xxx, grid.ref), which(years %in% period.years[, 1])], 0.025), lty = 2, lwd = 2)
           
         } # end if 3 == 2 plot
         
