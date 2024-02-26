@@ -283,7 +283,7 @@ for(m in 1:n.models){
   #------------------------------------------------------------------------------
   
   for(i in 1:n.CUs){
-    
+    # i <- 47 #Bowron
     #------------------------------------------------------------------------------
     # Loop through each life stage
     #------------------------------------------------------------------------------
@@ -345,14 +345,83 @@ for(m in 1:n.models){
               
             }}
           
-          # Plot flow
           if(3 == 2){
+            # Plot flow
+            xDate <- as.Date(paste("1998", 1:365, sep = "-"), format = "%Y-%j")
             
+            h <- which(period == c("hist"))
+            e <- which(period == c("early"))
+            m <- which(period == c("mid"))
+            l <- which(period == c("late"))
+            xx <- 10
+            # xx <- 198
+        quartz(width = 8, height = 5, pointsize = 12)
+            plot(xDate, tapply(Qs.weeklyMean[match(incl, grid.ref)[xx], h], DOY[h], median)[1:365], "l", col = cols[5], lwd = 2, log = "y")
+            abline(h = 0.2*mean(Qs.weeklyMean[match(incl, grid.ref)[xx], which(period == "hist")], na.rm = TRUE), lty = 2)
             
+            polygon(x = c(xDate, rev(xDate)),
+            y = c(tapply(Qs.weeklyMean[match(incl, grid.ref)[xx], h], DOY[h], quantile, 0.25)[1:365],
+                  rev(tapply(Qs.weeklyMean[match(incl, grid.ref)[xx], h], DOY[h], quantile, 0.75)[1:365])),
+            col = paste0(cols[5], 30),
+            border = NA)
             
+            lines(xDate, tapply(Qs.weeklyMean[match(incl, grid.ref)[xx], m], DOY[m], median)[1:365], lwd = 2, col = cols[3])
+            
+            polygon(x = c(xDate, rev(xDate)),
+            y = c(tapply(Qs.weeklyMean[match(incl, grid.ref)[xx], m], DOY[m], quantile, 0.25)[1:365],
+                  rev(tapply(Qs.weeklyMean[match(incl, grid.ref)[xx], m], DOY[m], quantile, 0.75)[1:365])),
+            col = paste0(cols[3], 30),
+            border = NA)
+            
+            # Stream temp
+            plot(xDate, tapply(Ts.weeklyMax[match(incl, grid.ref)[xx], h], DOY[h], median)[1:365], "l", col = cols[5], lwd = 2, ylim = c(0, 25))
+            
+            polygon(x = c(xDate, rev(xDate)),
+                    y = c(tapply(Ts.weeklyMax[match(incl, grid.ref)[xx], h], DOY[h], quantile, 0.25)[1:365],
+                          rev(tapply(Ts.weeklyMax[match(incl, grid.ref)[xx], h], DOY[h], quantile, 0.75)[1:365])),
+                    col = paste0(cols[5], 30),
+                    border = NA)
+            
+            lines(xDate, tapply(Ts.weeklyMax[match(incl, grid.ref)[xx], m], DOY[m], median)[1:365], lwd = 2, col = cols[3])
+            
+            polygon(x = c(xDate, rev(xDate)),
+                    y = c(tapply(Ts.weeklyMax[match(incl, grid.ref)[xx], m], DOY[m], quantile, 0.25)[1:365],
+                          rev(tapply(Ts.weeklyMax[match(incl, grid.ref)[xx], m], DOY[m], quantile, 0.75)[1:365])),
+                    col = paste0(cols[3], 30),
+                    border = NA)
+            
+            # Plot propotion of days
+            quartz(width = 12, height = 3, pointsize = 12)
+            par(mar = c(4,4,2,1))
+              plot(date[seq(1, 47482, 14)], Ts.weeklyMax[match(incl, grid.ref)[xx], seq(1, 47482, 14)], "l", las = 1, ylab = "Stream temperature", xlab = "Date", bty = "l")
+              polygon(x = date[c(range(h), rev(range(h)))], y = c(-1, -1, 40, 40), border = NA, col = paste0(cols[5], 20))
+              polygon(x = date[c(range(e), rev(range(e)))], y = c(-1, -1, 40, 40), border = NA, col = paste0(cols[3], 20))
+              polygon(x = date[c(range(m), rev(range(m)))], y = c(-1, -1, 40, 40), border = NA, col = paste0(cols[4], 20))
+              polygon(x = date[c(range(l), rev(range(l)))], y = c(-1, -1, 40, 40), border = NA, col = paste0(cols[1], 20))
+              
+              # Plot days over threshold
+              plot(1970:1999, apply(Ts.ij[xx, 1, , ] > tmax[i,j], 2, sum), xlim = c(1950, 2100), col = paste0(cols[5], 40), ylim = c(0, timing.ij$n.days), ylab = "Number of days over threshold", xlab = "", pch = 19, bty = "l", las = 1)
+                segments(x0 = 1970, x1 = 1999, y0 = sum(Ts.ij[xx, 1, , ] > tmax[i,j])/30, y1 = sum(Ts.ij[xx, 1, , ] > tmax[i,j])/30, col = cols[5], lwd = 3)
+ 
+                for(p in 2:4){
+                  points(period.years[, p], apply(Ts.ij[xx, p, , ] > tmax[i,j], 2, sum), col = paste0(cols[c(3,4,1)[p-1]], 40), pch = 19)
+                segments(x0 = period.years[1, p], x1 = period.years[30, p], y0 = sum(Ts.ij[xx, p, , ] > tmax[i,j])/30, y1 = sum(Ts.ij[xx, p, , ] > tmax[i,j])/30, col = cols[c(3,4,1)[p-1]], lwd = 3)
+                }
+                abline(v = c(1969.5, 1999.5, 2009.5, 2039.5, 2069.5), col = grey(0.8))
+                
+                # Proportion of stage over threshold
+                plot(1970:1999, apply(Ts.ij[xx, 1, , ] > tmax[i,j], 2, sum)/timing.ij$n.days, xlim = c(1950, 2100), col = paste0(cols[5], 40), ylim = c(0, 1), ylab = "Proportion of time over threshold", xlab = "", pch = 19, bty = "l", las = 1)
+                segments(x0 = 1970, x1 = 1999, y0 = sum(Ts.ij[xx, 1, , ] > tmax[i,j])/30/timing.ij$n.days, y1 = sum(Ts.ij[xx, 1, , ] > tmax[i,j])/30/timing.ij$n.days, col = cols[5], lwd = 3)
+                
+                for(p in 2:4){
+                  points(period.years[, p], apply(Ts.ij[xx, p, , ] > tmax[i,j], 2, sum)/timing.ij$n.days, col = paste0(cols[c(3,4,1)[p-1]], 40), pch = 19)
+                  segments(x0 = period.years[1, p], x1 = period.years[30, p], y0 = sum(Ts.ij[xx, p, , ] > tmax[i,j])/30/timing.ij$n.days, y1 = sum(Ts.ij[xx, p, , ] > tmax[i,j])/30/timing.ij$n.days, col = cols[c(3,4,1)[p-1]], lwd = 3)
+                }
+                abline(v = c(1969.5, 1999.5, 2009.5, 2039.5, 2069.5), col = grey(0.8))
+               
           }
           
-          # Plot temperature
+          # Plot temperature dots over threshold
           if(3 == 2){
             xx <- 1 # which grid cell
             start.ind <- which(period == c("hist", "early", "mid", "late")[p] & years == period.years[y, p] & DOY == timing.ij$start)
@@ -401,6 +470,7 @@ for(m in 1:n.models){
             # Need to account for late-century period not being able to extend into next year for 2099 if timing.ij$start + timing.ij$n.days > 365
             Ts.perc[p, ] <- Ts.dat[p, ] / sum(!is.na(Ts.ij[1, p, ]))
           } # end p
+          
           
           # Store full spatial output
           fw_spat[[i,j]][m, "temp", , ] <- Ts.perc
