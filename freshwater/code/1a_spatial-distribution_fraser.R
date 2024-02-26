@@ -117,6 +117,8 @@ grid_polys <- st_as_sf(data.frame(
 	summarise(geometry = st_combine(geometry)) %>%
 	st_cast("POLYGON") 
 
+# saveRDS(grid_polys, file = "docs/data/grid_polys_fw.rds")
+
 # Convert grid points to spatial object 
 grid_points <- st_as_sf(grid_points0, coords = c("lon", "lat"), crs = 4269)
 
