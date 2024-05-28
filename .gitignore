@@ -22,7 +22,7 @@
 README.Rmd
 
 # Output figures and data files
-output
+output/*.pdf
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 docs
