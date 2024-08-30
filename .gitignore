@@ -22,7 +22,9 @@
 README.Rmd
 
 # Output figures and data files
-output/*.pdf
+figures/
+ignore/
+archive/
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 docs
@@ -32,11 +34,9 @@ docs
 
 # Large data and output files
 freshwater/data
-freshwater/code/ignore
 freshwater/output
 
 marine/data
-marine/code/ignore
 marine/output
 
 data
