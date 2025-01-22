@@ -182,7 +182,7 @@ loadNOAA <- function(
   rm(varExtracted, varExtracted1)
   
   # Convert K to C
-  if(min(varExtracted2[30,1:100], na.rm = TRUE) > 200 & i == 4){
+  if(min(varExtracted2[1,1:100], na.rm = TRUE) > 200 & i == 4){
     varExtracted2 <- varExtracted2 - 273.15
   }
   return(varExtracted2)

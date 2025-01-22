@@ -1,0 +1,721 @@
+"species","cuid","cu_name","stage","variable","exp_median","exp_lowestGCM","exp_highestGCM"
+"CK",302,"Boundary Bay (Fall 4-1)","adult_migration","stream_flow",0.701136363636363,0.521969696969697,0.741666666666667
+"CK",302,"Boundary Bay (Fall 4-1)","adult_migration","stream_temp",0.968181818181818,0.93560606060606,0.978030303030303
+"CK",302,"Boundary Bay (Fall 4-1)","early_marine","SSS",0.170833333333333,0.0666666666666667,0.311111111111111
+"CK",302,"Boundary Bay (Fall 4-1)","early_marine","SST",0.672222222222222,0.558333333333333,0.922222222222222
+"CK",302,"Boundary Bay (Fall 4-1)","eggs_alevin","stream_flow",0.0266339869281045,0.0197712418300654,0.0356209150326797
+"CK",302,"Boundary Bay (Fall 4-1)","eggs_alevin","stream_temp",0.18937908496732,0.130718954248366,0.257352941176471
+"CK",302,"Boundary Bay (Fall 4-1)","fw_rearing","stream_flow",0,0,0
+"CK",302,"Boundary Bay (Fall 4-1)","fw_rearing","stream_temp",0.551333333333333,0.448666666666667,0.645
+"CK",302,"Boundary Bay (Fall 4-1)","marine_rearing","SSS",0.100225225225225,0.0432432432432432,0.197297297297297
+"CK",302,"Boundary Bay (Fall 4-1)","marine_rearing","SST",0.48018018018018,0.427477477477477,0.605405405405405
+"CK",302,"Boundary Bay (Fall 4-1)","spawning","stream_flow",0.0654618473895583,0.0485943775100402,0.0875502008032129
+"CK",302,"Boundary Bay (Fall 4-1)","spawning","stream_temp",0.220281124497992,0.199598393574297,0.346586345381526
+"CK",303,"Lower Fraser River (Fall 4-1)","adult_migration","stream_flow",0,0,0.0125925925925926
+"CK",303,"Lower Fraser River (Fall 4-1)","adult_migration","stream_temp",0.632222222222222,0.542222222222222,0.738518518518518
+"CK",303,"Lower Fraser River (Fall 4-1)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",303,"Lower Fraser River (Fall 4-1)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",303,"Lower Fraser River (Fall 4-1)","eggs_alevin","stream_flow",0.00744500846023689,0,0.0115059221658206
+"CK",303,"Lower Fraser River (Fall 4-1)","eggs_alevin","stream_temp",0.0195431472081218,0.00592216582064298,0.0341793570219966
+"CK",303,"Lower Fraser River (Fall 4-1)","fw_rearing","stream_flow",0.00138888888888889,0,0.00637254901960784
+"CK",303,"Lower Fraser River (Fall 4-1)","fw_rearing","stream_temp",0.16078431372549,0.137908496732026,0.223202614379085
+"CK",303,"Lower Fraser River (Fall 4-1)","marine_rearing","SSS",0.102631578947369,0.0447368421052632,0.202631578947368
+"CK",303,"Lower Fraser River (Fall 4-1)","marine_rearing","SST",0.493859649122807,0.442543859649123,0.61578947368421
+"CK",303,"Lower Fraser River (Fall 4-1)","spawning","stream_flow",0.0125730994152046,0,0.0333333333333333
+"CK",303,"Lower Fraser River (Fall 4-1)","spawning","stream_temp",0.0298245614035088,0.0111111111111111,0.0830409356725146
+"CK",304,"Lower Fraser River (Spring 5-2)","adult_migration","stream_flow",0.00151515151515151,0,0.00681818181818182
+"CK",304,"Lower Fraser River (Spring 5-2)","adult_migration","stream_temp",0,0,0
+"CK",304,"Lower Fraser River (Spring 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",304,"Lower Fraser River (Spring 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",304,"Lower Fraser River (Spring 5-2)","eggs_alevin","stream_flow",0.241091954022988,0.21867816091954,0.281992337164751
+"CK",304,"Lower Fraser River (Spring 5-2)","eggs_alevin","stream_temp",0.218103448275862,0.172988505747126,0.265996168582375
+"CK",304,"Lower Fraser River (Spring 5-2)","fw_rearing","stream_flow",0.219745998608212,0.18768267223382,0.246659707724426
+"CK",304,"Lower Fraser River (Spring 5-2)","fw_rearing","stream_temp",0.106228253305498,0.0755393180236604,0.160125260960334
+"CK",304,"Lower Fraser River (Spring 5-2)","marine_rearing","SSS",0.0974747474747474,0.0414141414141414,0.192929292929293
+"CK",304,"Lower Fraser River (Spring 5-2)","marine_rearing","SST",0.455555555555555,0.402020202020202,0.574747474747475
+"CK",304,"Lower Fraser River (Spring 5-2)","spawning","stream_flow",0,0,0
+"CK",304,"Lower Fraser River (Spring 5-2)","spawning","stream_temp",0.422222222222222,0.339316239316239,0.567521367521368
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","adult_migration","stream_flow",0,0,0
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","adult_migration","stream_temp",0.710294117647059,0.609150326797386,0.823529411764706
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","eggs_alevin","stream_flow",0.0196134347275032,0.00652724968314322,0.0356780735107731
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","eggs_alevin","stream_temp",0.232953105196451,0.224841571609632,0.258174904942966
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","fw_rearing","stream_flow",0.0123521224773834,0.00473208072372999,0.0224077940153097
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","fw_rearing","stream_temp",0.27268615170494,0.232707028531663,0.295476687543493
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","spawning","stream_flow",0.00116279069767442,0,0.0201550387596899
+"CK",305,"Lower Fraser River-Upper Pitt (Summer 5-2)","spawning","stream_temp",0.999612403100775,0.996124031007752,1
+"CK",306,"Lower Fraser River (Summer 5-2)","adult_migration","stream_flow",0,0,0
+"CK",306,"Lower Fraser River (Summer 5-2)","adult_migration","stream_temp",0.61924882629108,0.496713615023474,0.794835680751174
+"CK",306,"Lower Fraser River (Summer 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",306,"Lower Fraser River (Summer 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",306,"Lower Fraser River (Summer 5-2)","eggs_alevin","stream_flow",0.0795953360768176,0.0372427983539095,0.106995884773663
+"CK",306,"Lower Fraser River (Summer 5-2)","eggs_alevin","stream_temp",0.129046639231824,0.113443072702332,0.151783264746228
+"CK",306,"Lower Fraser River (Summer 5-2)","fw_rearing","stream_flow",0.0488517745302714,0.0293667362560891,0.0649965205288796
+"CK",306,"Lower Fraser River (Summer 5-2)","fw_rearing","stream_temp",0.166736256089074,0.143284620737648,0.207098121085595
+"CK",306,"Lower Fraser River (Summer 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",306,"Lower Fraser River (Summer 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",306,"Lower Fraser River (Summer 5-2)","spawning","stream_flow",0.00395480225988701,0.000564971751412429,0.0141242937853107
+"CK",306,"Lower Fraser River (Summer 5-2)","spawning","stream_temp",0.529237288135593,0.474293785310734,0.629661016949153
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","adult_migration","stream_flow",0,0,0
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","adult_migration","stream_temp",0.952923976608187,0.877777777777778,0.974853801169591
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","eggs_alevin","stream_flow",0.00336391437308868,0.000152905198776758,0.0153669724770642
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","eggs_alevin","stream_temp",0.0785932721712538,0.0707951070336391,0.103593272171254
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","fw_rearing","stream_flow",0,0,0
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","fw_rearing","stream_temp",0.496929824561403,0.450584795321637,0.594736842105263
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","spawning","stream_flow",0.0108695652173913,0.00072463768115942,0.0253623188405797
+"CK",307,"Lower Fraser River-Maria Slough (Summer 4-1)","spawning","stream_temp",0.372463768115942,0.33731884057971,0.499275362318841
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","adult_migration","stream_flow",0,0,0
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","adult_migration","stream_temp",0.526754385964912,0.447869674185464,0.562155388471178
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","eggs_alevin","stream_flow",0.0793859649122807,0.0709273182957394,0.127944862155388
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","eggs_alevin","stream_temp",0.0911654135338346,0.087719298245614,0.106516290726817
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","fw_rearing","stream_flow",0.052347959969207,0.0458429561200924,0.0872594303310239
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","fw_rearing","stream_temp",0.204984603541186,0.185642802155504,0.244226327944573
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","spawning","stream_flow",0.386979166666667,0.2375,0.482291666666667
+"CK",308,"Fraser Canyon-Nahatlatch (Spring 5-2)","spawning","stream_temp",0.663020833333334,0.555208333333333,0.794791666666667
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","adult_migration","stream_flow",0,0,0
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","adult_migration","stream_temp",0.712037037037037,0.583796296296296,0.794907407407407
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","eggs_alevin","stream_flow",0.00505464480874317,0,0.0204918032786885
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","eggs_alevin","stream_temp",0.075136612021858,0.0586748633879781,0.0935109289617486
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","fw_rearing","stream_flow",0.00306799336650083,0,0.0124378109452736
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","fw_rearing","stream_temp",0.298756218905472,0.271807628524046,0.311525704809287
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","marine_rearing","SSS",0.102631578947369,0.0447368421052632,0.202631578947368
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","marine_rearing","SST",0.493859649122807,0.442543859649123,0.61578947368421
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","spawning","stream_flow",0,0,0
+"CK",309,"Middle Fraser River-Portage (Fall 5-2)","spawning","stream_temp",0.145495495495496,0.12972972972973,0.265765765765766
+"CK",310,"Middle Fraser River (Spring 5-2)","adult_migration","stream_flow",0,0,0
+"CK",310,"Middle Fraser River (Spring 5-2)","adult_migration","stream_temp",0.423899371069183,0.331132075471698,0.482389937106918
+"CK",310,"Middle Fraser River (Spring 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",310,"Middle Fraser River (Spring 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",310,"Middle Fraser River (Spring 5-2)","eggs_alevin","stream_flow",0.0533783783783784,0.0290540540540541,0.117454954954955
+"CK",310,"Middle Fraser River (Spring 5-2)","eggs_alevin","stream_temp",0.176632882882883,0.158783783783784,0.199099099099099
+"CK",310,"Middle Fraser River (Spring 5-2)","fw_rearing","stream_flow",0.0243106244931062,0.0173560421735604,0.060705596107056
+"CK",310,"Middle Fraser River (Spring 5-2)","fw_rearing","stream_temp",0.25537307380373,0.219870235198702,0.279683698296837
+"CK",310,"Middle Fraser River (Spring 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",310,"Middle Fraser River (Spring 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",310,"Middle Fraser River (Spring 5-2)","spawning","stream_flow",0,0,0
+"CK",310,"Middle Fraser River (Spring 5-2)","spawning","stream_temp",0.955555555555555,0.905555555555556,0.992222222222222
+"CK",311,"Middle Fraser River (Summer 5-2)","adult_migration","stream_flow",0,0,0
+"CK",311,"Middle Fraser River (Summer 5-2)","adult_migration","stream_temp",0.768696581196582,0.597863247863248,0.873076923076923
+"CK",311,"Middle Fraser River (Summer 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",311,"Middle Fraser River (Summer 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",311,"Middle Fraser River (Summer 5-2)","eggs_alevin","stream_flow",0,0,0
+"CK",311,"Middle Fraser River (Summer 5-2)","eggs_alevin","stream_temp",0.107620817843866,0.0895910780669145,0.131598513011152
+"CK",311,"Middle Fraser River (Summer 5-2)","fw_rearing","stream_flow",0,0,0
+"CK",311,"Middle Fraser River (Summer 5-2)","fw_rearing","stream_temp",0.286969696969697,0.235378787878788,0.315681818181818
+"CK",311,"Middle Fraser River (Summer 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",311,"Middle Fraser River (Summer 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",311,"Middle Fraser River (Summer 5-2)","spawning","stream_flow",0,0,0
+"CK",311,"Middle Fraser River (Summer 5-2)","spawning","stream_temp",0.652298850574712,0.55632183908046,0.759770114942529
+"CK",312,"Upper Fraser River (Spring 5-2)","adult_migration","stream_flow",0,0,0
+"CK",312,"Upper Fraser River (Spring 5-2)","adult_migration","stream_temp",0.43301282051282,0.293589743589744,0.508119658119658
+"CK",312,"Upper Fraser River (Spring 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",312,"Upper Fraser River (Spring 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",312,"Upper Fraser River (Spring 5-2)","eggs_alevin","stream_flow",0.302097130242826,0.258830022075055,0.374834437086093
+"CK",312,"Upper Fraser River (Spring 5-2)","eggs_alevin","stream_temp",0.141501103752759,0.114128035320088,0.161810154525386
+"CK",312,"Upper Fraser River (Spring 5-2)","fw_rearing","stream_flow",0.253429027113238,0.213556618819777,0.304306220095694
+"CK",312,"Upper Fraser River (Spring 5-2)","fw_rearing","stream_temp",0.185566188197767,0.139393939393939,0.208771929824561
+"CK",312,"Upper Fraser River (Spring 5-2)","marine_rearing","SSS",0.0959523809523808,0.04,0.187619047619048
+"CK",312,"Upper Fraser River (Spring 5-2)","marine_rearing","SST",0.45047619047619,0.394761904761905,0.582857142857143
+"CK",312,"Upper Fraser River (Spring 5-2)","spawning","stream_flow",0.622435897435897,0.283333333333333,0.711538461538462
+"CK",312,"Upper Fraser River (Spring 5-2)","spawning","stream_temp",0.924358974358974,0.837179487179487,0.988461538461539
+"CK",313,"South Thompson River (Summer 4-1)","adult_migration","stream_flow",0,0,0
+"CK",313,"South Thompson River (Summer 4-1)","adult_migration","stream_temp",0.965602836879433,0.91241134751773,0.988652482269504
+"CK",313,"South Thompson River (Summer 4-1)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",313,"South Thompson River (Summer 4-1)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",313,"South Thompson River (Summer 4-1)","eggs_alevin","stream_flow",0.017687074829932,0,0.0365986394557823
+"CK",313,"South Thompson River (Summer 4-1)","eggs_alevin","stream_temp",0.11265306122449,0.0927891156462585,0.123809523809524
+"CK",313,"South Thompson River (Summer 4-1)","fw_rearing","stream_flow",0,0,0.00091324200913242
+"CK",313,"South Thompson River (Summer 4-1)","fw_rearing","stream_temp",0.30593607305936,0.275799086757991,0.352054794520548
+"CK",313,"South Thompson River (Summer 4-1)","marine_rearing","SSS",0.0995495495495496,0.0423423423423423,0.196396396396396
+"CK",313,"South Thompson River (Summer 4-1)","marine_rearing","SST",0.48018018018018,0.427477477477477,0.605405405405405
+"CK",313,"South Thompson River (Summer 4-1)","spawning","stream_flow",0,0,0.0040650406504065
+"CK",313,"South Thompson River (Summer 4-1)","spawning","stream_temp",0.433739837398374,0.414634146341463,0.527642276422764
+"CK",314,"South Thompson River (Summer 5-2)","adult_migration","stream_flow",0,0,0
+"CK",314,"South Thompson River (Summer 5-2)","adult_migration","stream_temp",0.7003367003367,0.62962962962963,0.76969696969697
+"CK",314,"South Thompson River (Summer 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",314,"South Thompson River (Summer 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",314,"South Thompson River (Summer 5-2)","eggs_alevin","stream_flow",0.0142493638676844,0,0.0253180661577608
+"CK",314,"South Thompson River (Summer 5-2)","eggs_alevin","stream_temp",0.135814249363868,0.116539440203562,0.145547073791349
+"CK",314,"South Thompson River (Summer 5-2)","fw_rearing","stream_flow",0.00900157232704402,0,0.017059748427673
+"CK",314,"South Thompson River (Summer 5-2)","fw_rearing","stream_temp",0.283922955974843,0.260141509433962,0.28687106918239
+"CK",314,"South Thompson River (Summer 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",314,"South Thompson River (Summer 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",314,"South Thompson River (Summer 5-2)","spawning","stream_flow",0,0,0
+"CK",314,"South Thompson River (Summer 5-2)","spawning","stream_temp",0.692635658914728,0.618604651162791,0.778294573643411
+"CK",315,"Shuswap River (Summer 4-1)","adult_migration","stream_flow",0,0,0
+"CK",315,"Shuswap River (Summer 4-1)","adult_migration","stream_temp",0.929012345679012,0.881893004115226,0.968724279835391
+"CK",315,"Shuswap River (Summer 4-1)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",315,"Shuswap River (Summer 4-1)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",315,"Shuswap River (Summer 4-1)","eggs_alevin","stream_flow",0.033531746031746,0.0078042328042328,0.0636243386243386
+"CK",315,"Shuswap River (Summer 4-1)","eggs_alevin","stream_temp",0.140410052910052,0.121031746031746,0.149074074074074
+"CK",315,"Shuswap River (Summer 4-1)","fw_rearing","stream_flow",0.000555555555555555,0,0.00333333333333333
+"CK",315,"Shuswap River (Summer 4-1)","fw_rearing","stream_temp",0.0633333333333334,0.0514814814814815,0.120740740740741
+"CK",315,"Shuswap River (Summer 4-1)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",315,"Shuswap River (Summer 4-1)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",315,"Shuswap River (Summer 4-1)","spawning","stream_flow",0,0,0.0183673469387755
+"CK",315,"Shuswap River (Summer 4-1)","spawning","stream_temp",0.509863945578231,0.494557823129252,0.593877551020408
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","adult_migration","stream_flow",0,0,0
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","adult_migration","stream_temp",0.948160173160173,0.904545454545455,0.977489177489178
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","eggs_alevin","stream_flow",0,0,0
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","eggs_alevin","stream_temp",0.145981554677207,0.131093544137022,0.163109354413702
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","fw_rearing","stream_flow",0,0,0
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","fw_rearing","stream_temp",0.301100628930817,0.286084905660377,0.325471698113208
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","marine_rearing","SST",0.463888888888889,0.410416666666667,0.594444444444444
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","spawning","stream_flow",0,0,0
+"CK",316,"South Thompson River-Bessette Creek (Summer 4-2)","spawning","stream_temp",0.8609375,0.842708333333333,0.901041666666667
+"CK",317,"Lower Thompson River (Spring 4-2)","adult_migration","stream_flow",0,0,0
+"CK",317,"Lower Thompson River (Spring 4-2)","adult_migration","stream_temp",0.4212,0.364533333333333,0.4824
+"CK",317,"Lower Thompson River (Spring 4-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",317,"Lower Thompson River (Spring 4-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",317,"Lower Thompson River (Spring 4-2)","eggs_alevin","stream_flow",0,0,0
+"CK",317,"Lower Thompson River (Spring 4-2)","eggs_alevin","stream_temp",0.23506711409396,0.217897091722595,0.252013422818792
+"CK",317,"Lower Thompson River (Spring 4-2)","fw_rearing","stream_flow",0,0,0
+"CK",317,"Lower Thompson River (Spring 4-2)","fw_rearing","stream_temp",0.303744855967078,0.285679012345679,0.310617283950617
+"CK",317,"Lower Thompson River (Spring 4-2)","marine_rearing","SSS",0.0938405797101448,0.0405797101449275,0.185507246376812
+"CK",317,"Lower Thompson River (Spring 4-2)","marine_rearing","SST",0.440579710144927,0.384782608695652,0.576811594202899
+"CK",317,"Lower Thompson River (Spring 4-2)","spawning","stream_flow",0,0,0
+"CK",317,"Lower Thompson River (Spring 4-2)","spawning","stream_temp",0.963157894736842,0.917543859649123,0.982456140350877
+"CK",318,"North Thompson River (Spring 5-2)","adult_migration","stream_flow",0,0,0
+"CK",318,"North Thompson River (Spring 5-2)","adult_migration","stream_temp",0.801166666666667,0.653666666666667,0.864666666666667
+"CK",318,"North Thompson River (Spring 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",318,"North Thompson River (Spring 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",318,"North Thompson River (Spring 5-2)","eggs_alevin","stream_flow",0.168947368421053,0.0941520467836257,0.242105263157895
+"CK",318,"North Thompson River (Spring 5-2)","eggs_alevin","stream_temp",0.152748538011696,0.132748538011696,0.171812865497076
+"CK",318,"North Thompson River (Spring 5-2)","fw_rearing","stream_flow",0.142101105845181,0.0725118483412322,0.186255924170616
+"CK",318,"North Thompson River (Spring 5-2)","fw_rearing","stream_temp",0.182938388625593,0.136808846761453,0.203317535545024
+"CK",318,"North Thompson River (Spring 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",318,"North Thompson River (Spring 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",318,"North Thompson River (Spring 5-2)","spawning","stream_flow",0,0,0
+"CK",318,"North Thompson River (Spring 5-2)","spawning","stream_temp",0.968279569892473,0.873118279569893,0.997849462365591
+"CK",319,"North Thompson River (Summer 5-2)","adult_migration","stream_flow",0,0,0
+"CK",319,"North Thompson River (Summer 5-2)","adult_migration","stream_temp",0.701228070175439,0.612280701754386,0.750877192982456
+"CK",319,"North Thompson River (Summer 5-2)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",319,"North Thompson River (Summer 5-2)","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",319,"North Thompson River (Summer 5-2)","eggs_alevin","stream_flow",0.128230676328502,0.0922101449275362,0.218961352657005
+"CK",319,"North Thompson River (Summer 5-2)","eggs_alevin","stream_temp",0.11274154589372,0.1,0.12451690821256
+"CK",319,"North Thompson River (Summer 5-2)","fw_rearing","stream_flow",0.10415611814346,0.0788607594936709,0.174135021097046
+"CK",319,"North Thompson River (Summer 5-2)","fw_rearing","stream_temp",0.247299578059072,0.221856540084388,0.267172995780591
+"CK",319,"North Thompson River (Summer 5-2)","marine_rearing","SSS",0.0969907407407407,0.0398148148148148,0.189814814814815
+"CK",319,"North Thompson River (Summer 5-2)","marine_rearing","SST",0.465740740740741,0.411574074074074,0.594444444444444
+"CK",319,"North Thompson River (Summer 5-2)","spawning","stream_flow",0.00111111111111111,0,0.0461111111111111
+"CK",319,"North Thompson River (Summer 5-2)","spawning","stream_temp",0.788055555555556,0.691111111111111,0.855
+"CK",333,"South Thompson-Adams River Upper","adult_migration","stream_flow",0,0,0
+"CK",333,"South Thompson-Adams River Upper","adult_migration","stream_temp",0.976041666666667,0.925,1
+"CK",333,"South Thompson-Adams River Upper","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CK",333,"South Thompson-Adams River Upper","early_marine","SST",0.508333333333334,0.391666666666667,0.888888888888889
+"CK",333,"South Thompson-Adams River Upper","eggs_alevin","stream_flow",0.372330729166666,0.274479166666667,0.408854166666667
+"CK",333,"South Thompson-Adams River Upper","eggs_alevin","stream_temp",0.0783203125,0.063671875,0.09453125
+"CK",333,"South Thompson-Adams River Upper","fw_rearing","stream_flow",0.235098039215687,0.171921568627451,0.256235294117647
+"CK",333,"South Thompson-Adams River Upper","fw_rearing","stream_temp",0.191372549019607,0.149882352941176,0.204941176470588
+"CK",333,"South Thompson-Adams River Upper","marine_rearing","SSS",0.102631578947369,0.0447368421052632,0.202631578947368
+"CK",333,"South Thompson-Adams River Upper","marine_rearing","SST",0.493859649122807,0.442543859649123,0.61578947368421
+"CK",333,"South Thompson-Adams River Upper","spawning","stream_flow",0.0809523809523809,0.00833333333333333,0.183333333333333
+"CK",333,"South Thompson-Adams River Upper","spawning","stream_temp",0.655952380952381,0.547619047619048,0.760714285714286
+"CM",701,"Lower Fraser","adult_migration","stream_flow",0.105902777777778,0.0513888888888889,0.224305555555556
+"CM",701,"Lower Fraser","adult_migration","stream_temp",0.0284722222222222,0.00972222222222222,0.0847222222222222
+"CM",701,"Lower Fraser","early_marine","SSS",0.136111111111111,0.0611111111111111,0.308333333333333
+"CM",701,"Lower Fraser","early_marine","SST",0.594444444444445,0.3,0.966666666666667
+"CM",701,"Lower Fraser","eggs_alevin","stream_flow",0.0165898617511521,0.00998463901689708,0.019047619047619
+"CM",701,"Lower Fraser","eggs_alevin","stream_temp",0.0297235023041474,0.0136712749615975,0.0439324116743472
+"CM",701,"Lower Fraser","fw_rearing","stream_flow",0,0,0
+"CM",701,"Lower Fraser","fw_rearing","stream_temp",0,0,0
+"CM",701,"Lower Fraser","marine_rearing","SSS",0.105208333333333,0.045,0.2075
+"CM",701,"Lower Fraser","marine_rearing","SST",0.5775,0.534583333333333,0.761666666666667
+"CM",701,"Lower Fraser","spawning","stream_flow",0.0273584905660378,0.0144654088050314,0.0452830188679245
+"CM",701,"Lower Fraser","spawning","stream_temp",0.00534591194968554,0.00251572327044025,0.0163522012578616
+"CO",704,"Lillooet","adult_migration","stream_flow",0.00733333333333333,0.002,0.0186666666666667
+"CO",704,"Lillooet","adult_migration","stream_temp",0.049,0.0186666666666667,0.098
+"CO",704,"Lillooet","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CO",704,"Lillooet","early_marine","SST",0.430555555555556,0.344444444444444,0.736111111111111
+"CO",704,"Lillooet","eggs_alevin","stream_flow",0.0995689655172413,0.0521551724137931,0.137068965517241
+"CO",704,"Lillooet","eggs_alevin","stream_temp",0.023132183908046,0.0126436781609195,0.0359195402298851
+"CO",704,"Lillooet","fw_rearing","stream_flow",0.0909429280397022,0.075889164598842,0.106617038875103
+"CO",704,"Lillooet","fw_rearing","stream_temp",0.111042183622829,0.0778329197684036,0.158354011579818
+"CO",704,"Lillooet","marine_rearing","SSS",0.113095238095238,0.0523809523809524,0.223809523809524
+"CO",704,"Lillooet","marine_rearing","SST",0.5,0.447619047619048,0.588095238095238
+"CO",704,"Lillooet","spawning","stream_flow",0.0231060606060607,0.0121212121212121,0.0628787878787879
+"CO",704,"Lillooet","spawning","stream_temp",0,0,0
+"CO",705,"Fraser Canyon","adult_migration","stream_flow",0.237280701754386,0.203508771929825,0.275730994152047
+"CO",705,"Fraser Canyon","adult_migration","stream_temp",0.164035087719299,0.104093567251462,0.236549707602339
+"CO",705,"Fraser Canyon","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CO",705,"Fraser Canyon","early_marine","SST",0.430555555555556,0.344444444444444,0.736111111111111
+"CO",705,"Fraser Canyon","eggs_alevin","stream_flow",0.00718518518518519,0.00222222222222222,0.0302222222222222
+"CO",705,"Fraser Canyon","eggs_alevin","stream_temp",0.083037037037037,0.0703703703703704,0.0980740740740741
+"CO",705,"Fraser Canyon","fw_rearing","stream_flow",0.0507650951199338,0.0468982630272953,0.0785359801488834
+"CO",705,"Fraser Canyon","fw_rearing","stream_temp",0.231637717121589,0.207402812241522,0.262158808933002
+"CO",705,"Fraser Canyon","marine_rearing","SSS",0.113095238095238,0.0523809523809524,0.223809523809524
+"CO",705,"Fraser Canyon","marine_rearing","SST",0.5,0.447619047619048,0.588095238095238
+"CO",705,"Fraser Canyon","spawning","stream_flow",0.0163120567375887,0.00638297872340425,0.0631205673758865
+"CO",705,"Fraser Canyon","spawning","stream_temp",0,0,0
+"CO",707,"Lower Thompson","adult_migration","stream_flow",0,0,0
+"CO",707,"Lower Thompson","adult_migration","stream_temp",0.119047619047619,0.0829931972789116,0.194557823129252
+"CO",707,"Lower Thompson","early_marine","SSS",0.170833333333333,0.0666666666666667,0.311111111111111
+"CO",707,"Lower Thompson","early_marine","SST",0.597222222222222,0.511111111111111,0.819444444444444
+"CO",707,"Lower Thompson","eggs_alevin","stream_flow",0,0,0.00175438596491228
+"CO",707,"Lower Thompson","eggs_alevin","stream_temp",0.172199730094467,0.165249662618084,0.196828609986505
+"CO",707,"Lower Thompson","fw_rearing","stream_flow",0.000161812297734628,0,0.00881877022653722
+"CO",707,"Lower Thompson","fw_rearing","stream_temp",0.282301779935275,0.254328478964401,0.316788025889968
+"CO",707,"Lower Thompson","marine_rearing","SSS",0.103846153846154,0.0461538461538462,0.207692307692308
+"CO",707,"Lower Thompson","marine_rearing","SST",0.461538461538462,0.405128205128205,0.556410256410256
+"CO",707,"Lower Thompson","spawning","stream_flow",0,0,0
+"CO",707,"Lower Thompson","spawning","stream_temp",0,0,0.00476190476190476
+"CO",708,"South Thompson","adult_migration","stream_flow",0,0,0
+"CO",708,"South Thompson","adult_migration","stream_temp",0.225666666666667,0.169333333333333,0.311333333333333
+"CO",708,"South Thompson","early_marine","SSS",0.170833333333333,0.0666666666666667,0.311111111111111
+"CO",708,"South Thompson","early_marine","SST",0.597222222222222,0.511111111111111,0.819444444444444
+"CO",708,"South Thompson","eggs_alevin","stream_flow",0.0498470948012232,0.0131498470948012,0.0827217125382263
+"CO",708,"South Thompson","eggs_alevin","stream_temp",0.0837155963302752,0.0753822629969419,0.114984709480122
+"CO",708,"South Thompson","fw_rearing","stream_flow",0.0237875288683603,0.00612009237875289,0.0404541955350269
+"CO",708,"South Thompson","fw_rearing","stream_temp",0.292956120092378,0.265396458814473,0.313125481139338
+"CO",708,"South Thompson","marine_rearing","SSS",0.103846153846154,0.0461538461538462,0.207692307692308
+"CO",708,"South Thompson","marine_rearing","SST",0.461538461538462,0.405128205128205,0.556410256410256
+"CO",708,"South Thompson","spawning","stream_flow",0.0064814814814815,0,0.0333333333333333
+"CO",708,"South Thompson","spawning","stream_temp",0,0,0.00462962962962963
+"CO",709,"North Thompson","adult_migration","stream_flow",0.00200617283950617,0,0.017283950617284
+"CO",709,"North Thompson","adult_migration","stream_temp",0.11141975308642,0.079320987654321,0.187654320987654
+"CO",709,"North Thompson","early_marine","SSS",0.170833333333333,0.0666666666666667,0.311111111111111
+"CO",709,"North Thompson","early_marine","SST",0.597222222222222,0.511111111111111,0.819444444444444
+"CO",709,"North Thompson","eggs_alevin","stream_flow",0.259808259587021,0.154793510324484,0.333480825958702
+"CO",709,"North Thompson","eggs_alevin","stream_temp",0.0474926253687315,0.037905604719764,0.0555309734513274
+"CO",709,"North Thompson","fw_rearing","stream_flow",0.155172413793103,0.107969348659004,0.202758620689655
+"CO",709,"North Thompson","fw_rearing","stream_temp",0.192911877394636,0.151800766283525,0.221226053639847
+"CO",709,"North Thompson","marine_rearing","SSS",0.103846153846154,0.0461538461538462,0.207692307692308
+"CO",709,"North Thompson","marine_rearing","SST",0.461538461538462,0.405128205128205,0.556410256410256
+"CO",709,"North Thompson","spawning","stream_flow",0.0369791666666667,0.009375,0.106770833333333
+"CO",709,"North Thompson","spawning","stream_temp",0,0,0
+"PKO",710,"Fraser River (odd)","adult_migration","stream_flow",0,0,0
+"PKO",710,"Fraser River (odd)","adult_migration","stream_temp",0.462719298245614,0.37719298245614,0.626315789473684
+"PKO",710,"Fraser River (odd)","early_marine","SSS",0.136111111111111,0.0611111111111111,0.308333333333333
+"PKO",710,"Fraser River (odd)","early_marine","SST",0.630555555555556,0.3,0.977777777777778
+"PKO",710,"Fraser River (odd)","eggs_alevin","stream_flow",0.0261695906432748,0.0149122807017544,0.0359649122807018
+"PKO",710,"Fraser River (odd)","eggs_alevin","stream_temp",0.0501461988304094,0.035672514619883,0.0605263157894737
+"PKO",710,"Fraser River (odd)","fw_rearing","stream_flow",0,0,0
+"PKO",710,"Fraser River (odd)","fw_rearing","stream_temp",0,0,0
+"PKO",710,"Fraser River (odd)","marine_rearing","SSS",0.103571428571429,0.0476190476190476,0.20952380952381
+"PKO",710,"Fraser River (odd)","marine_rearing","SST",0.602380952380952,0.564285714285714,0.789285714285714
+"PKO",710,"Fraser River (odd)","spawning","stream_flow",0,0,0.015625
+"PKO",710,"Fraser River (odd)","spawning","stream_temp",0.195833333333333,0.167708333333333,0.327083333333333
+"SEL",711,"Chilliwack-Early Summer (cyclic)","adult_migration","stream_flow",0,0,0
+"SEL",711,"Chilliwack-Early Summer (cyclic)","adult_migration","stream_temp",0.0344444444444444,0.02,0.0525925925925926
+"SEL",711,"Chilliwack-Early Summer (cyclic)","early_marine","SSS",0.136111111111111,0.0611111111111111,0.308333333333333
+"SEL",711,"Chilliwack-Early Summer (cyclic)","early_marine","SST",0.972222222222222,0.469444444444444,1
+"SEL",711,"Chilliwack-Early Summer (cyclic)","eggs_alevin","stream_flow",0.0330469644902635,0.0124856815578465,0.0604810996563574
+"SEL",711,"Chilliwack-Early Summer (cyclic)","eggs_alevin","stream_temp",0.21815578465063,0.198739977090493,0.23631156930126
+"SEL",711,"Chilliwack-Early Summer (cyclic)","fw_rearing","stream_flow",0.0251087902523933,0.00948651000870322,0.0459530026109661
+"SEL",711,"Chilliwack-Early Summer (cyclic)","fw_rearing","stream_temp",0.263751087902523,0.243603133159269,0.290513489991297
+"SEL",711,"Chilliwack-Early Summer (cyclic)","marine_rearing","SSS",0.0973333333333331,0.04,0.193333333333333
+"SEL",711,"Chilliwack-Early Summer (cyclic)","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",711,"Chilliwack-Early Summer (cyclic)","spawning","stream_flow",0,0,0
+"SEL",711,"Chilliwack-Early Summer (cyclic)","spawning","stream_temp",0.998387096774193,0.988172043010753,1
+"SEL",712,"Cultus-Late","adult_migration","stream_flow",0,0,0
+"SEL",712,"Cultus-Late","adult_migration","stream_temp",0.0606060606060606,0.0595959595959596,0.0606060606060606
+"SEL",712,"Cultus-Late","early_marine","SSS",0.136111111111111,0.0611111111111111,0.308333333333333
+"SEL",712,"Cultus-Late","early_marine","SST",0.972222222222222,0.469444444444444,1
+"SEL",712,"Cultus-Late","eggs_alevin","stream_flow",0.00433006535947713,0.00253267973856209,0.00784313725490196
+"SEL",712,"Cultus-Late","eggs_alevin","stream_temp",0.0992238562091503,0.0754901960784314,0.123039215686275
+"SEL",712,"Cultus-Late","fw_rearing","stream_flow",0.168076923076923,0.161794871794872,0.187094017094017
+"SEL",712,"Cultus-Late","fw_rearing","stream_temp",0.31542735042735,0.292393162393162,0.336581196581197
+"SEL",712,"Cultus-Late","marine_rearing","SSS",0.100641025641026,0.0435897435897436,0.201282051282051
+"SEL",712,"Cultus-Late","marine_rearing","SST",0.754807692307692,0.669230769230769,0.97948717948718
+"SEL",712,"Cultus-Late","spawning","stream_flow",0.0185483870967742,0.0021505376344086,0.0344086021505376
+"SEL",712,"Cultus-Late","spawning","stream_temp",0.00161290322580645,0,0.0102150537634409
+"SEL",713,"Harrison-Downstream Migrating-Late","adult_migration","stream_flow",0,0,0
+"SEL",713,"Harrison-Downstream Migrating-Late","adult_migration","stream_temp",0.193548387096774,0.19247311827957,0.193548387096774
+"SEL",713,"Harrison-Downstream Migrating-Late","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",713,"Harrison-Downstream Migrating-Late","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",713,"Harrison-Downstream Migrating-Late","eggs_alevin","stream_flow",0.00604938271604939,0,0.00839506172839506
+"SEL",713,"Harrison-Downstream Migrating-Late","eggs_alevin","stream_temp",0.261234567901234,0.231481481481481,0.278765432098765
+"SEL",713,"Harrison-Downstream Migrating-Late","fw_rearing","stream_flow",0.00415606446140797,0,0.00576759966072943
+"SEL",713,"Harrison-Downstream Migrating-Late","fw_rearing","stream_temp",0.35381679389313,0.338337574215437,0.376759966072943
+"SEL",713,"Harrison-Downstream Migrating-Late","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",713,"Harrison-Downstream Migrating-Late","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",713,"Harrison-Downstream Migrating-Late","spawning","stream_flow",0,0,0.0135135135135135
+"SEL",713,"Harrison-Downstream Migrating-Late","spawning","stream_temp",0.959009009009009,0.945045045045045,0.988288288288288
+"SEL",714,"Harrison-Upstream Migrating-Late","adult_migration","stream_flow",0,0,0
+"SEL",714,"Harrison-Upstream Migrating-Late","adult_migration","stream_temp",0.117647058823529,0.116339869281046,0.117647058823529
+"SEL",714,"Harrison-Upstream Migrating-Late","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",714,"Harrison-Upstream Migrating-Late","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",714,"Harrison-Upstream Migrating-Late","eggs_alevin","stream_flow",0.078968253968254,0.062037037037037,0.0837301587301587
+"SEL",714,"Harrison-Upstream Migrating-Late","eggs_alevin","stream_temp",0.203373015873016,0.168783068783069,0.243518518518519
+"SEL",714,"Harrison-Upstream Migrating-Late","fw_rearing","stream_flow",0.00412457912457912,0,0.00572390572390572
+"SEL",714,"Harrison-Upstream Migrating-Late","fw_rearing","stream_temp",0.353787878787879,0.338468013468013,0.377104377104377
+"SEL",714,"Harrison-Upstream Migrating-Late","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",714,"Harrison-Upstream Migrating-Late","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",714,"Harrison-Upstream Migrating-Late","spawning","stream_flow",0.320430107526882,0.252150537634409,0.340322580645161
+"SEL",714,"Harrison-Upstream Migrating-Late","spawning","stream_temp",0.381720430107527,0.336021505376344,0.45752688172043
+"SEL",715,"Pitt-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",715,"Pitt-Early Summer","adult_migration","stream_temp",0.0200757575757576,0.0128787878787879,0.0212121212121212
+"SEL",715,"Pitt-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",715,"Pitt-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",715,"Pitt-Early Summer","eggs_alevin","stream_flow",0.0166071428571428,0.00589285714285714,0.0275595238095238
+"SEL",715,"Pitt-Early Summer","eggs_alevin","stream_temp",0.223125,0.205714285714286,0.251488095238095
+"SEL",715,"Pitt-Early Summer","fw_rearing","stream_flow",0.00555555555555556,0.00279898218829517,0.0188295165394402
+"SEL",715,"Pitt-Early Summer","fw_rearing","stream_temp",0.325445292620865,0.29236641221374,0.34334181509754
+"SEL",715,"Pitt-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",715,"Pitt-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",715,"Pitt-Early Summer","spawning","stream_flow",0.0157407407407407,0,0.0694444444444444
+"SEL",715,"Pitt-Early Summer","spawning","stream_temp",0.993518518518518,0.975,0.995833333333333
+"SEL",716,"Lillooet-Harrison-Late","adult_migration","stream_flow",0,0,0
+"SEL",716,"Lillooet-Harrison-Late","adult_migration","stream_temp",0.317073170731707,0.310975609756098,0.317073170731707
+"SEL",716,"Lillooet-Harrison-Late","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",716,"Lillooet-Harrison-Late","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",716,"Lillooet-Harrison-Late","eggs_alevin","stream_flow",0.0426923076923077,0.0158974358974359,0.0737179487179487
+"SEL",716,"Lillooet-Harrison-Late","eggs_alevin","stream_temp",0.0548717948717948,0.0421794871794872,0.0737179487179487
+"SEL",716,"Lillooet-Harrison-Late","fw_rearing","stream_flow",0.0225589225589225,0.0104377104377104,0.0484006734006734
+"SEL",716,"Lillooet-Harrison-Late","fw_rearing","stream_temp",0.181944444444444,0.0927609427609428,0.209427609427609
+"SEL",716,"Lillooet-Harrison-Late","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",716,"Lillooet-Harrison-Late","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",716,"Lillooet-Harrison-Late","spawning","stream_flow",0.00043859649122807,0,0.00350877192982456
+"SEL",716,"Lillooet-Harrison-Late","spawning","stream_temp",0.318421052631578,0.282456140350877,0.47719298245614
+"SEL",718,"Nahatlatch-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",718,"Nahatlatch-Early Summer","adult_migration","stream_temp",0.125225225225225,0.103603603603604,0.130630630630631
+"SEL",718,"Nahatlatch-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",718,"Nahatlatch-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",718,"Nahatlatch-Early Summer","eggs_alevin","stream_flow",0.0754355400696864,0.0685830429732869,0.133101045296167
+"SEL",718,"Nahatlatch-Early Summer","eggs_alevin","stream_temp",0.181794425087108,0.17253193960511,0.19274099883856
+"SEL",718,"Nahatlatch-Early Summer","fw_rearing","stream_flow",0.0543927648578812,0.0493540051679587,0.0988802756244617
+"SEL",718,"Nahatlatch-Early Summer","fw_rearing","stream_temp",0.236089577950043,0.217312661498708,0.268475452196382
+"SEL",718,"Nahatlatch-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",718,"Nahatlatch-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",718,"Nahatlatch-Early Summer","spawning","stream_flow",0.206944444444444,0.125,0.328968253968254
+"SEL",718,"Nahatlatch-Early Summer","spawning","stream_temp",0.986111111111111,0.969047619047619,0.987698412698413
+"SEL",719,"Anderson-Seton-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",719,"Anderson-Seton-Early Summer","adult_migration","stream_temp",0.0837037037037038,0.0437037037037037,0.10962962962963
+"SEL",719,"Anderson-Seton-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",719,"Anderson-Seton-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",719,"Anderson-Seton-Early Summer","eggs_alevin","stream_flow",0.00443645083932854,0,0.0179856115107914
+"SEL",719,"Anderson-Seton-Early Summer","eggs_alevin","stream_temp",0.245563549160672,0.223860911270983,0.275539568345324
+"SEL",719,"Anderson-Seton-Early Summer","fw_rearing","stream_flow",0.0045639771801141,0,0.0133659331703341
+"SEL",719,"Anderson-Seton-Early Summer","fw_rearing","stream_temp",0.386104319478403,0.365851670741646,0.407171964140179
+"SEL",719,"Anderson-Seton-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",719,"Anderson-Seton-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",719,"Anderson-Seton-Early Summer","spawning","stream_flow",0,0,0
+"SEL",719,"Anderson-Seton-Early Summer","spawning","stream_temp",0.992460317460317,0.984126984126984,0.996825396825397
+"SEL",720,"Chilko-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",720,"Chilko-Early Summer","adult_migration","stream_temp",0.235294117647058,0.172549019607843,0.259477124183007
+"SEL",720,"Chilko-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",720,"Chilko-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",720,"Chilko-Early Summer","eggs_alevin","stream_flow",0.513179669030733,0.458510638297872,0.537943262411347
+"SEL",720,"Chilko-Early Summer","eggs_alevin","stream_temp",0.0690898345153664,0.0463356973995272,0.0803782505910166
+"SEL",720,"Chilko-Early Summer","fw_rearing","stream_flow",0.283950617283951,0.264109347442681,0.31005291005291
+"SEL",720,"Chilko-Early Summer","fw_rearing","stream_temp",0.27689594356261,0.213756613756614,0.296031746031746
+"SEL",720,"Chilko-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",720,"Chilko-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",720,"Chilko-Early Summer","spawning","stream_flow",0.00537634408602151,0,0.0118279569892473
+"SEL",720,"Chilko-Early Summer","spawning","stream_temp",0.511290322580645,0.398924731182796,0.676344086021505
+"SEL",721,"Chilko-Summer","adult_migration","stream_flow",0,0,0
+"SEL",721,"Chilko-Summer","adult_migration","stream_temp",0.360869565217392,0.327536231884058,0.368115942028986
+"SEL",721,"Chilko-Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",721,"Chilko-Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",721,"Chilko-Summer","eggs_alevin","stream_flow",0.372386223862239,0.335055350553506,0.409717097170972
+"SEL",721,"Chilko-Summer","eggs_alevin","stream_temp",0.146617466174661,0.121771217712177,0.171955719557196
+"SEL",721,"Chilko-Summer","fw_rearing","stream_flow",0.286876640419948,0.268503937007874,0.312860892388451
+"SEL",721,"Chilko-Summer","fw_rearing","stream_temp",0.27567804024497,0.21259842519685,0.294225721784777
+"SEL",721,"Chilko-Summer","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",721,"Chilko-Summer","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",721,"Chilko-Summer","spawning","stream_flow",0,0,0
+"SEL",721,"Chilko-Summer","spawning","stream_temp",0.544623655913979,0.420430107526882,0.644086021505376
+"SEL",725,"Francois-Fraser-Summer","adult_migration","stream_flow",0,0,0
+"SEL",725,"Francois-Fraser-Summer","adult_migration","stream_temp",0.449666666666666,0.402,0.458666666666667
+"SEL",725,"Francois-Fraser-Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",725,"Francois-Fraser-Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",725,"Francois-Fraser-Summer","eggs_alevin","stream_flow",0.0103281853281853,0,0.0541827541827542
+"SEL",725,"Francois-Fraser-Summer","eggs_alevin","stream_temp",0.110778635778636,0.0924710424710425,0.136872586872587
+"SEL",725,"Francois-Fraser-Summer","fw_rearing","stream_flow",0.0160668380462725,0,0.0508140531276778
+"SEL",725,"Francois-Fraser-Summer","fw_rearing","stream_temp",0.299100257069409,0.267352185089974,0.305312767780634
+"SEL",725,"Francois-Fraser-Summer","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",725,"Francois-Fraser-Summer","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",725,"Francois-Fraser-Summer","spawning","stream_flow",0.0568181818181818,0,0.137878787878788
+"SEL",725,"Francois-Fraser-Summer","spawning","stream_temp",0.809848484848485,0.759090909090909,0.896969696969697
+"SEL",727,"Nadina-Francois-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",727,"Nadina-Francois-Early Summer","adult_migration","stream_temp",0.334876543209876,0.297530864197531,0.341358024691358
+"SEL",727,"Nadina-Francois-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",727,"Nadina-Francois-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",727,"Nadina-Francois-Early Summer","eggs_alevin","stream_flow",0,0,0
+"SEL",727,"Nadina-Francois-Early Summer","eggs_alevin","stream_temp",0.113395061728395,0.0964197530864198,0.135
+"SEL",727,"Nadina-Francois-Early Summer","fw_rearing","stream_flow",0.0157828282828283,0,0.0499158249158249
+"SEL",727,"Nadina-Francois-Early Summer","fw_rearing","stream_temp",0.297306397306398,0.264478114478114,0.304292929292929
+"SEL",727,"Nadina-Francois-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",727,"Nadina-Francois-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",727,"Nadina-Francois-Early Summer","spawning","stream_flow",0,0,0
+"SEL",727,"Nadina-Francois-Early Summer","spawning","stream_temp",0.76263440860215,0.693010752688172,0.854838709677419
+"SEL",728,"Quesnel-Summer (cyclic)","adult_migration","stream_flow",0,0,0
+"SEL",728,"Quesnel-Summer (cyclic)","adult_migration","stream_temp",0.48018018018018,0.443243243243243,0.486486486486487
+"SEL",728,"Quesnel-Summer (cyclic)","early_marine","SSS",0.136111111111111,0.0611111111111111,0.308333333333333
+"SEL",728,"Quesnel-Summer (cyclic)","early_marine","SST",0.972222222222222,0.469444444444444,1
+"SEL",728,"Quesnel-Summer (cyclic)","eggs_alevin","stream_flow",0,0,0
+"SEL",728,"Quesnel-Summer (cyclic)","eggs_alevin","stream_temp",0.183634175691938,0.164981949458484,0.201925391095066
+"SEL",728,"Quesnel-Summer (cyclic)","fw_rearing","stream_flow",0,0,0
+"SEL",728,"Quesnel-Summer (cyclic)","fw_rearing","stream_temp",0.304421768707483,0.277125850340136,0.312414965986395
+"SEL",728,"Quesnel-Summer (cyclic)","marine_rearing","SSS",0.100641025641026,0.0435897435897436,0.201282051282051
+"SEL",728,"Quesnel-Summer (cyclic)","marine_rearing","SST",0.754807692307692,0.669230769230769,0.97948717948718
+"SEL",728,"Quesnel-Summer (cyclic)","spawning","stream_flow",0,0,0
+"SEL",728,"Quesnel-Summer (cyclic)","spawning","stream_temp",0.866025641025641,0.783333333333333,0.930769230769231
+"SEL",729,"Seton-Late (de novo)","adult_migration","stream_flow",0,0,0
+"SEL",729,"Seton-Late (de novo)","adult_migration","stream_temp",0.236111111111111,0.231018518518519,0.236111111111111
+"SEL",729,"Seton-Late (de novo)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",729,"Seton-Late (de novo)","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",729,"Seton-Late (de novo)","eggs_alevin","stream_flow",0.0376382306477093,0.0148499210110585,0.0774881516587678
+"SEL",729,"Seton-Late (de novo)","eggs_alevin","stream_temp",0.0578593996840442,0.0462085308056872,0.0846761453396525
+"SEL",729,"Seton-Late (de novo)","fw_rearing","stream_flow",0.0204414191419142,0.00808580858085809,0.041006600660066
+"SEL",729,"Seton-Late (de novo)","fw_rearing","stream_temp",0.372256600660066,0.353011551155116,0.391254125412541
+"SEL",729,"Seton-Late (de novo)","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",729,"Seton-Late (de novo)","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",729,"Seton-Late (de novo)","spawning","stream_flow",0.00224358974358975,0,0.0301282051282051
+"SEL",729,"Seton-Late (de novo)","spawning","stream_temp",0.0112179487179487,0.00448717948717949,0.0326923076923077
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","adult_migration","stream_flow",0,0,0
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","adult_migration","stream_temp",0.525347222222223,0.455555555555556,0.539583333333333
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","eggs_alevin","stream_flow",0,0,0.00203562340966921
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","eggs_alevin","stream_temp",0.0876590330788804,0.0648854961832061,0.110559796437659
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","fw_rearing","stream_flow",0,0,0
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","fw_rearing","stream_temp",0.268395833333334,0.231958333333333,0.287125
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","spawning","stream_flow",0,0,0
+"SEL",731,"Takla-Trembleur-Stuart-Summer (cyclic)","spawning","stream_temp",0.623148148148148,0.503703703703704,0.698148148148148
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","adult_migration","stream_flow",0,0,0
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","adult_migration","stream_temp",0.516666666666666,0.316161616161616,0.603030303030303
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","eggs_alevin","stream_flow",0.00114754098360655,0,0.0103825136612022
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","eggs_alevin","stream_temp",0.205464480874317,0.192568306010929,0.231366120218579
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","fw_rearing","stream_flow",0.001575456053068,0,0.0101160862354892
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","fw_rearing","stream_temp",0.259618573797678,0.221890547263682,0.278358208955224
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","marine_rearing","SSS",0.0938405797101448,0.0405797101449275,0.185507246376812
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","marine_rearing","SST",0.722826086956522,0.626086956521739,0.976811594202899
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","spawning","stream_flow",0,0,0
+"SEL",732,"Takla-Trembleur-Early Stuart (cyclic)","spawning","stream_temp",1,0.978787878787879,1
+"SEL",734,"Taseko-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",734,"Taseko-Early Summer","adult_migration","stream_temp",0.430357142857143,0.31547619047619,0.472619047619048
+"SEL",734,"Taseko-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",734,"Taseko-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",734,"Taseko-Early Summer","eggs_alevin","stream_flow",0.522353603603604,0.494369369369369,0.566891891891892
+"SEL",734,"Taseko-Early Summer","eggs_alevin","stream_temp",0.0957207207207208,0.0611486486486486,0.136261261261261
+"SEL",734,"Taseko-Early Summer","fw_rearing","stream_flow",0.489814814814814,0.464393939393939,0.506986531986532
+"SEL",734,"Taseko-Early Summer","fw_rearing","stream_temp",0.0602483164983165,0.0482744107744108,0.121338383838384
+"SEL",734,"Taseko-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",734,"Taseko-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",734,"Taseko-Early Summer","spawning","stream_flow",0,0,0
+"SEL",734,"Taseko-Early Summer","spawning","stream_temp",0.50375,0.19,0.700833333333333
+"SEL",735,"Bowron-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",735,"Bowron-Early Summer","adult_migration","stream_temp",0.525925925925926,0.424074074074074,0.561111111111111
+"SEL",735,"Bowron-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",735,"Bowron-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",735,"Bowron-Early Summer","eggs_alevin","stream_flow",0.233333333333333,0.185763888888889,0.338888888888889
+"SEL",735,"Bowron-Early Summer","eggs_alevin","stream_temp",0.160185185185185,0.149305555555556,0.180671296296296
+"SEL",735,"Bowron-Early Summer","fw_rearing","stream_flow",0.19854797979798,0.149915824915825,0.283122895622896
+"SEL",735,"Bowron-Early Summer","fw_rearing","stream_temp",0.244633838383839,0.216456228956229,0.265488215488215
+"SEL",735,"Bowron-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",735,"Bowron-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",735,"Bowron-Early Summer","spawning","stream_flow",0.7984375,0.425,0.848958333333333
+"SEL",735,"Bowron-Early Summer","spawning","stream_temp",0.944791666666667,0.891666666666667,0.978125
+"SEL",738,"Shuswap-Early Summer (cyclic)","adult_migration","stream_flow",0,0,0
+"SEL",738,"Shuswap-Early Summer (cyclic)","adult_migration","stream_temp",0.224431818181819,0.215151515151515,0.227272727272727
+"SEL",738,"Shuswap-Early Summer (cyclic)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",738,"Shuswap-Early Summer (cyclic)","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",738,"Shuswap-Early Summer (cyclic)","eggs_alevin","stream_flow",0.00236318407960199,0,0.0144278606965174
+"SEL",738,"Shuswap-Early Summer (cyclic)","eggs_alevin","stream_temp",0.255348258706468,0.23955223880597,0.27363184079602
+"SEL",738,"Shuswap-Early Summer (cyclic)","fw_rearing","stream_flow",0.0014866979655712,0,0.00907668231611894
+"SEL",738,"Shuswap-Early Summer (cyclic)","fw_rearing","stream_temp",0.384135367762129,0.376134585289515,0.410406885758998
+"SEL",738,"Shuswap-Early Summer (cyclic)","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",738,"Shuswap-Early Summer (cyclic)","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",738,"Shuswap-Early Summer (cyclic)","spawning","stream_flow",0,0,0
+"SEL",738,"Shuswap-Early Summer (cyclic)","spawning","stream_temp",0.986324786324786,0.960683760683761,0.994017094017094
+"SEL",739,"Shuswap-Late (cyclic)","adult_migration","stream_flow",0,0,0
+"SEL",739,"Shuswap-Late (cyclic)","adult_migration","stream_temp",0.423022598870056,0.419774011299435,0.423728813559322
+"SEL",739,"Shuswap-Late (cyclic)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",739,"Shuswap-Late (cyclic)","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",739,"Shuswap-Late (cyclic)","eggs_alevin","stream_flow",0.0027536231884058,0,0.0168115942028986
+"SEL",739,"Shuswap-Late (cyclic)","eggs_alevin","stream_temp",0.133985507246377,0.118405797101449,0.157536231884058
+"SEL",739,"Shuswap-Late (cyclic)","fw_rearing","stream_flow",0.0015115354017502,0,0.00922832140015911
+"SEL",739,"Shuswap-Late (cyclic)","fw_rearing","stream_temp",0.375238663484487,0.367342879872713,0.401352426412092
+"SEL",739,"Shuswap-Late (cyclic)","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SEL",739,"Shuswap-Late (cyclic)","marine_rearing","SST",0.745,0.656,0.978666666666667
+"SEL",739,"Shuswap-Late (cyclic)","spawning","stream_flow",0,0,0
+"SEL",739,"Shuswap-Late (cyclic)","spawning","stream_temp",0.206190476190476,0.157142857142857,0.325714285714286
+"SEL",740,"Kamloops-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",740,"Kamloops-Early Summer","adult_migration","stream_temp",0.28,0.273333333333333,0.28
+"SEL",740,"Kamloops-Early Summer","early_marine","SSS",0.136111111111111,0.0611111111111111,0.308333333333333
+"SEL",740,"Kamloops-Early Summer","early_marine","SST",0.972222222222222,0.469444444444444,1
+"SEL",740,"Kamloops-Early Summer","eggs_alevin","stream_flow",0.130348258706467,0.0783582089552239,0.220273631840796
+"SEL",740,"Kamloops-Early Summer","eggs_alevin","stream_temp",0.13047263681592,0.124378109452736,0.143407960199005
+"SEL",740,"Kamloops-Early Summer","fw_rearing","stream_flow",0.0227820844099914,0.0119724375538329,0.0642549526270457
+"SEL",740,"Kamloops-Early Summer","fw_rearing","stream_temp",0.31365202411714,0.293626184323859,0.315934539190353
+"SEL",740,"Kamloops-Early Summer","marine_rearing","SSS",0.100641025641026,0.0435897435897436,0.201282051282051
+"SEL",740,"Kamloops-Early Summer","marine_rearing","SST",0.754807692307692,0.669230769230769,0.97948717948718
+"SEL",740,"Kamloops-Early Summer","spawning","stream_flow",0,0,0
+"SEL",740,"Kamloops-Early Summer","spawning","stream_temp",0.967901234567901,0.92962962962963,0.979012345679012
+"SER",742,"Widgeon (river-type)","adult_migration","stream_flow",0,0,0
+"SER",742,"Widgeon (river-type)","adult_migration","stream_temp",0.772708333333334,0.692916666666667,0.82125
+"SER",742,"Widgeon (river-type)","early_marine","SSS",0.181944444444444,0.0666666666666667,0.35
+"SER",742,"Widgeon (river-type)","early_marine","SST",0.994444444444444,0.919444444444445,1
+"SER",742,"Widgeon (river-type)","eggs_alevin","stream_flow",0.00592948717948718,0.00120192307692308,0.0116185897435897
+"SER",742,"Widgeon (river-type)","eggs_alevin","stream_temp",0.044551282051282,0.0260416666666667,0.066426282051282
+"SER",742,"Widgeon (river-type)","fw_rearing","stream_flow",0,0,0
+"SER",742,"Widgeon (river-type)","fw_rearing","stream_temp",0.512421383647799,0.422012578616352,0.568867924528302
+"SER",742,"Widgeon (river-type)","marine_rearing","SSS",0.0928571428571429,0.0366666666666667,0.182857142857143
+"SER",742,"Widgeon (river-type)","marine_rearing","SST",0.728095238095238,0.630952380952381,0.974285714285714
+"SER",742,"Widgeon (river-type)","spawning","stream_flow",0.0241830065359477,0.00490196078431373,0.0473856209150327
+"SER",742,"Widgeon (river-type)","spawning","stream_temp",0.0568627450980392,0.0258169934640523,0.121895424836601
+"SER",745,"Harrison River (river-type)","adult_migration","stream_flow",0,0,0
+"SER",745,"Harrison River (river-type)","adult_migration","stream_temp",0.689700374531835,0.61310861423221,0.728838951310861
+"SER",745,"Harrison River (river-type)","early_marine","SSS",0.181944444444444,0.0666666666666667,0.35
+"SER",745,"Harrison River (river-type)","early_marine","SST",0.994444444444444,0.919444444444445,1
+"SER",745,"Harrison River (river-type)","eggs_alevin","stream_flow",0.00452261306532663,0,0.0102177554438861
+"SER",745,"Harrison River (river-type)","eggs_alevin","stream_temp",0.0622278056951424,0.0350083752093802,0.0790619765494137
+"SER",745,"Harrison River (river-type)","fw_rearing","stream_flow",0,0,0.000943396226415094
+"SER",745,"Harrison River (river-type)","fw_rearing","stream_temp",0.739229559748428,0.706132075471698,0.782547169811321
+"SER",745,"Harrison River (river-type)","marine_rearing","SSS",0.0928571428571429,0.0366666666666667,0.182857142857143
+"SER",745,"Harrison River (river-type)","marine_rearing","SST",0.728095238095238,0.630952380952381,0.974285714285714
+"SER",745,"Harrison River (river-type)","spawning","stream_flow",0.0105442176870748,0,0.0387755102040816
+"SER",745,"Harrison River (river-type)","spawning","stream_temp",0.0149659863945578,0.00136054421768707,0.0448979591836735
+"CO",749,"Interior Fraser","adult_migration","stream_flow",0,0,0
+"CO",749,"Interior Fraser","adult_migration","stream_temp",0.0585,0.0393333333333333,0.127333333333333
+"CO",749,"Interior Fraser","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CO",749,"Interior Fraser","early_marine","SST",0.430555555555556,0.344444444444444,0.736111111111111
+"CO",749,"Interior Fraser","eggs_alevin","stream_flow",0.0427442528735632,0.0348419540229885,0.129238505747126
+"CO",749,"Interior Fraser","eggs_alevin","stream_temp",0.0768678160919541,0.0625,0.0818965517241379
+"CO",749,"Interior Fraser","fw_rearing","stream_flow",0.0147022332506203,0.00293631100082713,0.0483043837882548
+"CO",749,"Interior Fraser","fw_rearing","stream_temp",0.226323407775021,0.186145574855252,0.254342431761787
+"CO",749,"Interior Fraser","marine_rearing","SSS",0.113095238095238,0.0523809523809524,0.223809523809524
+"CO",749,"Interior Fraser","marine_rearing","SST",0.5,0.447619047619048,0.588095238095238
+"CO",749,"Interior Fraser","spawning","stream_flow",0.0116319444444444,0.00208333333333333,0.0659722222222222
+"CO",749,"Interior Fraser","spawning","stream_temp",0,0,0.00347222222222222
+"CO",750,"Lower Fraser","adult_migration","stream_flow",0.223809523809524,0.166666666666667,0.271428571428571
+"CO",750,"Lower Fraser","adult_migration","stream_temp",0.154761904761904,0.114285714285714,0.252380952380952
+"CO",750,"Lower Fraser","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CO",750,"Lower Fraser","early_marine","SST",0.430555555555556,0.344444444444444,0.736111111111111
+"CO",750,"Lower Fraser","eggs_alevin","stream_flow",0.00420711974110032,0.00194174757281553,0.00760517799352751
+"CO",750,"Lower Fraser","eggs_alevin","stream_temp",0.0550970873786407,0.0266990291262136,0.0877022653721683
+"CO",750,"Lower Fraser","fw_rearing","stream_flow",0.0621693121693122,0.0406651549508692,0.0733938019652305
+"CO",750,"Lower Fraser","fw_rearing","stream_temp",0.262925170068027,0.224489795918367,0.275585789871504
+"CO",750,"Lower Fraser","marine_rearing","SSS",0.113095238095238,0.0523809523809524,0.223809523809524
+"CO",750,"Lower Fraser","marine_rearing","SST",0.5,0.447619047619048,0.588095238095238
+"CO",750,"Lower Fraser","spawning","stream_flow",0.00767195767195768,0.00211640211640212,0.0243386243386243
+"CO",750,"Lower Fraser","spawning","stream_temp",0.0037037037037037,0,0.00687830687830688
+"SEL",751,"Adams & Momich Lakes-Early Summer","adult_migration","stream_flow",0,0,0
+"SEL",751,"Adams & Momich Lakes-Early Summer","adult_migration","stream_temp",0.204964539007092,0.190780141843972,0.212765957446809
+"SEL",751,"Adams & Momich Lakes-Early Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",751,"Adams & Momich Lakes-Early Summer","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",751,"Adams & Momich Lakes-Early Summer","eggs_alevin","stream_flow",0.0748427672955975,0.0420125786163522,0.14440251572327
+"SEL",751,"Adams & Momich Lakes-Early Summer","eggs_alevin","stream_temp",0.177610062893082,0.152452830188679,0.196477987421384
+"SEL",751,"Adams & Momich Lakes-Early Summer","fw_rearing","stream_flow",0.0460761460761461,0.0276612276612277,0.0944832944832945
+"SEL",751,"Adams & Momich Lakes-Early Summer","fw_rearing","stream_temp",0.383682983682983,0.378088578088578,0.414296814296814
+"SEL",751,"Adams & Momich Lakes-Early Summer","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",751,"Adams & Momich Lakes-Early Summer","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",751,"Adams & Momich Lakes-Early Summer","spawning","stream_flow",0.00625,0,0.0291666666666667
+"SEL",751,"Adams & Momich Lakes-Early Summer","spawning","stream_temp",0.984722222222222,0.968055555555556,0.995833333333333
+"SEL",752,"North Barriere-Early Summer (de novo)","adult_migration","stream_flow",0,0,0
+"SEL",752,"North Barriere-Early Summer (de novo)","adult_migration","stream_temp",0.416666666666667,0.404166666666667,0.416666666666667
+"SEL",752,"North Barriere-Early Summer (de novo)","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SEL",752,"North Barriere-Early Summer (de novo)","early_marine","SST",0.972222222222222,0.605555555555556,1
+"SEL",752,"North Barriere-Early Summer (de novo)","eggs_alevin","stream_flow",0.143996415770609,0.108183990442055,0.241517323775388
+"SEL",752,"North Barriere-Early Summer (de novo)","eggs_alevin","stream_temp",0.192921146953405,0.184169653524492,0.209498207885305
+"SEL",752,"North Barriere-Early Summer (de novo)","fw_rearing","stream_flow",0.110889443059019,0.0835411471321696,0.187281795511222
+"SEL",752,"North Barriere-Early Summer (de novo)","fw_rearing","stream_temp",0.285827098919369,0.259684123025769,0.292186201163757
+"SEL",752,"North Barriere-Early Summer (de novo)","marine_rearing","SSS",0.0951388888888887,0.0402777777777778,0.190277777777778
+"SEL",752,"North Barriere-Early Summer (de novo)","marine_rearing","SST",0.734375,0.641666666666667,0.977777777777778
+"SEL",752,"North Barriere-Early Summer (de novo)","spawning","stream_flow",0.445689655172414,0.26264367816092,0.645977011494253
+"SEL",752,"North Barriere-Early Summer (de novo)","spawning","stream_temp",0.997126436781609,0.993103448275862,1
+"SH",780,"Mid Fraser Summer","adult_migration","stream_flow",0.00309734513274337,0,0.0256637168141593
+"SH",780,"Mid Fraser Summer","adult_migration","stream_temp",0.00250737463126843,0.000147492625368732,0.0100294985250737
+"SH",780,"Mid Fraser Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SH",780,"Mid Fraser Summer","early_marine","SST",0.572222222222222,0.422222222222222,0.925
+"SH",780,"Mid Fraser Summer","eggs_alevin","stream_flow",0.000114942528735632,0,0.00137931034482759
+"SH",780,"Mid Fraser Summer","eggs_alevin","stream_temp",0.825977011494253,0.764367816091954,0.837011494252874
+"SH",780,"Mid Fraser Summer","fw_rearing","stream_flow",0.0419199228171732,0.0107091172214182,0.0753014954172697
+"SH",780,"Mid Fraser Summer","fw_rearing","stream_temp",0.0493005306319344,0.0224312590448625,0.0883260974433189
+"SH",780,"Mid Fraser Summer","marine_rearing","SSS",0.10679012345679,0.0469135802469136,0.211111111111111
+"SH",780,"Mid Fraser Summer","marine_rearing","SST",0.545061728395062,0.501234567901235,0.685185185185185
+"SH",780,"Mid Fraser Summer","spawning","stream_flow",0,0,0.00344827586206897
+"SH",780,"Mid Fraser Summer","spawning","stream_temp",0.0350574712643678,0.00689655172413793,0.0655172413793104
+"SH",781,"Thompson Summer","adult_migration","stream_flow",0,0,0.00446428571428571
+"SH",781,"Thompson Summer","adult_migration","stream_temp",0.0118303571428571,0.00803571428571428,0.0239583333333333
+"SH",781,"Thompson Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SH",781,"Thompson Summer","early_marine","SST",0.572222222222222,0.422222222222222,0.925
+"SH",781,"Thompson Summer","eggs_alevin","stream_flow",0,0,0
+"SH",781,"Thompson Summer","eggs_alevin","stream_temp",0.920918367346939,0.91734693877551,0.947278911564626
+"SH",781,"Thompson Summer","fw_rearing","stream_flow",0,0,0.00262008733624454
+"SH",781,"Thompson Summer","fw_rearing","stream_temp",0.194735565259583,0.174575448811257,0.226880155264435
+"SH",781,"Thompson Summer","marine_rearing","SSS",0.10679012345679,0.0469135802469136,0.211111111111111
+"SH",781,"Thompson Summer","marine_rearing","SST",0.545061728395062,0.501234567901235,0.685185185185185
+"SH",781,"Thompson Summer","spawning","stream_flow",0,0,0
+"SH",781,"Thompson Summer","spawning","stream_temp",0.216414141414142,0.168686868686869,0.306060606060606
+"SH",782,"Lower Fraser Winter","adult_migration","stream_flow",0.0111940298507463,0.0054726368159204,0.0480099502487562
+"SH",782,"Lower Fraser Winter","adult_migration","stream_temp",0,0,0
+"SH",782,"Lower Fraser Winter","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SH",782,"Lower Fraser Winter","early_marine","SST",0.572222222222222,0.422222222222222,0.925
+"SH",782,"Lower Fraser Winter","eggs_alevin","stream_flow",0.0405753968253968,0.0277777777777778,0.0507936507936508
+"SH",782,"Lower Fraser Winter","eggs_alevin","stream_temp",0.697619047619048,0.655555555555556,0.73531746031746
+"SH",782,"Lower Fraser Winter","fw_rearing","stream_flow",0.0858176555716353,0.0745779064158225,0.109310178485287
+"SH",782,"Lower Fraser Winter","fw_rearing","stream_temp",0.108345393150024,0.0836468885672938,0.154462132175591
+"SH",782,"Lower Fraser Winter","marine_rearing","SSS",0.0983333333333334,0.0433333333333333,0.198333333333333
+"SH",782,"Lower Fraser Winter","marine_rearing","SST",0.493333333333333,0.445833333333333,0.631666666666667
+"SH",782,"Lower Fraser Winter","spawning","stream_flow",0,0,0.0037037037037037
+"SH",782,"Lower Fraser Winter","spawning","stream_temp",0.0423280423280423,0.0232804232804233,0.064021164021164
+"SH",783,"Fraser Canyon Summer","adult_migration","stream_flow",0.0115781710914454,0.00368731563421829,0.0333333333333333
+"SH",783,"Fraser Canyon Summer","adult_migration","stream_temp",0.0111356932153392,0.00545722713864307,0.0252212389380531
+"SH",783,"Fraser Canyon Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SH",783,"Fraser Canyon Summer","early_marine","SST",0.572222222222222,0.422222222222222,0.925
+"SH",783,"Fraser Canyon Summer","eggs_alevin","stream_flow",0.0450574712643678,0.0310344827586207,0.0790804597701149
+"SH",783,"Fraser Canyon Summer","eggs_alevin","stream_temp",0.744022988505747,0.684137931034483,0.77632183908046
+"SH",783,"Fraser Canyon Summer","fw_rearing","stream_flow",0.113145200192957,0.0832609744331886,0.158176555716353
+"SH",783,"Fraser Canyon Summer","fw_rearing","stream_temp",0.0997105643994212,0.078388808490111,0.141437530149542
+"SH",783,"Fraser Canyon Summer","marine_rearing","SSS",0.10679012345679,0.0469135802469136,0.211111111111111
+"SH",783,"Fraser Canyon Summer","marine_rearing","SST",0.545061728395062,0.501234567901235,0.685185185185185
+"SH",783,"Fraser Canyon Summer","spawning","stream_flow",0,0,0
+"SH",783,"Fraser Canyon Summer","spawning","stream_temp",0.03125,0.0166666666666667,0.0633333333333333
+"SH",784,"Lower Fraser Summer","adult_migration","stream_flow",0.0444444444444445,0.0420498084291188,0.0599616858237548
+"SH",784,"Lower Fraser Summer","adult_migration","stream_temp",0.231465517241379,0.195977011494253,0.253448275862069
+"SH",784,"Lower Fraser Summer","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SH",784,"Lower Fraser Summer","early_marine","SST",0.572222222222222,0.422222222222222,0.925
+"SH",784,"Lower Fraser Summer","eggs_alevin","stream_flow",0.0431034482758621,0.0294252873563218,0.076551724137931
+"SH",784,"Lower Fraser Summer","eggs_alevin","stream_temp",0.847701149425288,0.817931034482759,0.869655172413793
+"SH",784,"Lower Fraser Summer","fw_rearing","stream_flow",0.057392667631452,0.0540762180414858,0.0855041003376749
+"SH",784,"Lower Fraser Summer","fw_rearing","stream_temp",0.147274481427882,0.12301013024602,0.18557645923782
+"SH",784,"Lower Fraser Summer","marine_rearing","SSS",0.0993333333333335,0.044,0.198666666666667
+"SH",784,"Lower Fraser Summer","marine_rearing","SST",0.508666666666667,0.461333333333333,0.66
+"SH",784,"Lower Fraser Summer","spawning","stream_flow",0,0,0
+"SH",784,"Lower Fraser Summer","spawning","stream_temp",0.12,0.0758333333333333,0.2225
+"SH",785,"Boundary Bay Winter","adult_migration","stream_flow",0,0,0.000746268656716418
+"SH",785,"Boundary Bay Winter","adult_migration","stream_temp",0.00174129353233831,0,0.01318407960199
+"SH",785,"Boundary Bay Winter","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"SH",785,"Boundary Bay Winter","early_marine","SST",0.572222222222222,0.422222222222222,0.925
+"SH",785,"Boundary Bay Winter","eggs_alevin","stream_flow",0.2875,0.171825396825397,0.33968253968254
+"SH",785,"Boundary Bay Winter","eggs_alevin","stream_temp",0.982242063492063,0.977380952380952,0.995436507936508
+"SH",785,"Boundary Bay Winter","fw_rearing","stream_flow",0.214212827988338,0.180612244897959,0.22555879494655
+"SH",785,"Boundary Bay Winter","fw_rearing","stream_temp",0.288143828960156,0.264528668610301,0.320262390670554
+"SH",785,"Boundary Bay Winter","marine_rearing","SSS",0.0983333333333334,0.0433333333333333,0.198333333333333
+"SH",785,"Boundary Bay Winter","marine_rearing","SST",0.493333333333333,0.445833333333333,0.631666666666667
+"SH",785,"Boundary Bay Winter","spawning","stream_flow",0,0,0
+"SH",785,"Boundary Bay Winter","spawning","stream_temp",0.814285714285715,0.696825396825397,0.91005291005291
+"CO",906,"Boundary Bay","adult_migration","stream_flow",0,0,0.0133333333333333
+"CO",906,"Boundary Bay","adult_migration","stream_temp",0.541666666666667,0.451666666666667,0.73
+"CO",906,"Boundary Bay","early_marine","SSS",0.147222222222222,0.0666666666666667,0.325
+"CO",906,"Boundary Bay","early_marine","SST",0.430555555555556,0.344444444444444,0.736111111111111
+"CO",906,"Boundary Bay","eggs_alevin","stream_flow",0.027266081871345,0.0233918128654971,0.033625730994152
+"CO",906,"Boundary Bay","eggs_alevin","stream_temp",0.262134502923977,0.221198830409357,0.354824561403509
+"CO",906,"Boundary Bay","fw_rearing","stream_flow",0.178391472868217,0.146511627906977,0.191085271317829
+"CO",906,"Boundary Bay","fw_rearing","stream_temp",0.384825581395349,0.360193798449612,0.44468992248062
+"CO",906,"Boundary Bay","marine_rearing","SSS",0.113095238095238,0.0523809523809524,0.223809523809524
+"CO",906,"Boundary Bay","marine_rearing","SST",0.5,0.447619047619048,0.588095238095238
+"CO",906,"Boundary Bay","spawning","stream_flow",0.0807359307359307,0.0692640692640693,0.0995670995670996
+"CO",906,"Boundary Bay","spawning","stream_temp",0.276406926406926,0.260606060606061,0.417748917748918

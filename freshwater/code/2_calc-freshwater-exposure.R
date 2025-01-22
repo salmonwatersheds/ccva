@@ -53,6 +53,7 @@ grid_points <- read.csv("freshwater/data/processed-data/PCIC-grid-points_fraser.
 
 # Grid cells corresponding to each CU and stage for Fraser SEL
 incl.stages <- readRDS("freshwater/output/PCIC_incl.rds")
+incl.stages_na.rm <- incl.stages
 
 #-----------------------------------------------------------------------------
 # Define freshwater stages
@@ -196,6 +197,9 @@ for(r in 1:2){
     GCM_var <- readRDS(paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_rcp", rcp,  "_processed.rds")) 
     
     Ts.weeklyMax <- GCM_var[[1]]
+    # Note that max(NA, na.rm = TRUE) return -Inf; need to set these to NA for weeklyMax output
+    Ts.weeklyMax[which(Ts.weeklyMax == -Inf)] <- NA
+    
     Qs.weeklyMean <- GCM_var[[2]]
     
     # Check dimnames: this is how output will be organized
@@ -213,6 +217,7 @@ for(r in 1:2){
     
     for(i in 1:n.CUs){
       # i <- 47 #Bowron
+      # i <- grep("Bay Winter", cu_list$cu_name_pse)
       #------------------------------------------------------------------------------
       # Loop through each life stage
       #------------------------------------------------------------------------------
@@ -232,10 +237,35 @@ for(r in 1:2){
             # Identify grid cells for given life stage
             #-----------------------------------------------------------------------------
             
-            # See freshwater-grid.R for code that identifies which grid cells should be used
+            # See 1a_spatial-distribution_fraser.R for code that identifies which grid cells should be used
             # for each life stage.
+            incl0 <- incl.stages[[i,j]]
             
-            incl <- incl.stages[[i,j]]
+            # In some cases, there are projections NA for all years for a grid cell (e.g., cells on the border)
+            # Identify and remove these?
+            if(length(incl0) == 1){ # if there's just one grid cell
+              if(sum(is.na(Ts.weeklyMax[match(incl0, grid.ref),])) == ncol(Ts.weeklyMax)){
+                stop("No data for single grid cell relevant for this CU and stage!")
+              } else {
+                incl <- incl0
+              }
+            } else { # if there is more than one grd cell
+              no.data <- which(apply(is.na(Ts.weeklyMax[match(incl0, grid.ref),]), 1, sum) == ncol(Ts.weeklyMax))
+              if(length(no.data) > 0){
+                # Check that flow data is also missing
+                no.flow <- which(apply(is.na(Qs.weeklyMean[match(incl0, grid.ref),]), 1, sum) == ncol(Qs.weeklyMean))
+                if(length(no.data) == length(no.flow) & sum(no.data - no.flow) == 0){
+                  incl <- incl0[-no.data]
+                } else {
+                  stop("Missing temp data not the same as missing flow data for incl.")
+                }
+              } else {
+                incl <- incl0
+              }
+            }
+            
+            # Track which grid cells are actually used.
+            incl.stages_na.rm[[i,j]] <- incl
             
             # Dimensions
             n.grid <- length(incl)
@@ -405,7 +435,8 @@ for(r in 1:2){
               # Percentage of days;
               # Need to account for late-century period not being able to extend into next year for 2099 if timing.ij$start + timing.ij$duration > 365
               # If there are missing data (Ts.ij[1, p, ] == NA), exclude those in the denominator
-                  Ts.perc[p, ] <- Ts.dat[p, ] / ((timing.ij$duration_total - sum(is.na(Ts.ij[1, p, ]))) * 30)
+              # Note that missing data will be differnt for each grid cell
+                  Ts.perc[p, ] <- Ts.dat[p, ] / (timing.ij$duration_total*30 - ifelse(n.grid == 1, sum(is.na(Ts.ij[, p, ])), apply(is.na(Ts.ij[, p, ]), 1, sum)))
             
               } # end p
             
@@ -419,7 +450,7 @@ for(r in 1:2){
             Ts.perc[, which(tmean == -Inf)] <- NA
             
             # Store full spatial output
-            fw_spat[[i,j]][m, "temp", , ] <- Ts.perc
+            fw_spat[[i,j]][m, "temp", , match(incl, incl0)] <- Ts.perc
             
             # store summary output
             for(p in 1:4){ # for each period
@@ -461,7 +492,9 @@ for(r in 1:2){
               # Percentage of days;
               # Need to account for late-century period not being able to extend into next year for 2099 if timing.ij$start + timing.ij$duration > 365
               # Qs.perc[p, ] <- Qs.dbt[p, ] / sum(!is.na(Qs.ij[which(!is.na(mad))[1], p, ]))
-              Qs.perc[p, ] <- Qs.dbt[p, ] / ((timing.ij$duration_total - sum(is.na(Ts.ij[1, p, ]))) * 30)
+              # Qs.perc[p, ] <- Qs.dbt[p, ] / ((timing.ij$duration_total - sum(is.na(Ts.ij[1, p, ]))) * 30)
+              
+              Qs.perc[p, ] <- Qs.dbt[p, ] / (timing.ij$duration_total*30 - ifelse(n.grid == 1, sum(is.na(Ts.ij[, p, ])), apply(is.na(Qs.ij[, p, ]), 1, sum)))
               
               
               
@@ -472,7 +505,7 @@ for(r in 1:2){
             Qs.perc[, is.na(mad)] <- NA
             
             # Store full spatial output
-            fw_spat[[i,j]][m, "flow", , ] <- Qs.perc
+            fw_spat[[i,j]][m, "flow", , match(incl, incl0)] <- Qs.perc
             
             for(p in 1:4){ # for each period
               # Store output in end array
@@ -485,6 +518,7 @@ for(r in 1:2){
         
       } # end life stage j
       
+      rm(incl, incl0)
       print(paste0("Done ", cuid[i]))
       
     } # end CU i
@@ -503,3 +537,6 @@ for(r in 1:2){
   saveRDS(fw_output, file = paste0("freshwater/output/freshwater_output_fraser_rcp", rcp, "_",  Sys.Date(), "_shortSELmig.rds"))
   
 }
+
+saveRDS(incl.stages_na.rm, file = "freshwater/output/PCIC_incl_narm.rds")
+saveRDS(incl.stages_na.rm, file = paste0("freshwater/output/PCIC_incl_narm_",  Sys.Date(), ".rds"))

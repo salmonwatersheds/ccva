@@ -1,0 +1,13 @@
+name: climate-change-exposure
+title: climate-change-exposure
+username:
+account: salmonwatersheds
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13708960
+bundleId: 9658955
+url: https://salmonwatersheds.shinyapps.io/climate-change-exposure/
+when: 1737071098.15145
+lastSyncTime: 1737071098.15147
+asMultiple: FALSE
+asStatic: FALSE

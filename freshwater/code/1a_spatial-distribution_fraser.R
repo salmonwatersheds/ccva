@@ -67,6 +67,12 @@ spp_lookup <- data.frame(
 # Then run:
 sf_use_s2(FALSE)
 
+# Load migration paths
+# List layers in gdb
+# library(rgdal)
+# ogrListLayers(paste0(dat_root, "bcfishpass.gdb"))
+# Load when looping through species
+
 #------------------------------------------------------------------------------
 # Conservation Unit boundaries for Fraser CUs (all species)
 #------------------------------------------------------------------------------
@@ -78,23 +84,24 @@ cu_boundary <- st_read(paste0(XDrive_root, "/5_DATA/CUs_Master/GDB/PSF_CUs_Maste
 # Are all CUs in cu_list in cu_boundary?
 cu_list$cuid %in% cu_boundary$CUID # Yes
 
-#------------------------------------------------------------------------------
-# Migration paths from spawning habitat to ocean entry point
-# NOTE: these were based on NuSEDS spawner survey locations across all species
-# This analysis will need to be updated so that the bcfishpass rearing and spawning 
-# stream reaches are all connected by a mig path to ocean entry point
-# Missing completely for steelhead, so have to construct for that species
-#------------------------------------------------------------------------------
-mig_paths <- st_read(dsn = paste0(dat_root, "fw-migration/spawn_timing_migration_paths_wCU_fraser.shp")) %>% 
-	st_transform(crs = 4269)
-
-cu_list$cuid %in% mig_paths$cuid # Doesn't include steelhead
-
-mig_paths_start <- data.frame(
-  csv_id = mig_paths$csv_id,
-  lat = mig_paths$lat_snap,
-  lon = mig_paths$lon_snap) %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4269)
+# #------------------------------------------------------------------------------
+# # Migration paths from spawning habitat to ocean entry point
+# # NOTE: these were based on NuSEDS spawner survey locations across all species
+# # This analysis will need to be updated so that the bcfishpass rearing and spawning 
+# # stream reaches are all connected by a mig path to ocean entry point
+# # Missing completely for steelhead, so have to construct for that species
+# # June 24, 2024 - this is deprecated now that we have better mig paths from Simon Norris
+# #------------------------------------------------------------------------------
+# mig_paths <- st_read(dsn = paste0(dat_root, "fw-migration/spawn_timing_migration_paths_wCU_fraser.shp")) %>% 
+# 	st_transform(crs = 4269)
+# 
+# cu_list$cuid %in% mig_paths$cuid # Doesn't include steelhead
+# 
+# mig_paths_start <- data.frame(
+#   csv_id = mig_paths$csv_id,
+#   lat = mig_paths$lat_snap,
+#   lon = mig_paths$lon_snap) %>%
+#   st_as_sf(coords = c("lon", "lat"), crs = 4269)
 
 #------------------------------------------------------------------------------
 # PCIC grid points
@@ -158,27 +165,58 @@ I <- 0 # Overall cu # counter
 
 # For each species
 for(s in 1:6){
+  
+  # Load migration paths for that species
+  ind.mig <- st_read(paste0(dat_root, "bcfishpass.gdb"), layer = paste0("cu_migrationpaths_", spp_lookup$streams_code[s]))
 	
-	# Subset spawning and rearing streams for that species (this is a bit slow)
-	ind.spawn <- streams %>% 
+	#-----
+  # Subset spawning and rearing streams for that species (this is a bit slow)
+	
+  # SPAWNING
+  ind.spawn <- streams %>% 
 		as.data.frame %>% 
 		select(paste0("model_spawning_", spp_lookup$streams_code[s]))
-	spawning.s <- streams[which(ind.spawn == 1), ]
+	
+	spawning.s <- streams[which(ind.spawn == 1), ] # %>%  
+	# filter(is.na(barriers_pscis_dnstr)) %>% # No PSCIS barrier downstream; new addition June 26, 2024
+	#   filter(is.na(barriers_dams_dnstr)) # No dam downstream; new addition June 26, 2024
+	# 
+	# if(s < 6){ # If not steelhead, remove upstream of gradient or other natural barrier to salmon
+	#   spawning.s <- spawning.s %>%
+	#     filter(barriers_ch_cm_co_pk_sk_dnstr == "") # No gradient or other natural barrier downstream
+	# } else {
+	#   spawning.s <- spawning.s %>%
+	#     filter(barriers_st_dnstr == "") # No gradient or other natural barrier downstream
+	# }
+	
 
+	# REARING
 	if(spp_lookup$species_pooled[s] %in% c("Chum", "Pink") == FALSE) { # No rearing distributions for pink and chum
-	ind.rear <- streams %>% 
-		as.data.frame %>% 
-		select(paste0("model_rearing_", spp_lookup$streams_code[s]))
-	rearing.s <- streams[which(ind.rear == 1), ]
+	  ind.rear <- streams %>% 
+	    as.data.frame %>% 
+	    select(paste0("model_rearing_", spp_lookup$streams_code[s]))
+	  
+	  rearing.s <- streams[which(ind.rear == 1), ] #%>%  
+	  #   filter(is.na(barriers_pscis_dnstr)) %>% # No PSCIS barrier downstream; new addition June 26, 2024
+	  #   filter(is.na(barriers_dams_dnstr)) # No dam downstream; new addition June 26, 2024
+	  # 
+	  # if(s < 6){ # If not steelhead, remove upstream of gradient or other natural barrier to salmon
+	  #   rearing.s <- rearing.s %>%
+	  #     filter(barriers_ch_cm_co_pk_sk_dnstr == "") # No gradient or other natural barrier downstream
+	  # } else {
+	  #   rearing.s <- rearing.s %>%
+	  #     filter(barriers_st_dnstr == "") # No gradient or other natural barrier downstream
+	  # }
 	}
 	
 	# # Plot all CUs for that species
-	# plot(st_geometry(spawning.s), col = cols[2])
-	# plot(st_geometry(obs.spawning.s), add = TRUE, lwd = 1.2, col  = cols[3])
+	# plot(st_geometry(spawning.s), col = cols[2], axes = TRUE, ylim = c(50, 53), xlim = c(-124, -118), lwd = 2)
+	# plot(st_geometry(which(cu_boundary$species == "Chinook", ]), col = "#00000030", border = "#00000060", add = TRUE)
 	# plot(st_geometry(shoreline), add = TRUE)
-	# plot(st_geometry(rearing.s), col = cols[1], lwd = 0.5)
-	# plot(st_geometry(shoreline), add = TRUE)
-	# 
+	# plot(st_geometry(streams[which(ind.spawn == 1), ] ), col = paste0(cols[2], 30), lwd = 2, add = TRUE)
+	# # plot(st_geometry(streams[which(ind.rear == 1), ] ), col = paste0(cols[1], 30), lwd = 1, add = TRUE)
+	# # plot(st_geometry(rearing.s), col = cols[1], lwd = 1, add = TRUE)
+	# plot(st_geometry(streams %>% filter(linear_feature_id %in% ind.mig$linear_feature_id) ), col = cols[3], lwd = 0.5, add = TRUE)
 	
 	# Extract cuids for the selected species
 	cuid.s <- cu_list$pooledcuid[which(cu_list$species_pooled == spp_lookup$species_pooled[s])]
@@ -188,6 +226,18 @@ for(s in 1:6){
 	for(i in 1:length(cuid.s)){
 		# Subset CU boundary
 		cu_boundary.i <- cu_boundary[cu_boundary$CUID == cuid.s[i], ]
+		
+		# MIGRATION
+		if(cu_list$cu_name_pse[which(cu_list$species_pooled == spp_lookup$species_pooled[s])[i]] == "Harrison-Upstream Migrating-Late"){
+		# If upstream migrating, use mig path for downstream migrating
+		  mig_paths.i <- streams[streams$linear_feature_id %in% ind.mig$linear_feature_id[ind.mig$cuid == 713], ]
+		  } else {
+		  mig_paths.i <- streams[streams$linear_feature_id %in% ind.mig$linear_feature_id[ind.mig$cuid == cuid.s[i]], ]
+		  
+		}
+		
+		intrscts_mig <- st_intersects(mig_paths.i, grid_polys, sparse = FALSE)
+		incl_mig <- which(apply(intrscts_mig, 2, sum) > 0)
 		
 		# SPAWNING: Find grid_id that intersect freshwater *spawning*
 		dum.spawn <- st_intersects(spawning.s, cu_boundary.i, sparse = FALSE)
@@ -199,7 +249,7 @@ for(s in 1:6){
 		# REARING: Find grid_id that intersect freshwater *rearing* (includes migration)
 		if(spp_lookup$species_pooled[s] %in% c("Chum", "Pink") == FALSE) { # No rearing distributions for pink and chum
 		  
-		  # EXCEPTION: Harrison upstream-migrating late. This CU boundary includes spawning habitat but not the rearing lake. Use Harrison downstream migrating CU boudnary to determine rearing habitat.
+		  # EXCEPTION: Harrison upstream-migrating late. This CU boundary includes spawning habitat but not the rearing lake. Use Harrison downstream migrating CU boundary to determine rearing habitat.
 		  if(cu_list$cu_name_pse[which(cu_list$species_pooled == spp_lookup$species_pooled[s])[i]] == "Harrison-Upstream Migrating-Late"){
 		    
 		    dum.rear <- st_intersects(rearing.s, cu_boundary[cu_boundary$cuname == "Harrison-Downstream Migrating-Late", ], sparse = FALSE)
@@ -215,47 +265,13 @@ for(s in 1:6){
 		  incl_rear <- which(apply(intrscts_rear, 2, sum) > 0)
 		}
 		
-		# MIGRATION: Find grid_id that intersect freshwater *migration*
-		# if(s <= 5){ # for salmon
-		#   
-		#   mig_paths.i <- mig_paths[which(mig_paths$cuid == cuid.s[i]), ]
-		#   intrscts_mig <- st_intersects(mig_paths.i, grid_polys, sparse = FALSE)
-		#   incl_mig <- which(apply(intrscts_mig, 2, sum) > 0)
-		#   
-		# } else if(s == 6){ # for steelhead (no mig_paths)
-		  
-		  # within <- st_intersection(mig_paths_start, cu_boundary.i)$csv_id
-		  # plot(st_geometry(mig_paths_start[which(mig_paths_start$csv_id %in% within), ]), add = TRUE)
-		  # 
-		  # Or intersect with grid polys?
-		  simpleLoc <- st_union(grid_polys[unique(c(incl_spawn, incl_rear)),])
-		  # plot(st_geometry(simpleLoc), add = TRUE, col = NA)
-		  within_simpleLoc <- st_intersection(mig_paths_start, simpleLoc)$csv_id
-		  
-		  #Check that they're within the CU boundary (for some small CUs the grid cells
-		  # capture points outside of watershed/CU boundaries)
-		  
-		  within <- st_intersection(mig_paths_start[mig_paths_start$csv_id %in% within_simpleLoc, ], cu_boundary.i)$csv_id
-		  
-		 
-		   mig_paths.i <- mig_paths[which(mig_paths$csv_id %in% within), ]
-		  intrscts_mig <- st_intersects(mig_paths.i, grid_polys, sparse = FALSE)
-		  incl_mig <- which(apply(intrscts_mig, 2, sum) > 0)
-		  
-		
-		
-		# } # end if steelhead
-		
-		
 		# Assign grid cells to each life stage
 		I <- I + 1
-		PCIC_incl[[I, "adult_migration"]] <- unique(c(incl_mig, incl_spawn))
+		PCIC_incl[[I, "adult_migration"]] <- incl_mig
 		PCIC_incl[[I, "spawning"]] <- incl_spawn
 		PCIC_incl[[I, "eggs_alevin"]] <- incl_spawn
 		if(spp_lookup$species_pooled[s] %in% c("Chum", "Pink") == FALSE) {
-		  PCIC_incl[[I, "fw_rearing"]] <- unique(c(incl_mig, incl_rear))
-		} else {
-		  PCIC_incl[[I, "fw_rearing"]] <- NULL
+		  PCIC_incl[[I, "fw_rearing"]] <- incl_rear
 		}
 		
 		if(I == 1){
@@ -265,8 +281,8 @@ for(s in 1:6){
 		}
 		
 		# Plot
-		pdf(file = paste0("freshwater/output/freshwater_distribution_fraser_", spp_lookup[s,1], "_", cuid.s[i], ".pdf"), width = 8, height = 10)
-		png(paste0("freshwater/output/freshwater_distribution_fraser_", spp_lookup[s,1], "_", cuid.s[i], ".pdf"))
+		pdf(file = paste0("freshwater/output/freshwater_distribution_fraser_", spp_lookup[s,1], "_", cuid.s[i], "_", Sys.Date() ".pdf"), width = 8, height = 10)
+		# png(paste0("freshwater/output/freshwater_distribution_fraser_", spp_lookup[s,1], "_", cuid.s[i], ".pdf"))
 		
 		plot(st_geometry(grid_polys[unique(c(incl_mig, incl_spawn, incl_rear)),]), col = NA, border = NA, axes = TRUE) 
 		plot(st_geometry(cu_boundary.i), col = grey(0.8), border = NA, add = TRUE)
@@ -276,22 +292,23 @@ for(s in 1:6){
 		
 		# Rearing (not for pink and chum)
 		if(spp_lookup$species_pooled[s] %in% c("Chum", "Pink") == FALSE) {
-		  plot(st_geometry(grid_polys[PCIC_incl[[I, "fw_rearing"]],]), col = paste0(cols[1], 50), border = cols[1], lwd = 0.5, add = TRUE)
-		  plot(st_geometry(rearing.i), col = cols[1], add = TRUE, lwd = 1)
+		  plot(st_geometry(grid_polys[incl_rear,]), col = paste0(cols[1], 50), border = cols[1], lwd = 0.5, add = TRUE)
+		  plot(st_geometry(rearing.i), col = cols[1], add = TRUE, lwd = 3)
 		} 
 		
 		plot(st_geometry(shoreline), add = TRUE)
 		plot(st_geometry(spawning.i), col = cols[2], add = TRUE, lwd = 2)
 		plot(st_geometry(mig_paths.i), col = cols[3], add = TRUE, lwd = 0.8)
 		
-		legend("topright", col = c(grey(0.8), cols), lwd = c(10, rep(3, 3)), c("CU boundary", "Rearing", "Spawning", "Migration"), bty = "n")
+		legend("topright", col = c(grey(0.8), cols), lwd = c(10, 3, 2, 0.8), c("CU boundary", "Rearing", "Spawning", "Migration"), bty = "n")
 		mtext(side = 3, adj = 0, paste0(cu_list$cu_name_pse[cu_list$cuid == cuid.s[i]], " ", cu_list$species_pooled[cu_list$cuid == cuid.s[i]]), font = 2)
 		dev.off()
 		
 		print(".")
 	} # end CU i
 	print(paste0("End ", spp_lookup$species_pooled[s]))
-} # end species s
+
+	} # end species s
 
 
 

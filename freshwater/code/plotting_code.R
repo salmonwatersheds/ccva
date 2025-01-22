@@ -57,14 +57,14 @@ bounds <- c(xmin = -124.5, ymin = 50.85, xmax = -123.6, ymax = 51.7)
 # Lakes, rivers, and shorelines
 #------------------------------------------------------------------------------
 
-lakes <- readRDS("data/spatial/layers/waterbodies_250.rds")# %>% st_crop(bounds)
-rivers <- readRDS("data/spatial/layers/watercourse_250.rds") #%>% st_crop(bounds)
+lakes <- readRDS(paste0(dat_root, "/layers/waterbodies_250.rds"))# %>% st_crop(bounds)
+rivers <- readRDS(paste0(dat_root, "layers/watercourse_250.rds")) #%>% st_crop(bounds)
 
 bounds0 <- c(xmin = -127, ymin = 49, xmax = -116.5, ymax = 56)
-lakes0 <- readRDS("data/spatial/layers/waterbodies_lowRes.rds")# %>% st_crop(bounds)
-rivers0 <- readRDS("data/spatial/layers/watercourse_lowRes.rds") #%>% st_crop(bounds)
-BC <- readRDS("data/spatial/layers/BC_lowRes.rds")
-shoreline <- st_read(dsn = "data/spatial/layers/GSHHS_i_L1.shp")
+lakes0 <- readRDS(paste0(dat_root, "layers/waterbodies_lowRes.rds"))# %>% st_crop(bounds)
+rivers0 <- readRDS(paste0(dat_root, "layers/watercourse_lowRes.rds")) #%>% st_crop(bounds)
+BC <- readRDS(paste0(dat_root, "layers/BC_lowRes.rds"))
+shoreline <- st_read(dsn = paste0(dat_root, "layers/GSHHS_i_L1.shp"))
 
 # #------------------------------------------------------------------------------
 # # Spawning Zone of Influence: Fraser SEL
@@ -97,15 +97,15 @@ grid_points <- read.csv("freshwater/data/processed-data/PCIC-grid-points_fraser.
 # Timing
 #------------------------------------------------------------------------------
 
-timing <- read.csv("freshwater/output/freshwater_timing_fraser.csv")
+timing <- read.csv("data/timing/timing-fraser.csv")
 
 ###############################################################################
 # CU Overlay plots:
 # Calculate median and range across models for each CU, by life-stage
 ###############################################################################
 
-fw_output45 <- readRDS("freshwater/output/freshwater_output_fraser_rcp45_2024-01-05.rds")
-fw_output85 <- readRDS("freshwater/output/freshwater_output_fraser_rcp85_2024-01-05.rds")
+fw_output45 <- readRDS("freshwater/output/freshwater_output_fraser_rcp45_2024-02-12.rds")
+fw_output85 <- readRDS("freshwater/output/freshwater_output_fraser_rcp85_2024-02-12.rds")
 
 fw_output <- list(
   rcp45 = fw_output45,

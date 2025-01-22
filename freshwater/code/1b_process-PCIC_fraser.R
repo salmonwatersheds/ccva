@@ -38,7 +38,7 @@ n.models <- length(gcms$modelName)
 ###############################################################################
 # Loop through each GCM and save output
 ###############################################################################
-
+for(r in 1:2){ # for two emissions scenarios
 for(m in 1:n.models){ # for each model
   
   #----------------------------------------------------------------------------
@@ -48,7 +48,7 @@ for(m in 1:n.models){ # for each model
   Ts <- loadPCIC(
     variable = "waterTemp", # Which variable to load? One of waterTemperature or discharge
     model = gcms$modelName[m],
-    rcp = 85 # Which GCM?
+    rcp = c(45, 85)[r] # Which GCM?
   )
   
   # Change Ts from degrees Kelvin to Celsius
@@ -69,7 +69,7 @@ for(m in 1:n.models){ # for each model
   Qs <- loadPCIC(
     variable = "discharge",
     model = gcms$modelName[m], 
-    rcp = 85
+    rcp = c(45, 85)[r]
   )
   
   Qs.weeklyMean <- t(apply(Qs, 1, weeklyStat, stat = "mean"))
@@ -88,8 +88,9 @@ for(m in 1:n.models){ # for each model
   # Save output
   #----------------------------------------------------------------------------
   
-  saveRDS(var, paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_rcp85_processed.rds"))
+  saveRDS(var, paste0("freshwater/data/processed-data/PCIC_", gcms$modelName[m], "_rcp", c(45, 85)[r], "_processed.rds"))
   
   print(paste0("End ", gcms$modelName[m]))
 } #end m
+} # end r
   

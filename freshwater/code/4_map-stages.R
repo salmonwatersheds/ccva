@@ -6,6 +6,40 @@
 # Date: Sept 26, 2023
 ###############################################################################
 #------------------------------------------------------------------------------
+# List of CUs in the PSE
+#------------------------------------------------------------------------------
+
+cu_list <- read.csv("data/conservationunits_decoder.csv") %>% 
+  subset(region == "Fraser" & (cu_type != "Extinct" | is.na(cu_type)))
+
+# Check that CUs equal what's in incl.stages
+cu_list$pooledcuid %in% as.numeric(dimnames(incl.stages)[[1]])
+as.numeric(dimnames(incl.stages)[[1]]) %in% cu_list$pooledcuid
+dim(cu_list)[1] == dim(incl.stages)[1]
+
+# Create vector of cuid
+cuid <- as.numeric(dimnames(incl.stages)[[1]])
+n.CUs <- length(cuid)
+
+# Order CU list to match incl.stages order (CK, CM, CO, PKE, PKO, SEL, SER, SH)
+cu_list <- cu_list[match(cuid, cu_list$cuid), ]
+
+# Create pooled species field (for matching to temp max)
+cu_list$species_pooled <- cu_list$species_name
+cu_list$species_pooled[cu_list$species_name %in% c("Lake sockeye", "River sockeye")] <- "Sockeye"
+cu_list$species_pooled[cu_list$species_name %in% c("Pink (odd)", "Pink (even)")] <- "Pink"
+
+#------------------------------------------------------------------------------
+# Conservation Unit boundaries for Fraser CUs (all species)
+#------------------------------------------------------------------------------
+# Set root for X Drive (user dependent; assuming ccva repo is in X Drive/1_PROJECTS)
+XDrive_root <- paste(strsplit(getwd(), "/")[[1]][1:6], collapse = "/")
+
+cu_boundary <- st_read(paste0(XDrive_root, "/5_DATA/CUs_Master/GDB/PSF_CUs_Master.gdb")) %>%
+  subset(regionname == "Fraser") %>%
+  st_transform(crs = 4269)
+
+#------------------------------------------------------------------------------
 # Lakes, rivers, and shorelines
 #------------------------------------------------------------------------------
 
@@ -13,10 +47,10 @@
 # rivers <- readRDS("data/spatial/layers/watercourse_250.rds") #%>% st_crop(bounds)
 # 
 # bounds0 <- c(xmin = -127, ymin = 49, xmax = -116.5, ymax = 56)
-lakes0 <- readRDS("data/spatial/layers/waterbodies_lowRes.rds")# %>% st_crop(bounds)
-rivers0 <- readRDS("data/spatial/layers/watercourse_lowRes.rds") #%>% st_crop(bounds)
-BC <- readRDS("data/spatial/layers/BC_lowRes.rds")
-shoreline <- st_read(dsn = "data/spatial/layers/GSHHS_i_L1.shp")
+lakes0 <- readRDS("freshwater/data/spatial/layers/waterbodies_lowRes.rds")# %>% st_crop(bounds)
+rivers0 <- readRDS("freshwater/data/spatial/layers/watercourse_lowRes.rds") #%>% st_crop(bounds)
+BC <- readRDS("freshwater/data/spatial/layers/BC_lowRes.rds")
+shoreline <- st_read(dsn = "freshwater/data/spatial/layers/GSHHS_i_L1.shp")
 
 #-----------------------------------------------------------------------------
 # map life stages
@@ -27,7 +61,7 @@ colStages <- c(adult_migration = "#001289",
                spawning = "#0F78B6",
                eggs_alevin = "#53B3E9",
                fw_rearing = "#009C70")
-z <- nc_open(paste0("data/raw-data/PCIC/hydro_model_out/fraser/", "waterTemp", "_day_dynWat-VICGL_", "CanESM2", "_rcp45_", "r1i1p1", "_19450101-20991231_fraser.nc"))
+z <- nc_open(paste0("freshwater/data/raw-data/PCIC/hydro_model_out/fraser/", "waterTemp", "_day_dynWat-VICGL_", "CanESM2", "_rcp45_", "r1i1p1", "_19450101-20991231_fraser.nc"))
 
 # Spatial variables
 lon <- ncvar_get(z, "lon")
@@ -40,6 +74,8 @@ grid_points <- data.frame(
   lon_id = rep(c(1:length(lon)), length(lat)),
   lat_id = rep(c(1:length(lat)), each = length(lon)))
 
+# Spatial grid
+grid_points <- read.csv("freshwater/data/processed-data/PCIC-grid-points_fraser.csv")
 
 n <- length(grid_points$id)
 d <- 1/16
@@ -47,8 +83,8 @@ d <- 1/16
 grid_polys_all <- st_as_sf(data.frame(
   id = rep(grid_points$id, each = 5),
   rep(c("SW0", "NW", "NE", "SE", "SW1"), n),
-  lon = c(rep(rep(lon, length(lat)), each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), n)),
-  lat = c(rep(rep(lat, each = length(lon)), each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), n))
+  lon = c(rep(grid_points$lon, each = 5) + rep(c(- d/2, -d/2, d/2,  d/2, -d/2), n)),
+  lat = c(rep(grid_points$lat, each = 5) + rep(c(- d/2,  d/2, d/2, -d/2, -d/2), n))
 ), coords = c("lon", "lat"), crs = 4269) %>% 
   group_by(id) %>%
   summarise(geometry = st_combine(geometry)) %>%
@@ -58,12 +94,12 @@ grid_polys_all <- st_as_sf(data.frame(
 #-----------------------------------------------------------------------------
 # Select CU
 #-----------------------------------------------------------------------------
-i <- 47
+i <- 47 # Bowron ES
 
-cuid <- cu_list$CUID[i]
-cu_boundary.i <- cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$Full.CU.Index[i]),]
-zoi.i <- spawn_zoi[which(spawn_zoi$cuid == cuid), ]
-mig_paths.i <- mig_paths[which(mig_paths$cuid == cuid), ]
+cuid <- cu_list$cuid[i]
+cu_boundary.i <- cu_boundary[which(cu_boundary$FULL_CU_IN == cu_list$cu_index[i]),]
+# zoi.i <- spawn_zoi[which(spawn_zoi$cuid == cuid), ]
+# mig_paths.i <- mig_paths[which(mig_paths$cuid == cuid), ]
 
 #-----------------------------------------------------------------------------
 # Base map of different CU-specific spatial data
@@ -73,6 +109,8 @@ bounds0 <- st_bbox(mig_paths.i)[c(1,3,2,4)]
 bounds1 <- st_bbox(zoi.i)[c(1,3,2,4)]
 bounds2 <- apply(cbind(bounds0, bounds1), 1, range)
 bounds <- c(min(bounds2[,1]), max(bounds2[,2]), min(bounds2[,3]), max(bounds2[,4]))
+
+bounds <- st_bbox(cu_boundary.i)[c(1,3,2,4)]
 
 # Plot map
 par(mar = c(2,2,2,1), bg = "white")
