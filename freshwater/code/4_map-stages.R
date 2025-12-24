@@ -5,6 +5,9 @@
 # Contact: Stephanie Peacock <speacock@psf.ca>
 # Date: Sept 26, 2023
 ###############################################################################
+library(ncdf4)
+library(dplyr)
+library(sf)
 #------------------------------------------------------------------------------
 # List of CUs in the PSE
 #------------------------------------------------------------------------------
@@ -33,12 +36,16 @@ cu_list$species_pooled[cu_list$species_name %in% c("Pink (odd)", "Pink (even)")]
 # Conservation Unit boundaries for Fraser CUs (all species)
 #------------------------------------------------------------------------------
 # Set root for X Drive (user dependent; assuming ccva repo is in X Drive/1_PROJECTS)
-XDrive_root <- paste(strsplit(getwd(), "/")[[1]][1:6], collapse = "/")
-
+# XDrive_root <- paste(strsplit(getwd(), "/")[[1]][1:6], collapse = "/")
+XDrive_root <- "/Users/stephaniepeacock/Salmon Watersheds Dropbox/Stephanie Peacock/X Drive"
 cu_boundary <- st_read(paste0(XDrive_root, "/5_DATA/CUs_Master/GDB/PSF_CUs_Master.gdb")) %>%
   subset(regionname == "Fraser") %>%
   st_transform(crs = 4269)
 
+unique(cu_boundary$regionname)
+
+cu <- st_read("~/Downloads/se_boundary_regions/se_boundary_regions.shp")
+head(cu)
 #------------------------------------------------------------------------------
 # Lakes, rivers, and shorelines
 #------------------------------------------------------------------------------
@@ -61,7 +68,7 @@ colStages <- c(adult_migration = "#001289",
                spawning = "#0F78B6",
                eggs_alevin = "#53B3E9",
                fw_rearing = "#009C70")
-z <- nc_open(paste0("freshwater/data/raw-data/PCIC/hydro_model_out/fraser/", "waterTemp", "_day_dynWat-VICGL_", "CanESM2", "_rcp45_", "r1i1p1", "_19450101-20991231_fraser.nc"))
+z <- nc_open(paste0("/Volumes/ClimateData/PCIC/hydro_model_out/fraser/", "waterTemp", "_day_dynWat-VICGL_", "CanESM2", "_rcp45_", "r1i1p1", "_19450101-20991231_fraser.nc"))
 
 # Spatial variables
 lon <- ncvar_get(z, "lon")

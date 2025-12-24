@@ -22,7 +22,7 @@ cols <- wes_palette("Darjeeling1")
 dat_root <- "freshwater/data/spatial/"
 
 # Set root for X Drive (user dependent; assuming ccva repo is in X Drive/1_PROJECTS)
-XDrive_root <- paste(strsplit(getwd(), "/")[[1]][1:6], collapse = "/")
+XDrive_root <- "/Users/stephaniepeacock/Salmon Watersheds Dropbox/Stephanie Peacock/X Drive"#paste(strsplit(getwd(), "/")[[1]][1:6], collapse = "/")
 
 #------------------------------------------------------------------------------
 # Up-to-date CU list (taken from database)
@@ -81,7 +81,8 @@ shoreline <- st_read(dsn = paste0(dat_root, "layers/GSHHS_i_L1.shp"))
 # Conservation Unit boundaries for Fraser CUs (all species)
 #------------------------------------------------------------------------------
 
-cu_boundary <- st_read(paste0(XDrive_root, "/5_DATA/CUs_Master/GDB/PSF_CUs_Master.gdb")) %>%
+# Note: need older CU boundary file that has combined Adamns & Momoch Lakes - Early Summer CU (cuid 751)
+cu_boundary <- st_read("data/pse_conservation_units.gdb") %>%
   subset(regionname == "Fraser") %>%
   st_transform(crs = 4269)
 
@@ -97,7 +98,7 @@ grid_points <- read.csv("freshwater/data/processed-data/PCIC-grid-points_fraser.
 # Timing
 #------------------------------------------------------------------------------
 
-timing <- read.csv("data/timing/timing-fraser.csv")
+timing <- read.csv("data/timing/timing-fraser_days.csv")
 
 ###############################################################################
 # CU Overlay plots:
@@ -133,7 +134,7 @@ oj <- rev(c(3, 4, 5, 6, 1, 2)) # Order in which we want stages to appear
 numDays <- array(NA, dim = c(n.CUs, 4), dimnames = list(cuid, stages))
 for(i in 1:n.CUs){
   for(j in 1:4){
-    numDays[i,j] <- timing$n.days[which(timing$cuid == cuid[i] & timing$stage == stages[j])]
+    numDays[i,j] <- timing$duration[which(timing$cuid == cuid[i] & timing$stage == stages[j])]
   }}
 
 # # Create dataframe to store CU summary outputs
