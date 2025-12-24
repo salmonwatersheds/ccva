@@ -1,6 +1,6 @@
 ###############################################################################
 # Code to summarize projected changes in exposure to stream temperature and 
-# flow outside of the historical norms for the given species and life stage.
+# flow outside of the optimal ranges for the given species and life stage.
 # Takes output from calc-freshwater-exposure.R and tries to make sense of it!
 #
 # Contact: Stephanie Peacock <speacock@psf.ca>

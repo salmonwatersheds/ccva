@@ -1,8 +1,8 @@
 ###############################################################################
-# Code to summarize gridded hydrologic model output from the Pacific Climate 
-# Impacts Consortium and calculate projected changes in exposure to stream
-# temperature and flow outside of the historical norms for the given species 
-# and life stage.
+# Code to summarize gridded climate change projections for sea surface temp.
+# and salinity from CMIP5 GCMs and calculate projected changes in exposure to
+# temperature and salinity outside of the optimal range for each species 
+# (for temperature) and historical norms in each grid cell (for salinity).
 # 
 # Contact: Stephanie Peacock <speacock@psf.ca>
 # Date: Sept 13, 2023

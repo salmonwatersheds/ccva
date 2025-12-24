@@ -1,53 +1,64 @@
 README
 ================
 Stephanie Peacock
-2024-02-13
+2025-12-24
 
-## Climate Change Vulnerability Assessments for Pacific Salmon and Steelhead
+## Quantifying Exposure of Pacific Salmon and Steelhead to Climate Change in the Fraser River basin
 
 ### Background
 
-Climate Change Vulnerability Assessments (CCVAs) aim to quantify the
-potential impact of climate change on certain valued attributes of a
-particular system to inform the identification and prioritization of
-conservation and mitigation actions. In this project, we are interested
-in the potential impact of climate change on the viability of Pacific
-salmon and steelhead Conservation Units (CUs), with the aim to
-understand which CUs are likely to be most strongly affected and why.
-For more information on the project, see the [Salmon Watersheds Program
-website](https://salmonwatersheds.ca/project/ps13/).
+Climate Change Vulnerability Assessments (CCVAs) estimate how climate
+change may affect key attributes of a system to guide conservation and
+mitigation priorities. In this project, we focus on the potential
+impacts of climate change on the viability of Pacific salmon and
+steelhead Conservation Units (CUs), aiming to identify which CUs are
+most affected and why. Our approach is data-driven, quantifying climate
+change exposure by incorporating the spatial and temporal distribution
+of CUs along with species- and life-stage-specific temperature
+sensitivities. While CCVAs typically include adaptive capacity, this
+assessment excludes that component; therefore, we refer to these as
+climate change exposure assessments. For more details, visit
+<https://salmonwatersheds.ca/project/ps13/>.
 
 ### What’s in this repo
 
-Our approach to CCVAs involves quantifying **exposure** to climate
-changes as predicted by Global Climate Models, considering the unique
-spatial distribution and life-history timing of each CU. We are
-considering climate changes throughout the salmon life cycle, and the
-code and data here are organized into `freshwater` and `marine`
-sub-directories because the data sources and processing for these two
-environments are different.
+- The code and data are organized into `freshwater` and `marine`
+  sub-directories because the data sources and processing for these two
+  habitats are different.
+- Within the `freshwater` and `marine` folders, there are R files in
+  `code` that read in climate model projections, organize and summarize
+  it, and calculate exposure for each CU, life stage, and climate
+  attribute. These calculations have been applied for 60 CUs in the
+  Fraser River basin.
+- Raw data files consist of Global Climate Model projections and are
+  large files (hundreds of GB). These are therefore not made available
+  on GitHub but can be downloaded from the relevant sources listed in
+  the table below or by contacting the project lead (Stephanie Peacock,
+  speacock at psf dot ca).
 
-Within the `freshwater` and `marine` folders, there are R files in
-`code` that read in climate output, organize and summarize it, and
-calculate exposure for each CU, life stage, and climate attribute. As of
-Febraury 2024, these calculations have been applied for 60 CUs in the
-Fraser River basin.
+| Environment | Exposure attribute | Definition | Dataset |
+|----|----|----|----|
+| Freshwater | Stream temperature | The number of days within each life stage that stream temperature is above a species- and stage-specific upper threshold | [Pacific Climate Impacts Consortium gridded hydrologic model output](https://www.pacificclimate.org/data/gridded-hydrologic-model-output) |
+| Freshwater | Low flow | The number of days within each freshwater life stage that flow is below 20% of the Mean Annual Discharge (MAD) for the grid cell | [Pacific Climate Impacts Consortium gridded hydrologic model output](https://www.pacificclimate.org/data/gridded-hydrologic-model-output) |
+| Marine | Sea surface temperature | The number of months that SST is above the “core thermal range” during the marine stages. Core thermal range was defined by Langan et al (in review) based on ocean habitat use by each species. | [NOAA’s Climate Change Web Portal](https://psl.noaa.gov/ipcc/ocn/ccwp.html) |
+| Marine | Sea surface salinity | The number of months that salinity was below the 2.5 percentile of historical salinity within each grid cell (i.e., had a z-score of less than -2). | [NOAA’s Climate Change Web Portal](https://psl.noaa.gov/ipcc/ocn/ccwp.html) |
 
-Note that raw data files consist of Global Climate Model projections and
-are large files (hundreds of GB). These are therefore not made available
-on GitHub but can be downloaded from the relevant sources listed in the
-table below or by contacting the project lead (Stephanie Peacock,
-speacock at psf dot ca).
+### Draft outputs
 
-| Environment | Exposure attribute      | Definition                                                                                                                                                                                       | Dataset                                                                                                                                   |
-|-------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| Freshwater  | Stream temperature      | The number of days within each life stage that stream temperature is above a species- and stage-specific upper threshold                                                                         | [Pacific Climate Impacts Consortium gridded hydrologic model output](https://www.pacificclimate.org/data/gridded-hydrologic-model-output) |
-| Freshwater  | Low flow                | The number of days within each freshwater life stage that flow is below 20% of the Mean Annual Discharge (MAD) for the grid cell                                                                 | [Pacific Climate Impacts Consortium gridded hydrologic model output](https://www.pacificclimate.org/data/gridded-hydrologic-model-output) |
-| Marine      | Sea surface temperature | The number of months that SST is above the “core thermal range” during the marine stages. Core thermal range was defined by Langan et al (in review) based on ocean habitat use by each species. | [NOAA’s Climate Change Web Portal](https://psl.noaa.gov/ipcc/ocn/ccwp.html)                                                               |
-| Marine      | Sea surface salinity    | The number of months that salinity was below the 2.5 percentile of historical salinity within each grid cell (i.e., had a z-score of less than -2).                                              | [NOAA’s Climate Change Web Portal](https://psl.noaa.gov/ipcc/ocn/ccwp.html)                                                               |
+The `docs` folder contains
 
-<!-- ### Draft outputs -->
-<!-- The `docs` folder contains an R Shiny document that allows users to explore draft results. Please note that this output is preliminary and should not be over interpreted. The resulting Shiny document is online at https://salmonwatersheds.shinyapps.io/salmon-ccva/. -->
+- Supplemental material (`online-supplement.Rmd`) published online at
+  <https://bookdown.org/salmonwatersheds/climate-change-exposure-supp/online-supplement.html>
+- Functions to produce paper figures and supplement figures in
+  `online-supplement-functions.R`
+- `map-for-paper.R` is code for a map that has a point at the centroid
+  of each CU boundary, shaded according to overall exposure (Figure 2)
+
+The `shiny` folder contains
+
+- An R Shiny document (`app.R`) that allows users to explore draft
+  results, published online at
+  <https://salmonwatersheds.shinyapps.io/climate-change-exposure/>
 
 ## Acknowledgements
 

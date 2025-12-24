@@ -1,7 +1,7 @@
 ###############################################################################
 # Code to summarize gridded hydrologic model output from the Pacific Climate 
 # Impacts Consortium and calculate projected changes in exposure to stream
-# temperature and flow outside of the historical norms for the given species 
+# temperature and flow outside of the optimal ranges for the given species 
 # and life stage.
 # 
 # Contact: Stephanie Peacock <speacock@psf.ca>

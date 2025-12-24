@@ -32,11 +32,13 @@ For more details, visit https://salmonwatersheds.ca/project/ps13/.
 ### Draft outputs
 
 The `docs` folder contains
+
 * Supplemental material (`online-supplement.Rmd`) published online at https://bookdown.org/salmonwatersheds/climate-change-exposure-supp/online-supplement.html 
 * Functions to produce paper figures and supplement figures in `online-supplement-functions.R`
 * `map-for-paper.R` is code for a map that has a point at the centroid of each CU boundary, shaded according to overall exposure (Figure 2)
 
 The `shiny` folder contains
+
 * An R Shiny document (`app.R`) that allows users to explore draft results, published online at https://salmonwatersheds.shinyapps.io/climate-change-exposure/
 
 ## Acknowledgements
