@@ -1,7 +1,7 @@
 README
 ================
 Stephanie Peacock
-2025-12-24
+2026-03-18
 
 ## Quantifying Exposure of Pacific Salmon and Steelhead to Climate Change in the Fraser River basin
 
@@ -47,8 +47,7 @@ climate change exposure assessments. For more details, visit
 
 The `docs` folder contains
 
-- Supplemental material (`online-supplement.Rmd`) published online at
-  <https://bookdown.org/salmonwatersheds/climate-change-exposure-supp/online-supplement.html>
+- Supplemental material (`online-supplement.Rmd`) published online
 - Functions to produce paper figures and supplement figures in
   `online-supplement-functions.R`
 - `map-for-paper.R` is code for a map that has a point at the centroid
