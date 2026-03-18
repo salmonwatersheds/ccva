@@ -1,0 +1,555 @@
+---
+title: "Quantifying Climate Change Exposure of Pacific Salmon and Steelhead in Canada"
+author: "Stephanie Peacock"
+date: "`r strftime(Sys.Date(), format = '%B %d, %Y')`"
+output: 
+ bookdown::html_document2:
+  toc: true
+  toc_float: true
+  fig_width: 8
+  fig_height: 9.5
+  fig_caption: true
+bibliography: bib.json
+csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl 
+link-citations: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+source("docs/online-supplement-functions.R")
+source("data/colours.R")
+
+```
+# Online Supplement {.unnumbered}
+
+# Conservation Units and their life-history traits
+
+**Table S1.** List of the 60 Conservation Units in the Fraser River basin that were included in the study, along with life-history traits that were used to assess their exposure to climate changes.
+```{r tableS1, include = TRUE}
+options(width = 400)
+library(reactable)
+library(htmltools)
+library(fontawesome)
+
+tabS1 <- read.csv("output/TableS1_shortSELmig.csv") %>%
+  arrange(match(cuid, cu_order)) %>%
+  mutate(num = c(1:60)) %>%
+  select(-cuid, -X)
+
+tabS1 <- tabS1[, c(19, 1:18)]
+
+sticky_style <- list(backgroundColor = "#f7f7f7")
+
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download as CSV"),
+      onclick = "Reactable.downloadDataCSV('download-tableS1', 'TableS1_CU-life-history-traits.csv')"
+    ),
+    
+    # Render table
+reactable::reactable(
+  tabS1,
+  columns = list(
+    num = colDef(
+      name = "Number on map", 
+      maxWidth = 70,
+      sticky = "left",
+      style = sticky_style,
+      headerStyle = sticky_style
+    ),
+    species = colDef(
+      name = "Species", 
+      maxWidth = 80,
+      sticky = "left",
+      style = sticky_style,
+      headerStyle = sticky_style
+    ),
+    cu_name = colDef(
+      name = "Conservation Unit",
+      maxWidth = 260,
+      sticky = "left",
+      style = sticky_style,
+      headerStyle = sticky_style
+    ),
+    
+    generation_length = colDef(
+      name = "Gen. length (yrs)",
+      maxWidth = 80,
+      align = "left"
+    ),
+    incubation_start = colDef(
+      name = "start",
+      maxWidth = 80
+    ),
+    incubation_duration_days = colDef(
+      name = "duration (days)",
+      maxWidth = 80,
+      align = "left"
+    ),
+    fw_rearing_start = colDef(
+      name = "start",
+      maxWidth = 80
+    ),
+    fw_rearing_duration_days = colDef(
+      name = "duration (days)",
+      maxWidth = 80,
+      align = "left"
+    ),
+    ocean_entry_age_yrs = colDef(
+      name = "Ocean entry\nage (yrs)",
+      maxWidth = 80
+    ),
+    ocean_entry_peak = colDef(
+      name = "Ocean entry\npeak date",
+      maxWidth = 80
+    ),
+    marine_residence_time_yrs = colDef(
+      name = "Marine residence\n(yrs)",
+      maxWidth = 80
+    ),
+    run_timing_start = colDef(
+      name = "run start",
+      maxWidth = 80
+    ),
+    run_timing_peak = colDef(
+      name = "run peak",
+      maxWidth = 80
+    ),
+    run_timing_end = colDef(
+      name = "run end",
+      maxWidth = 80
+    ),
+    mig_duration_days = colDef(
+      name = "duration\n(days)*",
+      maxWidth = 80,
+      align = "left"
+    ),
+    spawn_timing_start = colDef(
+      name = "start",
+      maxWidth = 80
+    ),
+    spawn_timing_peak = colDef(
+      name = "peak",
+      maxWidth = 80
+    ),
+    spawn_timing_end = colDef(
+      name = "end",
+      maxWidth = 80
+    ),
+    spawn_duration_days = colDef(
+      name = "duration\n(days)",
+      maxWidth = 80,
+      align = "left"
+    )
+),
+columnGroups = list(
+    colGroup(name = "Incubation", columns = c("incubation_start", "incubation_duration_days"), headerStyle = sticky_style),
+    colGroup(name = "Freshwater\nrearing", columns = c("fw_rearing_start", "fw_rearing_duration_days"), headerStyle = sticky_style),
+    colGroup(name = "Adult freshwater\nmigration", columns = c("run_timing_start", "run_timing_peak", "run_timing_end", "mig_duration_days"), headerStyle = sticky_style),
+     colGroup(name = "Spawning", columns = c("spawn_timing_start", "spawn_timing_peak", "spawn_timing_end", "spawn_duration_days"), headerStyle = sticky_style)
+  ),
+bordered = TRUE,
+highlight = TRUE,
+striped = TRUE,
+resizable = TRUE, 
+wrap = TRUE,
+searchable = TRUE,
+style = list(fontSize = "1.25rem"),
+showSortIcon = TRUE,
+height = 800,
+pagination = FALSE,
+elementId = "download-tableS1"
+    )
+  )
+)
+
+```
+* Lake-type sockeye duration of exposure for adult freshwater migration was assumed to end when fish reached the rearing lake, where they are no longer exposed to potential low flows or high stream temperatures. See [below](#mig-dist) for details.
+** Adams & Momich Lakes-Early Summer (25 on map) is now considered two separate CUs: Adams - Early Summer ([Extinct](https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/cosewic-assessments-status-reports/sockeye-salmon-2021.html)) and Momich - Early Summer ([Endangered](https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/cosewic-assessments-status-reports/sockeye-salmon-2021.html)).
+
+# Global Climate Models
+
+We acknowledge the World Climate Research Programme’s Working Group on Coupled Modelling, which is responsible for CMIP, and we thank the climate modeling groups (Table S2, below) for producing and making available their model output. For CMIP the U.S. Department of Energy’s Program for Climate Model Diagnosis and Intercomparison provides coordinating support and led development of software infrastructure in partnership with the Global Organization for Earth System Science Portals.
+<!-- Need to add paper to CMIP registry eventually https://ipcc-data.org/cmip5-license.html  -->
+
+**Table S2.** The six Global Climate Models (GCMs) from which we used output in this paper and the research centres responsible for developing and running each GCM.
+```{r tableS2, include = TRUE}
+options(width = 400)
+tabS2 <- read.csv("output/TableS2.csv")
+
+reactable::reactable(
+  tabS2,
+  columns = list(
+    GCM = colDef(
+      name = "GCM",
+      maxWidth = 120
+    ),
+    Research.center = colDef(
+      name = "Research centre"
+    )
+  ),
+  bordered = TRUE,
+  highlight = TRUE,
+  striped = TRUE,
+  resizable = TRUE, 
+  wrap = TRUE,
+  searchable = FALSE,
+  style = list(fontSize = "1.25rem"),
+  showSortIcon = TRUE,
+  pagination = FALSE
+)
+
+```
+
+# Temperature thresholds for freshwater stages
+
+There is increasing evidence that salmonids can display considerable intraspecific diversity in thermal tolerance, likely due to local adaptation of populations to their freshwater thermal environments [@EliasonEtAl2011DifferencesThermalTolerance; @ZilligEtAl2021OneSizeDoes]. This variability makes it difficult to determine an upper stream temperature threshold to quantify the future duration over threshold for freshwater life stages. Data on specific thermal tolerance of Conservation Units (CUs) is limited to a handful of CUs and life stages, limiting the applicability of this specific information in our broad-scale analysis. Further, a recent review highlighted the variability in outcomes under different experimental approaches, and the questionable ecological relevance of some of the reported metrics [@MayerEtAl2023ThermalTolerancePacific]. As such, we decided to rely on temperature guidelines set out by the Province of BC [@OliverFidler2001WaterQualityGuideline] that specify a maximum optimal temperature for each species and stage, ignoring potential population-specific deviances. 
+
+To ensure the temperature thresholds we applied were not inconsistent with more recent research, we compared the BC Guidelines to the various studies reported on by @MayerEtAl2023ThermalTolerancePacific (Tables S2-S6 therein). These studies varied in their ecological relevance critical thermal maximum (CTmax) or upper incipient lethal temperature (UILT), which are considered to have low ecological relevance, to upper temperatures under which salmon can carry out activities essential to survival at any given life-stage (Pejus temperatures), considered to have high ecological relevance. We also show temperatures that are reported to be optimal or the upper observed range of populations in the wild. 
+
+There was considerable variability in thermal tolerance reported among studies, due to either population-specific differences or study methodology or both, but the BC Guidelines were not out of range of the thermal tolerance metrics reported by @MayerEtAl2023ThermalTolerancePacific (Figures S1 – S5). In general, the BC Guidelines were near upper-optimal or Pejus temepratures, which were considered the most ecologically relevant temperature thresholds by @MayerEtAl2023ThermalTolerancePacific. The BC Guidelines were far below critical temperatures shown to cause direct mortality. This is consistent with our use and interpretation of the BC Guidelines: we aimed to quantify salmon exposure to temperatures that may have more subtle (sublethal) adverse effects.
+@MayerEtAl2023ThermalTolerancePacific did not report any studies of thermal tolerance for spawning stages or for any life stage of steelhead that could be compared to the BC Guidelines.
+
+```{r echo = FALSE, fig.cap = "Comparison of threshold stream temperatures for salmonid life stages from the BC Guidelines (Oliver and Fidler 2001) to more recently reported estimates of thermal tolerance summarized in Mayer et al. (2023). These other studies are categorized according to the ecological relevance of the approach (see legend and Mayer et al. 2023 for details).", fig.height = 5, fig.width = 6}
+library(readxl)
+library(dplyr)
+library(PNWColors)
+
+# Source BC2001 thresholds
+t1 <- read.csv("freshwater/data/optimum-temps_BC2001.csv")
+t1$max[t1$stage == "adult_migration"] <- 18
+t2 <- read_xlsx("freshwater/data/MayerEtAl2023_TablesS2-S6.xlsx")
+
+t2 <- t2 %>% mutate(
+  stage = case_when(
+    `Life stage` == "Embryo-alevin" ~ "eggs_alevin",
+    `Life stage` == "Embryo-Alevin" ~ "eggs_alevin",
+    `Life stage` == "Juvenile" ~ "fw_rearing",
+    `Life stage` == "Juvenile (Parr)" ~ "fw_rearing",
+    `Life stage` == "Immature" ~ "fw_rearing",
+    `Life stage` == "Adult" ~ "adult_migration",
+    
+  )
+)
+
+stages <- c("eggs_alevin", "fw_rearing", "adult_migration", "spawning")
+
+# Check species names equal- good
+species <- unique(t1$species)
+
+# Plot
+rel_col <- pnw_palette("Bay", n = 8)[c(1,2,3,6,7,8)]
+for(s in 1:length(species)){
+  # png(file = paste0("freshwater/output/figures/temp_threshold_comparison_", species[s], "_", Sys.Date(), ".png"), width = 6, height = 5, units = "in", res = 200)
+  par(mfrow = c(4,1), mar = c(0,2,0,1), oma = c(4,0,2,12))
+  for(j in 1:4){
+    t2.j <- t2 %>% filter(stage == stages[j], Species == species[s])
+    plot(t2.j$Value_num, t2.j$ecological_relevance, col = rel_col[t2.j$ecological_relevance + 1], xlim = c(7, 30), pch = 19, ylim = c(-0.5, 5.5), yaxt ="n", ylab = "", xlab = "", xaxt = "n", cex = 2)  
+    mtext(side = 3, line = -1.2, c(" Eggs/alevin", " Freshwater rearing", " Adult migration", " Spawning")[j], adj = 0, cex = 0.8)
+    abline(v = seq(0, 35, 1), col = "#00000030", lwd = 0.6, lty = 3)
+    abline(v = t1$max[t1$species == species[s] & t1$stage == stages[j]], col = grey(0.6), lwd = 2)
+  if(j == 4){
+    axis(side = 1)
+    mtext(side= 1, "Temperature (˚C)", line = 2.5)
+  }
+    if(j == 1){
+      mtext(side = 3, species[s])
+      legend(31, 5, col = rel_col, pch = 19, pt.cex = 2, title = "Ecological relevance", legend = c("Optimal temp. or obs. range", "(HIGH) Pejus Temperatures", "Thermal migration barriers", "Preference/avoidance", "T_crit/Tarr", "(LOW) CTmax/UILT"), xpd = NA, bty = "n")
+      legend(31, -3, lwd = 2, col = grey(0.6), "BC Guideline", xpd = NA, bty = "n")
+    }
+    } # end j
+} # end s
+
+
+```
+
+# Migration speeds and distances for lake-type sockeye CUs {#mig-dist}
+
+The adult freshwater migration stage generally began with freshwater re-entry and extended until the start of spawning. For the adult freshwater migration stage of lake-type sockeye CUs, we considered the period of potential exposure extending for the duration of time it would take sockeye to reach their rearing lake, regardless of when spawning usually began. We based this migration duration on the distance from the ocean entry point to the rearing lake for the CU, with migration rates based on published data by run timing group [@Quinn2018BehaviorEcologyPacific; @EnglishEtAl2005MigrationTimingRiver]. This accounts for the ability of lake-type sockeye CUs, particularly early-migrating CUs, to hold in lakes where they can moderate exposure to high temperatures by moving to deeper water and are not exposed to low flows. The following tables detail the data and sources used to estimate the duration of the adult freshwater migration stage for lake-type sockeye CUs.
+
+**Table S3.** Data sources and values used to calculate the migration duration of lake-type sockeye CUs in the Fraser.
+
+|Stock run timing group |Migration rate (km/day) |Sample size |Reference |
+|:-------|:-------|:-------|:-------|
+|Summer    |43      |101      |@EnglishEtAl2005MigrationTimingRiver Table 5|
+|Late    |20      |96      |@EnglishEtAl2005MigrationTimingRiver Table 5|
+|Early Stuart    |45.8      |NA      |@Quinn2018BehaviorEcologyPacific Table 4.3|
+|Horsefly (ES)    |51.2      |NA      |@Quinn2018BehaviorEcologyPacific Table 4.4|
+|Bowron (ES)    |51.5      |NA      |@Quinn2018BehaviorEcologyPacific Table 4.5|
+
+
+***Table S4.** Lake-type sockeye CUs and associated start of freshwater re-entry, run timing group, migration rate (based on run timing group as outlined in Table S3 above), migration distance (calculated from rearing lake to point of ocean entry), and resulting duration of potential exposure.
+
+```{r include = TRUE, echo = FALSE}
+
+mig.dat <- read.csv("docs/mig-dist.csv")
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download as CSV"),
+      onclick = "Reactable.downloadDataCSV('download-tableS3', 'TableS3_SEL-migration.csv')"
+    ),
+    
+    # Render table
+    reactable::reactable(
+      mig.dat, 
+      columns = list(
+        Conservation.Unit = colDef(
+          name = "Conservation Unit",
+          maxWidth = 260,
+          sticky = "left",
+          style = sticky_style,
+          headerStyle = sticky_style
+        ),
+        Start.date = colDef(
+          name = "Start date",
+          maxWidth = 100
+        ),
+        Run.timing.group = colDef(
+          name = "Run timing group",
+          maxWidth = 100
+        ),
+        Migration.rate..km.day. = colDef(
+          name = "Migration rate (km/day)",
+          maxWidth = 100
+        ),
+        Migration.distance..km. = colDef(
+          name = "Migration distance (km)",
+          maxWidth = 100
+        ),
+        Duration.of.potential.exposure..days. = colDef(
+          name = "Duration of potential exposure (days)",
+          maxWidth = 100
+        )
+      ),
+      bordered = TRUE,
+      highlight = TRUE,
+      striped = TRUE,
+      resizable = TRUE, 
+      wrap = TRUE,
+      searchable = TRUE,
+      style = list(fontSize = "1.25rem"),
+      showSortIcon = TRUE,
+      height = 600,
+      pagination = FALSE,
+      elementId = "download-tableS3"
+    )
+  )
+)
+
+```
+
+# Supplemental results
+
+## Exposure outcomes {.tabset}
+
+**Table S5.** The following table contains raw exposure outcomes (median and range among six GCMs) for each CU, life stage, and climate change variable under RCP 4.5 and 8.5 in the historical, early, mid, and late century periods. Exposure is presented as the proportion of stage duration over threshold for each variable in the main text, but also provided here as the absolute number of days over threshold for comparison.
+
+### Table {.unnumbered}
+
+```{r tableS5, include = TRUE}
+options(width = 400)
+
+
+tabS5 <- out.dat_all %>%
+  group_by(group_var = paste(cuid, stage, variable, rcp, period)) %>%
+  summarise(
+    species = unique(species),
+    cu_name = unique(cu_name),
+    cuid = unique(cuid),
+    stage = unique(stage),
+    variable = unique(variable),
+    rcp = unique(rcp),
+    period = unique(period),
+    exposure_prop_median = round(median(median), 3),
+    exposure_prop_min = round(min(median), 3),
+    exposure_prop_max = round(max(median), 3)
+  ) %>%
+  select(-group_var) %>%
+  arrange(match(cuid, cu_order))
+
+tabS5$stage_duration_days <- NA
+
+for(j in 1:6){
+  stage.j <- unique(tabS5$stage)[j]
+  for(i in 1:n.CUs){
+    tabS5$stage_duration_days[tabS5$stage == stage.j & tabS5$cuid == cu_order[i]] <- timing_days$duration[timing_days$stage == stage.j & timing_days$cuid == cu_order[i]]
+  }
+}
+
+tabS5$exposure_days_median = round(tabS5$exposure_prop_median * tabS5$stage_duration_days)
+tabS5$exposure_days_min = round(tabS5$exposure_prop_min * tabS5$stage_duration_days)
+tabS5$exposure_days_max = round(tabS5$exposure_prop_max * tabS5$stage_duration_days)
+  
+sticky_style <- list(backgroundColor = "#f7f7f7")
+
+htmltools::browsable(
+  tagList(
+    tags$button(
+      tagList(fontawesome::fa("download"), "Download as CSV"),
+      onclick = "Reactable.downloadDataCSV('download-tableS5', 'TableS5_exposure-outcomes.csv')"
+    ),
+    
+    # Render table
+    reactable::reactable(
+      tabS5,
+      defaultColDef = colDef(
+    maxWidth = 80),
+    columns = list(
+        cu_name = colDef(
+          maxWidth = 260,
+          sticky = "left",
+          style = sticky_style,
+          headerStyle = sticky_style
+        )
+        ),
+      bordered = TRUE,
+      highlight = TRUE,
+      striped = TRUE,
+      resizable = TRUE, 
+      wrap = TRUE,
+      searchable = TRUE,
+      style = list(fontSize = "1.25rem"),
+      showSortIcon = TRUE,
+      height = 600,
+      pagination = TRUE,
+    defaultPageSize = 10,
+      elementId = "download-tableS5"
+    )
+  )
+)
+
+```
+
+### Attributes {.unnumbered}
+
+|Field |Description |
+|:--------|:-------------------|
+|**species**| CK = Chinook, CM = chum, CO = coho, PKO = odd-year pink, SEL = lake-type sockeye, SER = river-type sockeye, SH = steelhead |
+|**cu_name**| Name of the Conservation Unit|
+|**cuid**| Unique identifier assigned by the Pacific Salmon Foundation to each Conservation Unit; can be cross-referenced with other PSF databases available from [the Salmon Watersheds Data Library](https://data.salmonwatersheds.ca).|
+|**stage**| One of six life stages distingished in the paper: `eggs_alevin`, `fw_rearing`, `early_marine`, `marine_rearing`, `adult_migration`, `spawning`.|
+|**variable**| Climate change variable; for freshwater stages this is either `stream_flow` or `stream_temp` and for marine stages this is either `SSS` (sea surface salinity) or `SST` (sea surface temperature).|
+|**rcp**| Moderate emissions (`rcp45`) or high emissions (`rcp85`) scenario.|
+|**period**| One of four time perods: `hist` (1970-1999), `early` (2010-2039), `mid` (2040-2069), or `late` (2070-2099).|
+|**exposure_prop_median**| median exposure among six GCMs, summarized as the proportion of the stage duration above threshold (for `stream_temp` and `SST`) or below threshold (for `stream_flow` and `SSS`).|
+|**exposure_prop_min** and **exposure_prop_max**| The minimum or maximum exposure among six GCMs, summarized as the proportion of the stage duration above threshold (for `stream_temp` and `SST`) or below threshold (for `stream_flow` and `SSS`). |
+|**stage_duration_days**| The duration of the life stage or the given CU in days.|
+|**exposure_days_median**| Median exposure among six GCMs, summarized as the number of days above threshold (for `stream_temp` and `SST`) or below threshold (for `stream_flow` and `SSS`). Equal to the `stage_duration_days * exposure_prop_median`.|
+|**exposure_days_min** and **exposure_days_max**| The minimum or maximum exposure among six GCMs, summarized as the number of days.|
+
+## Overall exposure {.tabset}
+
+### Low emissions (RCP 4.5) {.tabset .unnumbered}
+
+#### Historical {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp45", period = "hist")
+```
+
+#### Early century {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp45", period = "early")
+```
+
+#### Mid century {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp45", period = "mid")
+```
+
+#### Late century {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp45", period = "late")
+```
+
+### High Emissions (RCP 8.5)  {.tabset .unnumbered}
+
+#### Historical {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp85", period = "hist")
+```
+
+#### Early century {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp85", period = "early")
+```
+
+#### Mid century {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp85", period = "mid")
+```
+
+#### Late century {.unnumbered}
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
+plot.overallExposure(emissions = "rcp85", period = "late")
+```
+
+## Exposure by life stage and varaible {.tabset}
+
+### Low emissions (RCP 4.5) {.tabset .unnumbered}
+
+#### Historical {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp45", period = "hist")
+```
+
+#### Early century {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp45", period = "early")
+```
+
+#### Mid century {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp45", period = "mid")
+```
+
+#### Late century {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp45", period = "late")
+```
+
+### High Emissions (RCP 8.5)  {.tabset .unnumbered}
+
+#### Historical {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp85", period = "hist")
+```
+#### Early century {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp85", period = "early")
+```
+
+#### Mid century {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp85", period = "mid")
+```
+
+#### Late century {.unnumbered}
+```{r, fig.cap='The proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Stream temperature (temp) and low flow (flow) were assessed for freshwater stages; sea surface temperature (SST) and sea surface salinity (sal) were assessed for marine stages. CUs are ordered from highest (top) to lowest (bottom) exposure to climate changes across the lifecycle and color coded according to species (see overall exposure figure above). ', echo = FALSE}
+plot.stageExposure(emissions = "rcp85", period = "late")
+```
+
+
+## Exposure across time periods {.tabset}
+
+### Low emissions (RCP 4.5) {.unnumbered}
+```{r, fig.align='center', fig.cap='Changes in exposure (y-axis), calculated as the proportion of time above or below threshold, for each CU (lines) organized by species (colours), across periods (x-axis; H = historical, E = early century, M = mid century, L = late century). Each panel shows exposure for a specific life stage and climate variable. Each line represents the median exposure among GCMS for a single CU, and the shaded region behind lines indicates the range of exposure outcomes among GCMs for that CU. Exposure is similar for marine stages because all CUs had the same spatial distribution and the monthly resolution of climate projections, combined with less overall variability through time for ocean variables, did not differentiate exposure due to CU-specific life-cycle timing.', echo = FALSE}
+
+out.dat_all <- read.csv(paste0("output/ignore/exposure-raw.csv")) # Raw among models
+stages <- c("eggs_alevin", "fw_rearing", "early_marine", "marine_rearing", "adult_migration", "spawning") 
+
+plot.overPeriods()
+
+```
+
+### High emissions (RCP 8.5) {.unnumbered}
+```{r, fig.align='center', fig.cap='Changes in exposure (y-axis), calculated as the proportion of time above or below threshold, for each CU (lines) organized by species (colours), across periods (x-axis; H = historical, E = early century, M = mid century, L = late century). Each panel shows exposure for a specific life stage and climate variable. Each line represents the median exposure among GCMS for a single CU, and the shaded region behind lines indicates the range of exposure outcomes among GCMs for that CU. Exposure is similar for marine stages because all CUs had the same spatial distribution and the monthly resolution of climate projections, combined with less overall variability through time for ocean variables, did not differentiate exposure due to CU-specific life-cycle timing.', echo = FALSE}
+
+plot.overPeriods("rcp85")
+
+```
+
+
+# References

@@ -1,0 +1,7 @@
+﻿Stage,Timing,Spatial distribution
+Incubation,Start* of spawning to end of fry migration,Accessible stream reaches with optimal gradient for spawning for the given species (Norris 2024)
+Freshwater rearing,Start of fry migration to end of ocean entry,"Accessible stream reaches with optimal gradient for rearing for the given species (Norris 2024), or known rearing lake for lake-type sockeye CUs"
+Early marine,3 months before to 3 months after peak ocean entry date,A 300 - 750 km buffer zone around point of marine entry
+Marine rearing,3 months after ocean entry to end of run timing,Pacific Ocean (north of 35˚N) and Bering Sea
+Adult freshwater migration,Start of run timing (freshwater entry) to start of spawning,Migration route(s) from freshwater entry point to accessible spawning stream reaches
+Spawning,Start to end of spawning period,Accessible stream reaches with optimal gradient for spawning for the given species (Norris 2024)

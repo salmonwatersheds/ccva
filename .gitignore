@@ -17,7 +17,7 @@
 *.knit.md
 
 # Large html files created by R markdown
-*.html
+docs/online-supplement.html
 
 README.Rmd
 
@@ -25,9 +25,6 @@ README.Rmd
 figures/
 ignore/
 archive/
-
-# Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
-docs
 
 # macOS desktop services store
 .DS_Store
