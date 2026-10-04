@@ -1,0 +1,13 @@
+name: salmon-ccva
+title: salmon-ccva
+username:
+account: salmonwatersheds
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10030737
+bundleId: 8239194
+url: https://salmonwatersheds.shinyapps.io/salmon-ccva/
+when: 1707506067.85968
+lastSyncTime: 1707506067.8597
+asMultiple: FALSE
+asStatic: FALSE

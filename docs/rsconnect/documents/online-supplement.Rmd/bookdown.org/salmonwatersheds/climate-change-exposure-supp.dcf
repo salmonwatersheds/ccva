@@ -1,0 +1,11 @@
+name: climate-change-exposure-supp
+title: climate-change-exposure-supp
+username: salmonwatersheds
+account: salmonwatersheds
+server: bookdown.org
+hostUrl: https://bookdown.org/__api__
+appId: 14901
+bundleId: 109825
+url: https://bookdown.org/salmonwatersheds/climate-change-exposure-supp/
+asMultiple: FALSE
+asStatic: TRUE

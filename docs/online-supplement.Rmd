@@ -14,7 +14,7 @@ csl: canadian-journal-of-fisheries-and-aquatic-sciences.csl
 link-citations: true
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(dplyr)
 source("docs/online-supplement-functions.R")
@@ -240,7 +240,14 @@ stages <- c("eggs_alevin", "fw_rearing", "adult_migration", "spawning")
 species <- unique(t1$species)
 
 # Plot
-rel_col <- pnw_palette("Bay", n = 8)[c(1,2,3,6,7,8)]
+rel_col <- rev(c(
+  "#6E1531",
+  "#BE704C",
+  "#C2AB75",
+  "#648D89",
+  "#27678A",
+  "#254F77"))
+
 for(s in 1:length(species)){
   # png(file = paste0("freshwater/output/figures/temp_threshold_comparison_", species[s], "_", Sys.Date(), ".png"), width = 6, height = 5, units = "in", res = 200)
   par(mfrow = c(4,1), mar = c(0,2,0,1), oma = c(4,0,2,12))
@@ -343,9 +350,22 @@ htmltools::browsable(
 
 # Supplemental results
 
+## Sea surface salinity
+
+In the main text, we consider exposure of marine life stages to sea surface temperature. Sea surface salinity is another oceanic variable that we considered for inclusion in the exposure assessments. Sea surface salinity can influence stratification and thus nutrient cycling in the ocean, driving bottom-up effects on salmon. Salinity in BC coastal waters has been decreasing since the middle of the last century [@Chandler2022SeaSurfaceTemperature] and long term projections of increased precipitation [@MorrisonEtAl2014ModelSimulationFuture] suggest that this trend will continue. There is some evidence of relationships between salinity and salmon growth or survival [e.g., @MoritaEtAl2001GrowthChumSalmona,@MueterEtAl2002SpatialCorrelationPatterns,@MueterEtAl2005RelationshipsCoastalOcean], but no information on thresholds or optimal salinity ranges. 
+
+Here, we present supplemental results that include the exposure of marine stages to sea surface salinities lower than the historical range that salmon have experienced. We focus on salinities *below* threshold under the assumption that projected decreases in surface salinity indicate increased stratification and reduced nutrient resupply to surface waters with general negative consequences for salmon [e.g., @ThomsonEtAl2012AnomalousOceanConditions]. We quantified the number of months below a lower salinity threshold, which we defined for each grid cell as the 2.5th percentile of the modelled historical (1970-1999) salinity. We note, however, that there is some uncertainty about how marine rearing stages will respond, and less saline conditions may have a net benefit for salmon in the open ocean.
+
+In general, exposure to decreasing sea surface salinity was both low and consistent among CUs, offering little information to differentiate overall exposure or prioritise efforts to mediate climate-change impacts on salmon. As such, we opted to exclude these results from the main text, but highlight that more research is needed to understand how to relate proxies of oceanographic change, like sea surface temperature, to salmon survival. 
+
+```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis) for the mid-century period (2040-2069) under the RCP 4.5 emissions scenario. Points and lines are the median and range in exposure among six different GCMs. Each CU has two version of exposure shown: semi-transparent points are the exposure *including* sea surface salinity for marine stages, and solid points are considering only SST for marine stages (as shwown in the main text). CUs are ordered by species and, within species, by life-history type and approximate distance from the river mouth (starting with the furthest migrating CUs), with numbers and shading corresponding to points in Figure 2. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU. See below for other periods and emissions scenarios. ', echo = FALSE}
+plot.overallExposure_SSScomp()
+```
+
+
 ## Exposure outcomes {.tabset}
 
-**Table S5.** The following table contains raw exposure outcomes (median and range among six GCMs) for each CU, life stage, and climate change variable under RCP 4.5 and 8.5 in the historical, early, mid, and late century periods. Exposure is presented as the proportion of stage duration over threshold for each variable in the main text, but also provided here as the absolute number of days over threshold for comparison.
+**Table S5.** The following table contains raw exposure outcomes (median and range among six GCMs) for each CU, life stage, and climate change variable (including sea surface temperature) under RCP 4.5 and 8.5 in the historical, early, mid, and late century periods. Exposure is presented as the proportion of stage duration over threshold for each variable in the main text, but also provided here as the absolute number of days over threshold for comparison.
 
 ### Table {.unnumbered}
 
@@ -446,47 +466,49 @@ htmltools::browsable(
 
 #### Historical {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp45", period = "hist")
+plot.overallExposure(exposure_R1, emissions = "rcp45", period = "hist")
 ```
 
 #### Early century {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp45", period = "early")
+plot.overallExposure(exposure_R1, emissions = "rcp45", period = "early")
 ```
 
 #### Mid century {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp45", period = "mid")
+plot.overallExposure(exposure_R1, emissions = "rcp45", period = "mid")
 ```
 
 #### Late century {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp45", period = "late")
+plot.overallExposure(exposure_R1, emissions = "rcp45", period = "late")
 ```
 
 ### High Emissions (RCP 8.5)  {.tabset .unnumbered}
 
 #### Historical {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp85", period = "hist")
+plot.overallExposure(exposure_R1, emissions = "rcp85", period = "hist")
 ```
 
 #### Early century {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp85", period = "early")
+plot.overallExposure(exposure_R1, emissions = "rcp85", period = "early")
 ```
 
 #### Mid century {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp85", period = "mid")
+plot.overallExposure(exposure_R1, emissions = "rcp85", period = "mid")
 ```
 
 #### Late century {.unnumbered}
 ```{r, fig.cap='Overall exposure to climate changes across the lifecycle (x-axis) for 60 salmon CUs in the Fraser River basin (y-axis). The mid-century period (2040-2069) under the RCP 4.5 emissions scenario is included in the main text; **other time periods and emissions scenarios can be viewed here under the tabs.** Points and lines are the median and range in exposure among six different GCMs. CUs are ordered from highest (top) to lowest (bottom) overall exposure. Exposure was calculated as the proportion of the lifecycle that was above or below the thresholds for different climate variables, averaged among variables and life stages for each CU.', echo = FALSE}
-plot.overallExposure(emissions = "rcp85", period = "late")
+plot.overallExposure(exposure_R1, emissions = "rcp85", period = "late")
 ```
 
-## Exposure by life stage and varaible {.tabset}
+## Exposure by life stage and variable {.tabset}
+
+The following figures are expanded version of Figure 4 in the main text, showing the proportion of time above or below the relevant threshold for each stage and climate variable (x -axis) and each CU (y-axis). Here, we also include exposure to sea surface salinity for completeness, but note that this variable was excluded when calculating overall exposure.
 
 ### Low emissions (RCP 4.5) {.tabset .unnumbered}
 
@@ -531,7 +553,6 @@ plot.stageExposure(emissions = "rcp85", period = "mid")
 plot.stageExposure(emissions = "rcp85", period = "late")
 ```
 
-
 ## Exposure across time periods {.tabset}
 
 ### Low emissions (RCP 4.5) {.unnumbered}
@@ -550,6 +571,5 @@ plot.overPeriods()
 plot.overPeriods("rcp85")
 
 ```
-
 
 # References
